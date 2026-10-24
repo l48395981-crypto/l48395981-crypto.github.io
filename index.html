@@ -26,8 +26,11 @@ body{ margin:0; max-width:100%; overflow-x:clip; background:radial-gradient(elli
 main{ width:min(34rem, 100%); margin:0 auto; padding:1.1rem 1.25rem 2.2rem; }
 h1,.serif{ font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; font-weight:500; }
 h1{ font-size:1.85rem; line-height:1.15; margin:.35rem 0 .35rem; letter-spacing:-.02em; }
-.lede{ color:var(--muted); margin:0 0 .35rem; font-size:.98rem; }
-.together{ color:var(--muted); margin:0 0 1rem; font-size:.95rem; }
+.lede{ color:var(--muted); margin:0 0 1rem; font-size:.98rem; }
+.top{ display:flex; justify-content:space-between; align-items:flex-start; gap:.75rem; }
+.visits{ flex:none; margin:.2rem 0 0; padding:0; border:0; background:none; color:var(--muted); font:inherit; font-size:.82rem; font-variant-numeric:tabular-nums; cursor:pointer; }
+.visits:hover,.visits[aria-expanded="true"]{ color:var(--ink); }
+.visitnote{ margin:.15rem 0 .2rem; font-size:.95rem; }
 nav{ display:flex; gap:.35rem; overflow-x:auto; min-width:0; max-width:100%; margin:0 -1.25rem 1.15rem; padding:.15rem 1.25rem .45rem; scrollbar-width:thin; }
 nav::-webkit-scrollbar{ height:4px; }
 nav::-webkit-scrollbar-thumb{ background:var(--line); border-radius:99px; }
@@ -86,7 +89,7 @@ footer p{ margin:.5rem 0; }
 footer a{ color:inherit; text-decoration:underline; }
 .write.short{ min-height:5rem; }
 ul.steps.plain input:checked + span{ text-decoration:none; color:var(--ink); font-weight:600; }
-.lang{ display:flex; justify-content:flex-end; align-items:center; gap:.35rem; flex-wrap:wrap; max-width:100%; }
+.lang{ display:flex; justify-content:flex-end; align-items:center; gap:.35rem; flex-wrap:wrap; flex:1; min-width:0; }
 .iconbtn{ min-height:1.9rem; padding:0 .7rem; border:1px solid var(--line); border-radius:2rem; background:transparent; color:var(--muted); font:inherit; font-size:.8rem; cursor:pointer; }
 .iconbtn:hover{ border-color:var(--amber); }
 .go:disabled,.quiet:disabled{ opacity:.55; cursor:default; }
@@ -121,11 +124,11 @@ footer .card .pick,footer .card li{ color:var(--muted); }
 </head>
 <body>
 <main>
-  <div class="lang"><button type="button" class="iconbtn" id="sizebtn" aria-label="Text size"><span id="sizelabel">Larger text</span></button><button type="button" class="iconbtn" id="themebtn" aria-label="Color theme"><span id="themelabel">Same as device</span></button><label class="langbox"><svg class="globe" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg><select id="langsel" aria-label="Language"><option value="en" lang="en">English</option><option value="zh" lang="zh">中文</option><option value="es" lang="es">Español</option><option value="fr" lang="fr">Français</option><option value="de" lang="de">Deutsch</option><option value="it" lang="it">Italiano</option></select><svg class="chev" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></label></div>
+  <div class="top"><button type="button" class="visits" id="visits" hidden aria-expanded="false" aria-controls="visitnote" aria-label="Times this page has been opened"></button><div class="lang"><button type="button" class="iconbtn" id="sizebtn" aria-label="Text size"><span id="sizelabel">Larger text</span></button><button type="button" class="iconbtn" id="themebtn" aria-label="Color theme"><span id="themelabel">Same as device</span></button><label class="langbox"><svg class="globe" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg><select id="langsel" aria-label="Language"><option value="en" lang="en">English</option><option value="zh" lang="zh">中文</option><option value="es" lang="es">Español</option><option value="fr" lang="fr">Français</option><option value="de" lang="de">Deutsch</option><option value="it" lang="it">Italiano</option></select><svg class="chev" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></label></div></div>
+  <p class="visitnote" id="visitnote" hidden>You are not alone.</p>
   <h1>A quiet corner</h1>
   <noscript><p class="lede">This page needs JavaScript to work.</p></noscript>
   <p class="lede">Nothing to finish here. Pick one thing and stay as long as you like.</p>
-  <p class="together" id="together" hidden></p>
 
   <nav role="tablist" aria-label="Choose something to do">
     <button role="tab" id="t-breathe" aria-selected="true" aria-controls="p-breathe">Breathe</button>
@@ -540,18 +543,23 @@ footer .card .pick,footer .card li{ color:var(--muted); }
     sizeLabel.textContent = sizeBig ? 'Smaller text' : 'Larger text';
   });
 
-  var together = document.getElementById('together');
+  var visits = document.getElementById('visits'), visitnote = document.getElementById('visitnote');
   var visitMark = 'quietCornerVisit';
   var already = false;
   try { already = sessionStorage.getItem(visitMark) === '1'; } catch(e){}
+  visits.addEventListener('click', function(){
+    var show = visitnote.hidden;
+    visitnote.hidden = !show;
+    visits.setAttribute('aria-expanded', show ? 'true' : 'false');
+  });
   fetch('https://abacus.jasoncameron.dev/' + (already ? 'get' : 'hit') + '/l48395981-crypto.github.io/opens').then(function(r){
     if(!r.ok) throw new Error('count');
     return r.json();
   }).then(function(data){
     if(!data || typeof data.value !== 'number') return;
     if(!already){ try { sessionStorage.setItem(visitMark, '1'); } catch(e){} }
-    together.textContent = 'Opened ' + data.value + (data.value === 1 ? ' time' : ' times') + '. You are not the only one here.';
-    together.hidden = false;
+    visits.textContent = String(data.value);
+    visits.hidden = false;
   }).catch(function(){});
 })();
 </script>
@@ -603,6 +611,8 @@ footer .card .pick,footer .card li{ color:var(--muted); }
     "Tell one person you trust that it’s on your mind":"告诉一个你信得过的人，这件事压在你心上",
     "Do the tiny piece, then rest":"做完那一小件，然后休息",
     "A quiet corner":"安静的角落",
+    "You are not alone.":"你并不孤单。",
+    "Times this page has been opened":"这个页面被打开的次数",
     "Nothing to finish here. Pick one thing and stay as long as you like.":"这里没有什么要做完的。挑一件事，想待多久就待多久。",
     "Choose something to do":"选一件想做的事",
     "Breathe":"呼吸",
@@ -820,6 +830,8 @@ footer .card .pick,footer .card li{ color:var(--muted); }
     "Tell one person you trust that it’s on your mind":"Cuéntale a una persona de confianza que lo tienes en la cabeza",
     "Do the tiny piece, then rest":"Haz esa pieza pequeña y luego descansa",
     "A quiet corner":"Un rincón tranquilo",
+    "You are not alone.":"No estás en soledad.",
+    "Times this page has been opened":"Veces que se ha abierto esta página",
     "Nothing to finish here. Pick one thing and stay as long as you like.":"Aquí no hay nada que terminar. Elige una cosa y quédate el tiempo que quieras.",
     "Choose something to do":"Elige algo que hacer",
     "Breathe":"Respirar",
@@ -996,6 +1008,8 @@ footer .card .pick,footer .card li{ color:var(--muted); }
     "Reading":"Lectures",
     "Ideas":"Idées",
     "A quiet corner":"Un coin tranquille",
+    "You are not alone.":"Vous n’êtes pas seul.",
+    "Times this page has been opened":"Nombre d’ouvertures de cette page",
     "Nothing to finish here. Pick one thing and stay as long as you like.":"Rien à terminer ici. Choisissez une chose et restez aussi longtemps que vous voulez.",
     "Choose something to do":"Choisissez quelque chose à faire",
     "Breathe":"Respirer",
@@ -1213,6 +1227,8 @@ footer .card .pick,footer .card li{ color:var(--muted); }
     "Reading":"Lesetipps",
     "Ideas":"Ideen",
     "A quiet corner":"Eine stille Ecke",
+    "You are not alone.":"Sie sind nicht allein.",
+    "Times this page has been opened":"Wie oft diese Seite geöffnet wurde",
     "Nothing to finish here. Pick one thing and stay as long as you like.":"Hier gibt es nichts zu erledigen. Wählen Sie eine Sache und bleiben Sie, so lange Sie möchten.",
     "Choose something to do":"Wählen Sie, was Sie tun möchten",
     "Breathe":"Atmen",
@@ -1430,6 +1446,8 @@ footer .card .pick,footer .card li{ color:var(--muted); }
     "Reading":"Letture",
     "Ideas":"Idee",
     "A quiet corner":"Un angolo tranquillo",
+    "You are not alone.":"Non sei solo.",
+    "Times this page has been opened":"Quante volte è stata aperta questa pagina",
     "Nothing to finish here. Pick one thing and stay as long as you like.":"Qui non c’è niente da finire. Scegli una cosa e resta quanto vuoi.",
     "Choose something to do":"Scegli cosa fare",
     "Breathe":"Respira",
@@ -1647,37 +1665,32 @@ footer .card .pick,footer .card li{ color:var(--muted); }
     [/^(\d+) slow breaths?$/, function(m){ return m[1] + (m[1] === '1' ? ' respiration lente' : ' respirations lentes'); }],
     [/^(\d+) lanterns? released$/, function(m){ return m[1] + (m[1] === '1' ? ' lanterne lâchée' : ' lanternes lâchées'); }],
     [/^(\d+) of (\d+)\. No rush\.$/, function(m){ return m[1] + ' sur ' + m[2] + '. Sans se presser.'; }],
-    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + ' fleurs sur ' + m[2]; }],
-    [/^Opened (\d+) times?\. You are not the only one here\.$/, function(m){ return 'Ouverte ' + m[1] + ' fois. Vous n’êtes pas seul ici.'; }]
+    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + ' fleurs sur ' + m[2]; }]
   ];
   var PATS_DE = [
     [/^(\d+) slow breaths?$/, function(m){ return m[1] + (m[1] === '1' ? ' langsamer Atemzug' : ' langsame Atemzüge'); }],
     [/^(\d+) lanterns? released$/, function(m){ return m[1] + (m[1] === '1' ? ' Laterne gestiegen' : ' Laternen gestiegen'); }],
     [/^(\d+) of (\d+)\. No rush\.$/, function(m){ return m[1] + ' von ' + m[2] + '. Ohne Eile.'; }],
-    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + ' von ' + m[2] + ' Blumen'; }],
-    [/^Opened (\d+) times?\. You are not the only one here\.$/, function(m){ return m[1] + '-mal geöffnet. Sie sind hier nicht allein.'; }]
+    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + ' von ' + m[2] + ' Blumen'; }]
   ];
   var PATS_IT = [
     [/^(\d+) slow breaths?$/, function(m){ return m[1] + (m[1] === '1' ? ' respiro lento' : ' respiri lenti'); }],
     [/^(\d+) lanterns? released$/, function(m){ return m[1] + (m[1] === '1' ? ' lanterna lasciata salire' : ' lanterne lasciate salire'); }],
     [/^(\d+) of (\d+)\. No rush\.$/, function(m){ return m[1] + ' di ' + m[2] + '. Senza fretta.'; }],
-    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + (m[1] === '1' ? ' fiore su ' : ' fiori su ') + m[2]; }],
-    [/^Opened (\d+) times?\. You are not the only one here\.$/, function(m){ return 'Aperta ' + m[1] + (m[1] === '1' ? ' volta' : ' volte') + '. Non sei solo qui.'; }]
+    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + (m[1] === '1' ? ' fiore su ' : ' fiori su ') + m[2]; }]
   ];
   var DICT = {zh: ZH, es: ES, fr: FR, de: DE, it: IT};
   var PATS_ES = [
     [/^(\d+) slow breaths?$/, function(m){ return m[1] + (m[1] === '1' ? ' respiración lenta' : ' respiraciones lentas'); }],
     [/^(\d+) lanterns? released$/, function(m){ return m[1] + (m[1] === '1' ? ' farolillo soltado' : ' farolillos soltados'); }],
     [/^(\d+) of (\d+)\. No rush\.$/, function(m){ return m[1] + ' de ' + m[2] + '. Sin prisa.'; }],
-    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + ' de ' + m[2] + ' flores'; }],
-    [/^Opened (\d+) times?\. You are not the only one here\.$/, function(m){ return 'Abierta ' + m[1] + (m[1] === '1' ? ' vez' : ' veces') + '. No estás en soledad.'; }]
+    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + ' de ' + m[2] + ' flores'; }]
   ];
   var PATS = [
     [/^(\d+) slow breaths?$/, function(m){ return m[1] + ' 次缓慢的呼吸'; }],
     [/^(\d+) lanterns? released$/, function(m){ return '已放飞 ' + m[1] + ' 盏灯笼'; }],
     [/^(\d+) of (\d+)\. No rush\.$/, function(m){ return m[2] + ' 件里做了 ' + m[1] + ' 件。不着急。'; }],
-    [/^(\d+) of (\d+) flowers$/, function(m){ return m[2] + ' 朵里开了 ' + m[1] + ' 朵'; }],
-    [/^Opened (\d+) times?\. You are not the only one here\.$/, function(m){ return '这里被打开过 ' + m[1] + ' 次。你不是唯一一个在这里的人。'; }]
+    [/^(\d+) of (\d+) flowers$/, function(m){ return m[2] + ' 朵里开了 ' + m[1] + ' 朵'; }]
   ];
   var PSETS = {zh: PATS, es: PATS_ES, fr: PATS_FR, de: PATS_DE, it: PATS_IT};
   var lang = 'en', orig = new WeakMap(), ATTR = ['placeholder', 'aria-label'];
