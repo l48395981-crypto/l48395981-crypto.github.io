@@ -26,7 +26,8 @@ body{ margin:0; max-width:100%; overflow-x:clip; background:radial-gradient(elli
 main{ width:min(34rem, 100%); margin:0 auto; padding:1.1rem 1.25rem 2.2rem; }
 h1,.serif{ font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; font-weight:500; }
 h1{ font-size:1.85rem; line-height:1.15; margin:.35rem 0 .35rem; letter-spacing:-.02em; }
-.lede{ color:var(--muted); margin:0 0 1rem; font-size:.98rem; }
+.lede{ color:var(--muted); margin:0 0 .35rem; font-size:.98rem; }
+.together{ color:var(--muted); margin:0 0 1rem; font-size:.95rem; }
 nav{ display:flex; gap:.35rem; overflow-x:auto; min-width:0; max-width:100%; margin:0 -1.25rem 1.15rem; padding:.15rem 1.25rem .45rem; scrollbar-width:thin; }
 nav::-webkit-scrollbar{ height:4px; }
 nav::-webkit-scrollbar-thumb{ background:var(--line); border-radius:99px; }
@@ -124,6 +125,7 @@ footer .card .pick,footer .card li{ color:var(--muted); }
   <h1>A quiet corner</h1>
   <noscript><p class="lede">This page needs JavaScript to work.</p></noscript>
   <p class="lede">Nothing to finish here. Pick one thing and stay as long as you like.</p>
+  <p class="together" id="together" hidden></p>
 
   <nav role="tablist" aria-label="Choose something to do">
     <button role="tab" id="t-breathe" aria-selected="true" aria-controls="p-breathe">Breathe</button>
@@ -270,7 +272,7 @@ footer .card .pick,footer .card li{ color:var(--muted); }
         <li>United States: call or text 988</li>
       </ul>
     </details>
-    <p>Nothing you write here is saved or sent anywhere, and nothing is stored on your device.</p></footer>
+    <p>Nothing you write here is saved or sent anywhere. Visits are counted, not your name or your words. This tab only remembers that you were already counted.</p></footer>
 </main>
 
 <script>
@@ -537,6 +539,20 @@ footer .card .pick,footer .card li{ color:var(--muted); }
     else document.documentElement.removeAttribute('data-size');
     sizeLabel.textContent = sizeBig ? 'Smaller text' : 'Larger text';
   });
+
+  var together = document.getElementById('together');
+  var visitMark = 'quietCornerVisit';
+  var already = false;
+  try { already = sessionStorage.getItem(visitMark) === '1'; } catch(e){}
+  fetch('https://abacus.jasoncameron.dev/' + (already ? 'get' : 'hit') + '/l48395981-crypto.github.io/opens').then(function(r){
+    if(!r.ok) throw new Error('count');
+    return r.json();
+  }).then(function(data){
+    if(!data || typeof data.value !== 'number') return;
+    if(!already){ try { sessionStorage.setItem(visitMark, '1'); } catch(e){} }
+    together.textContent = 'Opened ' + data.value + (data.value === 1 ? ' time' : ' times') + '. You are not the only one here.';
+    together.hidden = false;
+  }).catch(function(){});
 })();
 </script>
 <script>
@@ -670,6 +686,7 @@ footer .card .pick,footer .card li{ color:var(--muted); }
     "If you ever feel unsafe, in the US call or text 988, and in the UK or Ireland call Samaritans on 116 123. Elsewhere,":"如果你觉得自己不安全：在中国请拨打 12356，在美国请拨打或发短信到 988，在英国和爱尔兰请拨打 Samaritans 的 116 123。其他地方：",
     "lists free helplines in many countries.":"列出了许多国家的免费求助热线。",
     "Nothing you write here is saved or sent anywhere, and nothing is stored on your device.":"你在这里写的东西不会保存，也不会发到任何地方，设备上也不会留下任何记录。",
+    "Nothing you write here is saved or sent anywhere. Visits are counted, not your name or your words. This tab only remembers that you were already counted.":"你在这里写的东西不会保存，也不会发到任何地方。只统计打开次数，不记录你的名字，也不记录你写的话。这个标签页只记住你已经被数过一次。",
     "Language":"语言",
     "Color theme":"颜色",
     "Same as device":"跟随设备",
@@ -886,6 +903,7 @@ footer .card .pick,footer .card li{ color:var(--muted); }
     "If you ever feel unsafe, in the US call or text 988, and in the UK or Ireland call Samaritans on 116 123. Elsewhere,":"Si alguna vez te sientes en peligro, en EE. UU. llama o escribe al 988, y en el Reino Unido e Irlanda llama a Samaritans al 116 123. En otros lugares,",
     "lists free helplines in many countries.":"enumera líneas de ayuda gratuitas en muchos países.",
     "Nothing you write here is saved or sent anywhere, and nothing is stored on your device.":"Nada de lo que escribas aquí se guarda ni se envía a ningún sitio, y no se almacena nada en tu dispositivo.",
+    "Nothing you write here is saved or sent anywhere. Visits are counted, not your name or your words. This tab only remembers that you were already counted.":"Nada de lo que escribas aquí se guarda ni se envía. Solo se cuentan las visitas, no tu nombre ni tus palabras. Esta pestaña solo recuerda que ya se te contó.",
     "Language":"Idioma",
     "Color theme":"Tema de color",
     "Same as device":"Como el dispositivo",
@@ -1006,6 +1024,7 @@ footer .card .pick,footer .card li{ color:var(--muted); }
     "If you ever feel unsafe, in the US call or text 988, and in the UK or Ireland call Samaritans on 116 123. Elsewhere,":"Si vous vous sentez en danger : en France, appelez le 3114 (numéro national de prévention du suicide, gratuit, 24 h/24). Ailleurs,",
     "lists free helplines in many countries.":"répertorie des lignes d’écoute gratuites dans de nombreux pays.",
     "Nothing you write here is saved or sent anywhere, and nothing is stored on your device.":"Rien de ce que vous écrivez ici n’est enregistré ni envoyé, et rien n’est conservé sur votre appareil.",
+    "Nothing you write here is saved or sent anywhere. Visits are counted, not your name or your words. This tab only remembers that you were already counted.":"Rien de ce que vous écrivez ici n’est enregistré ni envoyé. On compte les visites, pas votre nom ni vos mots. Cet onglet retient seulement que vous avez déjà été compté.",
     "Books and free material for when you want more. Open one page or one worksheet, not the whole thing. Research suggests this kind of reading helps most when a real person is alongside you.":"Des livres et des ressources gratuites, pour quand vous voudrez aller plus loin. Ouvrez une page ou une fiche, pas tout le livre. Les recherches suggèrent que ce genre de lecture aide surtout lorsqu’une vraie personne est à vos côtés.",
     "A classic on spotting the thinking habits that feed anxiety and low mood, with exercises you can write out. The Chinese edition is called 《伯恩斯新情绪疗法》.":"Un classique pour repérer les habitudes de pensée qui nourrissent l’anxiété et la baisse de moral, avec des exercices à écrire. L’édition chinoise s’appelle 《伯恩斯新情绪疗法》.",
     "A step-by-step cognitive behavioural programme with monitoring sheets. In the UK it is on the Reading Well list of recommended books.":"Un programme de thérapie cognitivo-comportementale, étape par étape, avec des fiches de suivi. Au Royaume-Uni, il figure sur la liste Reading Well.",
@@ -1222,6 +1241,7 @@ footer .card .pick,footer .card li{ color:var(--muted); }
     "If you ever feel unsafe, in the US call or text 988, and in the UK or Ireland call Samaritans on 116 123. Elsewhere,":"Wenn Sie sich in Gefahr fühlen: In Deutschland erreichen Sie die Telefonseelsorge kostenlos unter 0800 111 0 111, 0800 111 0 222 oder 116 123. Anderswo",
     "lists free helplines in many countries.":"listet kostenlose Hilfetelefone in vielen Ländern auf.",
     "Nothing you write here is saved or sent anywhere, and nothing is stored on your device.":"Nichts, was Sie hier schreiben, wird gespeichert oder gesendet, und auf Ihrem Gerät wird nichts abgelegt.",
+    "Nothing you write here is saved or sent anywhere. Visits are counted, not your name or your words. This tab only remembers that you were already counted.":"Nichts, was Sie hier schreiben, wird gespeichert oder gesendet. Gezählt werden Besuche, nicht Ihr Name oder Ihre Worte. Dieser Tab merkt sich nur, dass Sie schon gezählt wurden.",
     "Books and free material for when you want more. Open one page or one worksheet, not the whole thing. Research suggests this kind of reading helps most when a real person is alongside you.":"Bücher und kostenloses Material, wenn Sie mehr möchten. Öffnen Sie eine Seite oder ein Arbeitsblatt, nicht das Ganze. Forschung legt nahe, dass solches Lesen am meisten hilft, wenn ein echter Mensch dabei ist.",
     "A classic on spotting the thinking habits that feed anxiety and low mood, with exercises you can write out. The Chinese edition is called 《伯恩斯新情绪疗法》.":"Ein Klassiker darüber, die Denkgewohnheiten zu erkennen, die Angst und gedrückte Stimmung nähren, mit Übungen zum Aufschreiben. Die chinesische Ausgabe heißt 《伯恩斯新情绪疗法》.",
     "A step-by-step cognitive behavioural programme with monitoring sheets. In the UK it is on the Reading Well list of recommended books.":"Ein kognitiv-verhaltenstherapeutisches Programm in Schritten, mit Protokollbögen. In Großbritannien steht es auf der Reading-Well-Liste.",
@@ -1438,6 +1458,7 @@ footer .card .pick,footer .card li{ color:var(--muted); }
     "If you ever feel unsafe, in the US call or text 988, and in the UK or Ireland call Samaritans on 116 123. Elsewhere,":"Se ti senti in pericolo: in Italia puoi chiamare Telefono Amico Italia al 02 2327 2327 (ogni giorno, in genere dalle 9-10 alle 24). Altrove,",
     "lists free helplines in many countries.":"elenca linee di ascolto gratuite in molti paesi.",
     "Nothing you write here is saved or sent anywhere, and nothing is stored on your device.":"Niente di ciò che scrivi qui viene salvato o inviato, e nulla resta memorizzato sul tuo dispositivo.",
+    "Nothing you write here is saved or sent anywhere. Visits are counted, not your name or your words. This tab only remembers that you were already counted.":"Niente di ciò che scrivi qui viene salvato o inviato. Si contano le visite, non il tuo nome né le tue parole. Questa scheda ricorda solo che sei già stato contato.",
     "Books and free material for when you want more. Open one page or one worksheet, not the whole thing. Research suggests this kind of reading helps most when a real person is alongside you.":"Libri e materiali gratuiti, per quando vuoi di più. Apri una pagina o una scheda, non tutto. Le ricerche suggeriscono che questo tipo di lettura aiuta soprattutto quando c’è una persona vera accanto a te.",
     "A classic on spotting the thinking habits that feed anxiety and low mood, with exercises you can write out. The Chinese edition is called 《伯恩斯新情绪疗法》.":"Un classico per riconoscere le abitudini di pensiero che alimentano l’ansia e l’umore basso, con esercizi da scrivere. L’edizione cinese si chiama 《伯恩斯新情绪疗法》.",
     "A step-by-step cognitive behavioural programme with monitoring sheets. In the UK it is on the Reading Well list of recommended books.":"Un programma di terapia cognitivo-comportamentale, passo dopo passo, con schede di monitoraggio. Nel Regno Unito è nella lista Reading Well.",
@@ -1626,32 +1647,37 @@ footer .card .pick,footer .card li{ color:var(--muted); }
     [/^(\d+) slow breaths?$/, function(m){ return m[1] + (m[1] === '1' ? ' respiration lente' : ' respirations lentes'); }],
     [/^(\d+) lanterns? released$/, function(m){ return m[1] + (m[1] === '1' ? ' lanterne lâchée' : ' lanternes lâchées'); }],
     [/^(\d+) of (\d+)\. No rush\.$/, function(m){ return m[1] + ' sur ' + m[2] + '. Sans se presser.'; }],
-    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + ' fleurs sur ' + m[2]; }]
+    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + ' fleurs sur ' + m[2]; }],
+    [/^Opened (\d+) times?\. You are not the only one here\.$/, function(m){ return 'Ouverte ' + m[1] + ' fois. Vous n’êtes pas seul ici.'; }]
   ];
   var PATS_DE = [
     [/^(\d+) slow breaths?$/, function(m){ return m[1] + (m[1] === '1' ? ' langsamer Atemzug' : ' langsame Atemzüge'); }],
     [/^(\d+) lanterns? released$/, function(m){ return m[1] + (m[1] === '1' ? ' Laterne gestiegen' : ' Laternen gestiegen'); }],
     [/^(\d+) of (\d+)\. No rush\.$/, function(m){ return m[1] + ' von ' + m[2] + '. Ohne Eile.'; }],
-    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + ' von ' + m[2] + ' Blumen'; }]
+    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + ' von ' + m[2] + ' Blumen'; }],
+    [/^Opened (\d+) times?\. You are not the only one here\.$/, function(m){ return m[1] + '-mal geöffnet. Sie sind hier nicht allein.'; }]
   ];
   var PATS_IT = [
     [/^(\d+) slow breaths?$/, function(m){ return m[1] + (m[1] === '1' ? ' respiro lento' : ' respiri lenti'); }],
     [/^(\d+) lanterns? released$/, function(m){ return m[1] + (m[1] === '1' ? ' lanterna lasciata salire' : ' lanterne lasciate salire'); }],
     [/^(\d+) of (\d+)\. No rush\.$/, function(m){ return m[1] + ' di ' + m[2] + '. Senza fretta.'; }],
-    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + (m[1] === '1' ? ' fiore su ' : ' fiori su ') + m[2]; }]
+    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + (m[1] === '1' ? ' fiore su ' : ' fiori su ') + m[2]; }],
+    [/^Opened (\d+) times?\. You are not the only one here\.$/, function(m){ return 'Aperta ' + m[1] + (m[1] === '1' ? ' volta' : ' volte') + '. Non sei solo qui.'; }]
   ];
   var DICT = {zh: ZH, es: ES, fr: FR, de: DE, it: IT};
   var PATS_ES = [
     [/^(\d+) slow breaths?$/, function(m){ return m[1] + (m[1] === '1' ? ' respiración lenta' : ' respiraciones lentas'); }],
     [/^(\d+) lanterns? released$/, function(m){ return m[1] + (m[1] === '1' ? ' farolillo soltado' : ' farolillos soltados'); }],
     [/^(\d+) of (\d+)\. No rush\.$/, function(m){ return m[1] + ' de ' + m[2] + '. Sin prisa.'; }],
-    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + ' de ' + m[2] + ' flores'; }]
+    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + ' de ' + m[2] + ' flores'; }],
+    [/^Opened (\d+) times?\. You are not the only one here\.$/, function(m){ return 'Abierta ' + m[1] + (m[1] === '1' ? ' vez' : ' veces') + '. No estás en soledad.'; }]
   ];
   var PATS = [
     [/^(\d+) slow breaths?$/, function(m){ return m[1] + ' 次缓慢的呼吸'; }],
     [/^(\d+) lanterns? released$/, function(m){ return '已放飞 ' + m[1] + ' 盏灯笼'; }],
     [/^(\d+) of (\d+)\. No rush\.$/, function(m){ return m[2] + ' 件里做了 ' + m[1] + ' 件。不着急。'; }],
-    [/^(\d+) of (\d+) flowers$/, function(m){ return m[2] + ' 朵里开了 ' + m[1] + ' 朵'; }]
+    [/^(\d+) of (\d+) flowers$/, function(m){ return m[2] + ' 朵里开了 ' + m[1] + ' 朵'; }],
+    [/^Opened (\d+) times?\. You are not the only one here\.$/, function(m){ return '这里被打开过 ' + m[1] + ' 次。你不是唯一一个在这里的人。'; }]
   ];
   var PSETS = {zh: PATS, es: PATS_ES, fr: PATS_FR, de: PATS_DE, it: PATS_IT};
   var lang = 'en', orig = new WeakMap(), ATTR = ['placeholder', 'aria-label'];
