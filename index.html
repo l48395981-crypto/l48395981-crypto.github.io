@@ -1,0 +1,1695 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#eaeff3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1622" media="(prefers-color-scheme: dark)">
+<meta name="description" content="A gentle, private page for slowing down: breathing, a hard moment, lanterns, small things, and ideas from anxiety self-help books. Nothing you write is saved.">
+<meta property="og:title" content="A quiet corner">
+<meta property="og:description" content="A gentle, private page for slowing down. Nothing you write is saved.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%AE%3C/text%3E%3C/svg%3E">
+<title>A quiet corner</title>
+<style>
+:root{
+  --bg:#eaeff3; --surface:#dde5ec; --ink:#1c2733; --muted:#4f5e6d; --amber:#b9741a; --glow:rgba(214,150,50,.38); --line:#c3cfda; --on-amber:#1b1305;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#0e1622; --surface:#172536; --ink:#ece8dc; --muted:#a3adbb; --amber:#f2b25c; --glow:rgba(242,178,92,.34); --line:#2a3b4f; --on-amber:#1b1305; }
+}
+:root[data-theme="dark"]{ --bg:#0e1622; --surface:#172536; --ink:#ece8dc; --muted:#a3adbb; --amber:#f2b25c; --glow:rgba(242,178,92,.34); --line:#2a3b4f; --on-amber:#1b1305; }
+html{ scroll-padding-top:env(safe-area-inset-top,0px); }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; max-width:100%; overflow-x:clip; background:radial-gradient(ellipse 70% 28rem at 50% -8rem, var(--glow), transparent 70%), var(--bg); color:var(--ink); font:1.02rem/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+main{ width:min(34rem, 100%); margin:0 auto; padding:1.1rem 1.25rem 2.2rem; }
+h1,.serif{ font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; font-weight:500; }
+h1{ font-size:1.85rem; line-height:1.15; margin:.35rem 0 .35rem; letter-spacing:-.02em; }
+.lede{ color:var(--muted); margin:0 0 1rem; font-size:.98rem; }
+nav{ display:flex; gap:.35rem; overflow-x:auto; min-width:0; max-width:100%; margin:0 -1.25rem 1.15rem; padding:.15rem 1.25rem .45rem; scrollbar-width:thin; }
+nav::-webkit-scrollbar{ height:4px; }
+nav::-webkit-scrollbar-thumb{ background:var(--line); border-radius:99px; }
+nav button{ flex:none; background:transparent; border:0; border-radius:999px; color:var(--muted); font:inherit; font-size:.92rem; padding:.38rem .72rem; cursor:pointer; }
+nav button[aria-selected="true"]{ background:var(--surface); color:var(--ink); }
+button:focus-visible,[role="button"]:focus-visible,input:focus-visible,summary:focus-visible{ outline:2px solid var(--amber); outline-offset:3px; }
+section[hidden]{ display:none; }
+.stage{ display:grid; place-items:center; height:13rem; }
+.orb{ width:12.5rem; height:12.5rem; border-radius:50%; transform:scale(.6); transition-property:transform; transition-timing-function:ease-in-out;
+  background:radial-gradient(circle at 50% 45%, var(--amber) 0 16%, var(--glow) 17% 46%, transparent 68%); }
+.say{ text-align:center; font-size:1.35rem; margin:0; }
+.sub{ text-align:center; color:var(--muted); margin:.15rem 0 0; }
+.go{ display:block; margin:0 auto; background:var(--amber); color:var(--on-amber); border:0; border-radius:2rem; font:inherit; font-weight:600; padding:.75rem 2rem; cursor:pointer; }
+.sky{ position:relative; height:16rem; overflow:hidden; border:0; border-radius:1.25rem; background:linear-gradient(var(--surface),var(--bg)); cursor:pointer; touch-action:manipulation; }
+.sky .hint{ position:absolute; inset:1rem 0 auto; text-align:center; color:var(--muted); font-size:.95rem; pointer-events:none; }
+.lantern{ position:absolute; bottom:.8rem; width:1.7rem; height:2.2rem; border-radius:.5rem .5rem .9rem .9rem; background:var(--amber); box-shadow:0 0 1.6rem .6rem var(--glow); opacity:0; animation:rise 9s ease-out forwards; }
+@keyframes rise{ 0%{ transform:translateY(0); opacity:0 } 8%{ opacity:1 } 100%{ transform:translateY(-15rem); opacity:0 } }
+.msg{ text-align:center; font-size:1.2rem; margin:.9rem 0 0; }
+.msg:empty,.tally:empty,.done:empty{ display:none; }
+.tally{ text-align:center; color:var(--muted); margin:.35rem 0 0; font-size:.92rem; }
+.pick{ color:var(--muted); margin:0 0 .75rem; font-size:.95rem; }
+ul.steps{ list-style:none; padding:0; margin:0 0 .5rem; }
+ul.steps li{ border-bottom:1px solid var(--line); }
+ul.steps li:last-child{ border-bottom:0; }
+ul.steps label{ display:flex; gap:.75rem; align-items:center; padding:.62rem .1rem; cursor:pointer; }
+ul.steps input{ width:1.15rem; height:1.15rem; accent-color:var(--amber); flex:none; }
+ul.steps input:checked + span{ color:var(--muted); text-decoration:line-through; text-decoration-color:var(--line); }
+.done{ color:var(--muted); margin:.4rem 0 0; }
+footer{ margin-top:1.8rem; padding-top:.9rem; border-top:1px solid var(--line); color:var(--muted); font-size:.86rem; }
+.write{ width:100%; min-height:9rem; resize:vertical; padding:1rem; font:inherit; line-height:1.6; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:1rem; transition:opacity 1.2s; }
+.write::placeholder{ color:var(--muted); }
+.write.letting{ animation:dissolve 3.5s ease-in forwards; }
+@keyframes dissolve{ 0%{ opacity:1; transform:translateY(0); filter:blur(0) } 100%{ opacity:0; transform:translateY(-3rem); filter:blur(6px) } }
+.row{ display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; margin-top:1rem; }
+.row .go{ margin:0; }
+.quiet{ background:none; border:1px solid var(--line); color:var(--ink); border-radius:2rem; font:inherit; padding:.75rem 1.4rem; cursor:pointer; }
+.plot{ display:grid; grid-template-columns:repeat(6,1fr); gap:.5rem; margin:0 0 1rem; }
+.plot .cell{ aspect-ratio:1; display:grid; place-items:center; font-size:1.7rem; line-height:1; border-radius:.75rem; border:0; background:var(--surface); color:var(--muted); padding:0; }
+.plot button.cell{ cursor:pointer; font-family:inherit; }
+.plot button.cell:hover{ background:color-mix(in srgb, var(--amber) 16%, var(--surface)); }
+.plot span.cell{ background:var(--bg); animation:open .8s ease-out; }
+@keyframes open{ from{ transform:scale(.4); opacity:0 } to{ transform:scale(1); opacity:1 } }
+@media (prefers-reduced-motion: reduce){ .plot span.cell{ animation:none; } .write.letting{ animation:none; opacity:0; } .orb{ transition:none !important; } .lantern{ animation:fade 5s ease-out forwards; } @keyframes fade{ 0%{opacity:0} 15%{opacity:1} 100%{opacity:0} } }
+.step-h{ font-size:1.12rem; margin:1.15rem 0 .25rem; }
+.card{ background:var(--surface); border-radius:1rem; padding:.72rem .95rem; margin:0 0 .5rem; }
+.card summary{ cursor:pointer; font-size:1.05rem; list-style:none; position:relative; padding-right:1.2rem; }
+.card summary::-webkit-details-marker{ display:none; }
+.card summary::after{ content:"+"; position:absolute; right:0; top:0; color:var(--muted); font-family:system-ui,sans-serif; font-size:.95rem; }
+.card[open] summary::after{ content:"–"; }
+.card[open]{ padding-bottom:.85rem; }
+.card small{ display:block; color:var(--muted); font-size:.85rem; font-family:system-ui,sans-serif; }
+.card p{ margin:.6rem 0; }
+.card input[type=range]{ width:100%; accent-color:var(--amber); }
+.card .msg{ min-height:3rem; font-size:1.1rem; margin:.6rem 0; }
+footer p{ margin:.5rem 0; }
+footer a{ color:inherit; text-decoration:underline; }
+.write.short{ min-height:5rem; }
+ul.steps.plain input:checked + span{ text-decoration:none; color:var(--ink); font-weight:600; }
+.lang{ display:flex; justify-content:flex-end; align-items:center; gap:.35rem; flex-wrap:wrap; max-width:100%; }
+.iconbtn{ min-height:1.9rem; padding:0 .7rem; border:1px solid var(--line); border-radius:2rem; background:transparent; color:var(--muted); font:inherit; font-size:.8rem; cursor:pointer; }
+.iconbtn:hover{ border-color:var(--amber); }
+.go:disabled,.quiet:disabled{ opacity:.55; cursor:default; }
+.card a{ color:inherit; }
+ul.gentle{ margin:.45rem 0 .7rem; padding-left:1.1rem; }
+ul.gentle li{ margin:.28rem 0; }
+ul.helps{ list-style:none; padding:0; margin:.35rem 0 .2rem; display:grid; grid-template-columns:1fr 1fr; gap:.28rem .75rem; }
+ul.helps li{ padding:0; border:0; font-size:.84rem; }
+.card .quiet{ margin:.15rem 0 .35rem; }
+#p-now{ display:grid; grid-template-columns:1fr 1fr; gap:.45rem; }
+#p-now[hidden]{ display:none; }
+#p-now > .pick{ grid-column:1 / -1; margin:0; }
+#p-now > .card{ margin:0; }
+#p-now > .card[open]{ grid-column:1 / -1; }
+#p-breathe .go{ margin-top:.85rem; }
+@media (max-width:30rem){
+  ul.helps,#p-now{ grid-template-columns:1fr; }
+}
+html[data-size="big"]{ font-size:118%; }
+#count:not(:empty){ min-height:2.7rem; font-size:2.4rem; line-height:1.1; font-variant-numeric:tabular-nums; color:var(--ink); }
+.langbox{ position:relative; display:inline-flex; align-items:center; gap:.35rem; min-height:1.9rem; padding:0 .65rem; border:1px solid var(--line); border-radius:2rem; background:transparent; color:var(--muted); cursor:pointer; }
+.langbox:hover{ border-color:var(--amber); }
+.langbox:focus-within{ outline:3px solid var(--amber); outline-offset:3px; }
+.langbox select{ appearance:none; -webkit-appearance:none; background:none; border:0; outline:none; color:var(--ink); font:inherit; font-size:.8rem; min-width:0; max-width:6.5rem; padding:0 1.15rem 0 0; cursor:pointer; }
+.langbox select option{ background:var(--surface); color:var(--ink); }
+.langbox .chev{ position:absolute; right:.5rem; pointer-events:none; }
+.langbox .globe{ width:14px; height:14px; }
+footer .card{ color:var(--ink); }
+footer .card .pick,footer .card li{ color:var(--muted); }
+:lang(zh) h1,:lang(zh) .serif{ font-family:"Songti SC","Noto Serif SC","Source Han Serif SC","Songti TC",serif; }
+</style>
+</head>
+<body>
+<main>
+  <div class="lang"><button type="button" class="iconbtn" id="sizebtn" aria-label="Text size"><span id="sizelabel">Larger text</span></button><button type="button" class="iconbtn" id="themebtn" aria-label="Color theme"><span id="themelabel">Same as device</span></button><label class="langbox"><svg class="globe" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg><select id="langsel" aria-label="Language"><option value="en" lang="en">English</option><option value="zh" lang="zh">中文</option><option value="es" lang="es">Español</option><option value="fr" lang="fr">Français</option><option value="de" lang="de">Deutsch</option><option value="it" lang="it">Italiano</option></select><svg class="chev" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></label></div>
+  <h1>A quiet corner</h1>
+  <noscript><p class="lede">This page needs JavaScript to work.</p></noscript>
+  <p class="lede">Nothing to finish here. Pick one thing and stay as long as you like.</p>
+
+  <nav role="tablist" aria-label="Choose something to do">
+    <button role="tab" id="t-breathe" aria-selected="true" aria-controls="p-breathe">Breathe</button>
+    <button role="tab" id="t-now" aria-selected="false" aria-controls="p-now">Right now</button>
+    <button role="tab" id="t-lantern" aria-selected="false" aria-controls="p-lantern">Lanterns</button>
+    <button role="tab" id="t-steps" aria-selected="false" aria-controls="p-steps">Small things</button>
+    <button role="tab" id="t-thoughts" aria-selected="false" aria-controls="p-thoughts">Thoughts</button>
+    <button role="tab" id="t-ideas" aria-selected="false" aria-controls="p-ideas">Ideas</button>
+    <button role="tab" id="t-reading" aria-selected="false" aria-controls="p-reading">Reading</button>
+    <button role="tab" id="t-garden" aria-selected="false" aria-controls="p-garden">Garden</button>
+    <button role="tab" id="t-letgo" aria-selected="false" aria-controls="p-letgo">Let go</button>
+  </nav>
+
+  <section id="p-breathe" role="tabpanel" aria-labelledby="t-breathe">
+    <div class="stage" aria-hidden="true"><div class="orb" id="orb"></div></div>
+    <p class="say serif" id="say" aria-live="polite">Breathe in for four, out for six.</p>
+    <p class="sub" id="count"></p>
+    <p class="tally" id="breaths"></p>
+    <button class="go" id="go">Start</button>
+  </section>
+
+  <section id="p-now" role="tabpanel" aria-labelledby="t-now" hidden>
+    <p class="pick">Open one. Skip any line.</p>
+    <details class="card"><summary class="serif">I can’t catch my breath</summary>
+      <ul class="gentle"><li>Sit or stand, and put both feet on the floor.</li><li>Breathe out more slowly than you breathe in.</li><li>Look at one still object and name its color.</li><li>Press your feet down for a few seconds, then release.</li></ul>
+      <p class="pick">If this comes with chest pain, fainting, or breathing trouble that is new for you, contact local medical help.</p>
+      <button type="button" class="quiet" data-go="breathe">Open Breathe</button></details>
+    <details class="card"><summary class="serif">I can’t sleep</summary>
+      <ul class="gentle"><li>Dim the screen after this, or stop here.</li><li>Unclench your jaw, your tongue, and your hands.</li><li>If a worry keeps returning, write one sentence in Let go, then leave it.</li><li>Rest with your eyes closed still counts, even when sleep does not come.</li></ul>
+      <button type="button" class="quiet" data-go="letgo">Open Let go</button></details>
+    <details class="card"><summary class="serif">I feel alone</summary>
+      <ul class="gentle"><li>Say one true sentence, even if the room is empty.</li><li>If there is one safe person, a short message is enough: “I’m having a hard time.”</li><li>A lantern can carry one sentence up.</li><li>If you want a voice, the numbers at the bottom of this page are there.</li></ul>
+      <p class="pick">Loneliness is not a failure.</p>
+      <button type="button" class="quiet" data-go="lantern">Open Lanterns</button></details>
+    <details class="card"><summary class="serif">I’m angry</summary>
+      <ul class="gentle"><li>Anger is allowed. You do not have to act on it.</li><li>Put both feet on the floor and lengthen the out-breath.</li><li>Open and close your hands slowly a few times.</li><li>If it is safe, step into another room or outside for one minute.</li><li>You can choose your words later, when your body is quieter.</li></ul></details>
+    <details class="card"><summary class="serif">I feel nothing</summary>
+      <ul class="gentle"><li>You do not have to force a brighter feeling.</li><li>Notice one temperature: air on your face, a cup, or your hands.</li><li>Name two plain details of one ordinary object.</li><li>Take a sip of water, and stay for one minute. That is enough.</li></ul>
+      <p class="pick">Numb is allowed to be here.</p></details>
+    <details class="card"><summary class="serif">Someone is gone</summary>
+      <ul class="gentle"><li>There is no right pace. Skipping this is fine.</li><li>A memory can sit here for a moment, or you can set it down.</li><li>If you have not eaten or had water, something small is a kindness.</li><li>One ordinary thing is enough today.</li></ul>
+      <p class="pick">Grief does not have to be done well.</p></details>
+    <details class="card"><summary class="serif">The worry won’t stop</summary>
+      <ul class="gentle"><li>A worry is not a fact, and it does not all have to be solved tonight.</li><li>If one worry is loudest, write it as a single sentence and leave the rest.</li><li>Name one thing you can see and one thing you can hear.</li><li>Then stop. More thinking is not required.</li></ul>
+      <p class="pick">You don’t have to answer every thought.</p>
+      <button type="button" class="quiet" data-go="thoughts">Open Thoughts</button></details>
+    <details class="card"><summary class="serif">Someone I love is hurting</summary>
+      <ul class="gentle"><li>Stay near, or say: “I’m here. You don’t have to explain.”</li><li>Ask what would help, and let “nothing” be a complete answer.</li><li>Help with one practical thing if they want it: water, a quieter room, or company.</li><li>If they may be unsafe, stay with them if you safely can, and use a line below. You can call for them.</li></ul>
+      <p class="pick">You don’t have to find the perfect words.</p></details>
+  </section>
+
+  <section id="p-lantern" role="tabpanel" aria-labelledby="t-lantern" hidden>
+    <div class="sky" id="sky" role="button" tabindex="0" aria-label="Release a lantern">
+      <div class="hint">Tap anywhere to release a lantern</div>
+    </div>
+    <p class="msg serif" id="msg" aria-live="polite"></p>
+    <p class="tally" id="tally"></p>
+  </section>
+
+  <section id="p-steps" role="tabpanel" aria-labelledby="t-steps" hidden>
+    <p class="pick">Pick any. Even one is plenty, and none is fine too.</p>
+    <ul class="steps" id="steps"></ul>
+    <p class="done serif" id="done" aria-live="polite"></p>
+  </section>
+
+  <section id="p-thoughts" role="tabpanel" aria-labelledby="t-thoughts" hidden>
+    <p class="pick">A gentle way to look at a worried thought. Nothing here is saved or sent. Skip any step, or stop anywhere.</p>
+    <h2 class="step-h serif">1. What is my mind saying?</h2>
+    <textarea class="write short" id="th1" rows="3" aria-label="What my mind is saying" placeholder="Just the sentence. No fixing, no judging."></textarea>
+    <h2 class="step-h serif">2. Does it sound like any of these?</h2>
+    <p class="pick">Tick any that fit, or none. These are habits a tired mind falls into. Seeing one is enough.</p>
+    <ul class="steps plain" id="tricks"></ul>
+    <h2 class="step-h serif">3. What would I say to a tired friend?</h2>
+    <p class="pick">Someone you care about who is tired and worried. Write something true and kind, not just cheerful.</p>
+    <textarea class="write short" id="th3" rows="3" aria-label="What I would say to a tired friend" placeholder="For example: I’m worried, and I’ve handled hard things before. I can take this slowly."></textarea>
+    <h2 class="step-h serif">4. One tiny step</h2>
+    <ul class="steps plain" id="tiny"></ul>
+    <div class="row"><button class="go" id="thdone">Done for now</button></div>
+    <p class="msg serif" id="thmsg" aria-live="polite"></p>
+  </section>
+
+  <section id="p-ideas" role="tabpanel" aria-labelledby="t-ideas" hidden>
+    <p class="pick">Ideas from anxiety self-help books. Open one, take what helps, and leave the rest.</p>
+    <details class="card"><summary class="serif">Float, don’t fight<small>Claire Weekes</small></summary><p>When tension rises, fighting it tends to feed it. Try letting your body go loose, as if you were floating on water, and let time pass. It rises, and it passes. You don’t have to make it leave.</p></details>
+    <details class="card"><summary class="serif">Start tiny<small>David Burns</small></summary><p>Wanting to do something often arrives after you begin, not before. Pick something very small, for five minutes. Starting is what counts, not finishing.</p></details>
+    <details class="card"><summary class="serif">How tense am I?<small>Edmund Bourne</small></summary><p>Give your tension a number from 0 to 10, with no judging. Try one thing from this page, then check the number again. Small changes are real changes.</p>
+      <input type="range" id="tense" min="0" max="10" value="5" aria-label="How tense I am, 0 to 10"><p class="tally"><output id="tenseval">5</output> / 10</p><p class="tally">0 is calm, 10 is very tense</p></details>
+    <details class="card"><summary class="serif">Let the muscles go<small>Edmund Bourne</small></summary><p>Tense a part of the body gently for about five seconds, then let it go and feel the difference. Skip any part that hurts.</p>
+      <p class="msg serif" id="mrtext" aria-live="polite"></p><button type="button" class="go" id="mrnext">Begin</button></details>
+    <details class="card"><summary class="serif">Come back to the room<small>A common grounding exercise</small></summary><p>Slowly notice five things you can see, four you can feel, three you can hear, two you can smell, and one you can taste. Skipping any is fine.</p></details>
+    <details class="card"><summary class="serif">A ladder for something hard<small>Edmund Bourne</small></summary><p>Big worries shrink when cut into small steps. Do the first one, and stop there if you want.</p><ul class="steps plain" id="ladder"></ul></details>
+  </section>
+
+  <section id="p-reading" role="tabpanel" aria-labelledby="t-reading" hidden>
+    <p class="pick">Books and free material for when you want more. Open one page or one worksheet, not the whole thing. Research suggests this kind of reading helps most when a real person is alongside you.</p>
+    <details class="card"><summary class="serif">Feeling Good<small>David Burns</small></summary><p>A classic on spotting the thinking habits that feed anxiety and low mood, with exercises you can write out. The Chinese edition is called 《伯恩斯新情绪疗法》.</p></details>
+    <details class="card"><summary class="serif">Overcoming Anxiety<small>Helen Kennerley</small></summary><p>A step-by-step cognitive behavioural programme with monitoring sheets. In the UK it is on the Reading Well list of recommended books.</p></details>
+    <details class="card"><summary class="serif">The Anxiety and Phobia Workbook<small>Edmund Bourne</small></summary><p>Relaxation, breathing, self-talk and gradual steps, laid out as exercises.</p></details>
+    <details class="card"><summary class="serif">Hope and Help for Your Nerves<small>Claire Weekes</small></summary><p>An older, gentle classic about not fighting tension: face it, accept it, float, and let time pass.</p></details>
+    <details class="card"><summary class="serif">Mind Over Mood<small>Dennis Greenberger and Christine Padesky</small></summary><p>A CBT workbook built around worksheets for thoughts and moods, much like the Thoughts tab here.</p></details>
+    <details class="card"><summary class="serif">Free workbooks<small>Centre for Clinical Interventions, Western Australia</small></summary><p>Free CBT workbooks on worry, anxiety, perfectionism, sleep and more, in English. They say these don’t replace a professional.</p><p><a href="https://www.cci.health.wa.gov.au/Resources/Looking-After-Yourself" target="_blank" rel="noopener">Open the site</a></p></details>
+    <details class="card"><summary class="serif">Every Mind Matters<small>NHS, UK</small></summary><p>Free advice and practical tips for mental wellbeing, in English.</p><p><a href="https://www.nhs.uk/every-mind-matters/" target="_blank" rel="noopener">Open the site</a></p></details>
+    <details class="card"><summary class="serif">MindShift CBT<small>Free app</small></summary><p>A free app based on CBT, for worry, stress and panic.</p><p><a href="https://www.mindshiftcbt.com/" target="_blank" rel="noopener">Open the site</a></p></details>
+  </section>
+
+  <section id="p-garden" role="tabpanel" aria-labelledby="t-garden" hidden>
+    <p class="pick">A garden that only grows. It never wilts, and nothing here can go wrong. Tap a bare spot to plant. Flowers also open when you breathe, release a lantern, or do a small thing.</p>
+    <div class="plot" id="plot"></div>
+    <p class="msg serif" id="gnote" aria-live="polite"></p>
+    <p class="tally" id="gcount"></p>
+    <button class="go" id="gnew" hidden>Start a fresh garden</button>
+  </section>
+
+  <section id="p-letgo" role="tabpanel" aria-labelledby="t-letgo" hidden>
+    <p class="pick">What’s heavy right now? Write it here, however messy. It stays in this tab: nothing is saved and nothing is sent anywhere. When you let it go, it’s gone.</p>
+    <textarea class="write" id="write" rows="6" aria-label="What’s heavy right now" placeholder="Write anything. It’s only for you."></textarea>
+    <div class="row">
+      <button class="go" id="letgo">Let it go</button>
+      <button class="quiet" id="clear">Just clear it</button>
+    </div>
+    <p class="msg serif" id="lmsg" aria-live="polite"></p>
+  </section>
+
+  <footer><p>A quiet space, not a treatment. If sleep is hard, eating is hard, or the fear keeps growing, a doctor or counsellor can help, and you can go at your own pace.</p><p>If you ever feel unsafe, in the US call or text 988, and in the UK or Ireland call Samaritans on 116 123. Elsewhere, <a href="https://findahelpline.com" target="_blank" rel="noopener">findahelpline.com</a> lists free helplines in many countries.</p>
+    <details class="card"><summary class="serif">More places to call</summary>
+      <p class="pick">These are listening lines for when life feels unsafe. If you are in immediate physical danger, use your local emergency number. If a number does not answer, try the link above.</p>
+      <ul class="helps">
+        <li>Aotearoa New Zealand: call or text 1737</li>
+        <li>Australia: Lifeline, 13 11 14</li>
+        <li>Brazil: CVV, 188</li>
+        <li>Canada: call or text 988</li>
+        <li>China: 12356</li>
+        <li>France: 3114</li>
+        <li>Germany: 0800 111 0 111 or 116 123</li>
+        <li>Hong Kong: 2389 2222</li>
+        <li>India: Tele-MANAS, 14416</li>
+        <li>Italy: 02 2327 2327</li>
+        <li>Japan: 0120-279-338</li>
+        <li>Singapore: 1767</li>
+        <li>South Korea: 109</li>
+        <li>Spain: 024</li>
+        <li>Taiwan: 1925</li>
+        <li>United Kingdom and Ireland: Samaritans, 116 123</li>
+        <li>United States: call or text 988</li>
+      </ul>
+    </details>
+    <p>Nothing you write here is saved or sent anywhere, and nothing is stored on your device.</p></footer>
+</main>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var tabs = ['breathe','now','lantern','steps','thoughts','ideas','reading','garden','letgo'];
+  function show(name){
+    tabs.forEach(function(t){
+      document.getElementById('p-'+t).hidden = (t !== name);
+      var tab = document.getElementById('t-'+t);
+      tab.setAttribute('aria-selected', String(t === name));
+      tab.tabIndex = (t === name) ? 0 : -1;
+      if(t === name && tab.scrollIntoView) tab.scrollIntoView({inline:'nearest', block:'nearest'});
+    });
+    if(name !== 'breathe') pause();
+  }
+  tabs.forEach(function(t, i){
+    var b = document.getElementById('t-'+t);
+    b.tabIndex = i ? -1 : 0;
+    b.addEventListener('click', function(){ show(t); });
+    b.addEventListener('keydown', function(e){
+      var k = e.key, j = -1;
+      if(k === 'ArrowRight') j = (i + 1) % tabs.length;
+      else if(k === 'ArrowLeft') j = (i + tabs.length - 1) % tabs.length;
+      else if(k === 'Home') j = 0;
+      else if(k === 'End') j = tabs.length - 1;
+      if(j < 0) return;
+      e.preventDefault(); show(tabs[j]); document.getElementById('t-' + tabs[j]).focus();
+    });
+  });
+  document.getElementById('p-now').addEventListener('click', function(e){
+    var b = e.target.closest ? e.target.closest('[data-go]') : null;
+    if(!b) return;
+    show(b.getAttribute('data-go'));
+  });
+
+  var orb = document.getElementById('orb'), say = document.getElementById('say'), count = document.getElementById('count'), breaths = document.getElementById('breaths'), go = document.getElementById('go');
+  var timer = null, tickTimer = null, running = false, cycles = 0;
+  function stopTicks(){ clearTimeout(timer); clearInterval(tickTimer); timer = null; tickTimer = null; }
+  function countdown(seconds, then){
+    var left = seconds;
+    count.textContent = String(left);
+    tickTimer = setInterval(function(){
+      left -= 1;
+      if(left <= 0){ clearInterval(tickTimer); tickTimer = null; then(); }
+      else count.textContent = String(left);
+    }, 1000);
+  }
+  function inhale(){
+    orb.style.transitionDuration = reduce ? '0s' : '4s'; orb.style.transform = 'scale(1)';
+    say.textContent = 'Breathe in…';
+    countdown(4, exhale);
+  }
+  function exhale(){
+    orb.style.transitionDuration = reduce ? '0s' : '6s'; orb.style.transform = 'scale(.6)';
+    say.textContent = 'Breathe out…';
+    countdown(6, function(){
+      cycles++; breaths.textContent = cycles + (cycles === 1 ? ' slow breath' : ' slow breaths');
+      bloom(); inhale();
+    });
+  }
+  function pause(){
+    if(!running) return;
+    running = false; stopTicks();
+    orb.style.transitionDuration = reduce ? '0s' : '1.5s'; orb.style.transform = 'scale(.8)';
+    say.textContent = 'Paused. Start whenever you like.'; count.textContent = ''; go.textContent = 'Start';
+  }
+  go.addEventListener('click', function(){
+    if(running){ pause(); } else { running = true; go.textContent = 'Pause'; inhale(); }
+  });
+  document.addEventListener('visibilitychange', function(){ if(document.hidden) pause(); });
+
+  var lines = [
+    "You don’t have to fix everything tonight.",
+    "Tired is allowed.",
+    "One breath at a time is enough.",
+    "It’s okay to rest before you figure it out.",
+    "You’ve gotten through hard hours before.",
+    "Being gentle with yourself counts as doing something.",
+    "This feeling is real, and it will change shape.",
+    "Nothing is asked of you in this minute."
+  ];
+  var EXTRA = {
+    en: ["Rest is part of the work.", "You can put this down for a while.", "Slow is still moving.", "Your body is doing its best.", "Nobody is keeping score here.", "It’s fine to not be fine right now.", "This moment is enough.", "You’re allowed to take up space.", "Soften your jaw. Let your shoulders drop.", "Breathe out a little longer than you breathe in.", "You don’t have to earn rest.", "Feelings come in waves, and waves pass.", "One small thing is plenty.", "You can start again whenever you like.", "Being tired doesn’t mean you’ve failed.", "There’s no hurry in this corner.", "Let the next hour be gentle.", "You are more than your worst thought.", "A worry is not a fact.", "You don’t need to solve it tonight.", "It’s okay to ask for help.", "You’ve already done a lot.", "Let the day be finished.", "Kindness to yourself counts.", "You can feel two things at once.", "Whatever you feel is allowed to be here.", "The heaviest moments do shift.", "Take a sip of water. That’s enough for now.", "Unclench your hands.", "Look at something far away for a moment.", "You are not behind.", "Good enough is good.", "Rest first, then decide.", "Not every thought needs an answer.", "You can pause and still be on your way.", "Let your feet feel the floor.", "This won’t last in exactly this form.", "You’re doing something right now: you’re resting.", "It’s okay to say no today.", "The pressure you feel is not an order.", "There is space between a thought and what you do.", "Be as patient with yourself as you’d be with a friend.", "Tonight, you only have to get through tonight.", "You’ve survived every hard day so far.", "Small steps still count as steps.", "Warm drink, soft light, nothing else needed.", "Let the noise settle.", "You can come back to this breath.", "You don’t have to be productive to be worthy.", "Nothing is wrong with needing a pause.", "Be gentle with the part of you that’s scared.", "It’s fine to go slowly through hard things.", "You’re not alone in feeling this.", "Let the lantern carry one worry up.", "Some things can wait until morning.", "You get to be a beginner.", "Mistakes are part of learning, not proof of failing.", "You can let someone know you’re having a hard time.", "Notice one thing you can hear right now.", "Your effort mattered, even when it was quiet.", "Today doesn’t need to be perfect.", "You can be proud and tired at the same time.", "Uncertainty is uncomfortable, and survivable.", "Let your breath be slow and unforced.", "It’s okay to want comfort.", "You’re allowed to change your mind.", "Take the next small step, and only that one.", "You don’t owe anyone an instant answer.", "Quiet is a good place to rest.", "Even the sky has grey days.", "A heavy feeling is not a permanent one.", "You can be kind to yourself without a reason.", "Rest your eyes for a moment.", "Your worth isn’t measured by today’s list.", "Let go of one “should”.", "Every breath is a fresh start.", "There’s room for you here.", "Take all the time you need.", "Gentle days help too.", "The worry will pass through, like weather.", "You can step away and come back later.", "Trust that you can handle one thing at a time.", "Ease up on yourself a little.", "You’ve earned a quiet minute.", "You don’t have to explain your tiredness.", "Feel your body being held up.", "A pause is not a failure.", "Choose the kinder thought, if one is available.", "You can enjoy small things even now.", "It’s okay to leave things unfinished tonight.", "Care for yourself the way you’d care for someone you love.", "Let the evening be slow.", "Hard feelings are visitors, not residents.", "You can ask the question again tomorrow.", "Your body knows how to settle. Give it a moment.", "Breathe. Nothing else to do for now.", "You’re allowed to rest before you’re “done”.", "Let this lantern be a small light.", "You can be unsure and still be okay.", "There is kindness in simply continuing.", "Let the day end without a verdict.", "You’re allowed to feel better, slowly.", "One kind sentence is enough to begin.", "May the next breath be easy."],
+    zh: ["休息也是工作的一部分。", "你可以先放下这件事一会儿。", "慢，也是在前进。", "你的身体正在尽力。", "这里没有人给你打分。", "现在不太好，也没关系。", "这一刻，已经足够。", "你可以占有一点空间。", "放松下巴，让肩膀沉下来。", "呼气比吸气再长一点。", "休息不需要靠挣来。", "情绪像海浪，来了也会过去。", "做一件小事就够了。", "想重新开始，随时可以。", "累，不代表你失败了。", "在这个角落里，不用着急。", "让接下来的一小时温柔一点。", "你比你最糟的念头更大。", "担心不等于事实。", "今晚不用把它解决。", "开口求助，是可以的。", "你已经做了很多了。", "让今天就这样结束吧。", "对自己友善，也算数。", "你可以同时有两种感受。", "无论你感觉到什么，都可以待在这里。", "最沉的时刻，也会慢慢松动。", "喝一口水。现在这样就够了。", "松开你的手。", "往远处看一会儿。", "你没有落后。", "够好，就是好。", "先休息，再决定。", "不是每个念头都需要回答。", "你可以暂停，仍然在路上。", "让脚感受一下地面。", "它不会一直保持现在这个样子。", "你此刻正在做一件事：休息。", "今天说“不”，也可以。", "你感到的压力，并不是命令。", "念头和行动之间，有一点空隙。", "对自己的耐心，像对朋友一样。", "今晚，你只需要走过今晚。", "到现在为止，每一个难熬的日子你都走过来了。", "小小的一步，也是一步。", "一杯热饮，一点柔光，不需要别的。", "让喧闹慢慢沉下去。", "你可以回到这一口呼吸。", "不需要有成果，你也值得被善待。", "需要停一下，没有什么不对。", "对那个害怕的自己，温柔一点。", "慢慢走过难事，也没关系。", "有这种感觉的人，不只你一个。", "让灯笼带走一份担心。", "有些事可以等到明天早上。", "你可以做一个初学者。", "犯错是学习的一部分，不是失败的证明。", "你可以告诉别人，你正在经历难处。", "留意一下此刻你听得到的一种声音。", "你的努力有意义，即使它很安静。", "今天不需要完美。", "你可以既骄傲又疲惫。", "不确定会让人不舒服，但能熬过去。", "让呼吸慢一点，不用用力。", "想要被安慰，是可以的。", "你可以改变主意。", "走下一小步，只走那一步。", "你不欠任何人一个马上的回答。", "安静是个适合休息的地方。", "连天空也有阴天。", "沉重的感觉，不会是永远的。", "对自己好，不需要理由。", "让眼睛休息一会儿。", "你的价值，不是用今天的清单来衡量的。", "放下一个“应该”。", "每一次呼吸，都是新的开始。", "这里有你的位置。", "想花多久，就花多久。", "温柔的日子也有帮助。", "担心会像天气一样经过。", "你可以先走开，稍后再回来。", "相信自己，一次可以应付一件事。", "对自己放松一点。", "你值得拥有安静的一分钟。", "你不用解释自己为什么累。", "感受一下身体被托住。", "暂停不是失败。", "如果有更温柔的想法，就选它。", "即使现在，你也可以享受小小的事。", "今晚留一些事没做完，也没关系。", "照顾自己，像照顾你爱的人那样。", "让夜晚慢一点。", "难受的情绪是访客，不是住户。", "这个问题，可以明天再问。", "你的身体知道怎么安定下来。给它一点时间。", "呼吸。现在不需要做别的。", "在“做完”之前，你也可以先休息。", "愿这盏灯笼成为一点小小的光。", "你可以不确定，同时依然没事。", "继续走下去，本身就是一种温柔。", "让今天不带评判地结束。", "你可以慢慢好起来。", "一句温柔的话，就足够开始。", "愿下一口呼吸轻松。"],
+    es: ["Descansar es parte del trabajo.", "Puedes dejar esto a un lado un rato.", "Ir despacio también es avanzar.", "Tu cuerpo está haciendo lo que puede.", "Aquí nadie lleva la cuenta.", "Está bien no estar bien ahora mismo.", "Este momento es suficiente.", "Tienes derecho a ocupar tu espacio.", "Relaja la mandíbula. Deja caer los hombros.", "Exhala un poco más largo de lo que inhalas.", "No tienes que ganarte el descanso.", "Las emociones llegan como olas, y las olas pasan.", "Una cosa pequeña es suficiente.", "Puedes empezar de nuevo cuando quieras.", "Cansarse no significa que hayas fallado.", "En este rincón no hay prisa.", "Que la próxima hora sea suave.", "Eres más que tu peor pensamiento.", "Una preocupación no es un hecho.", "No tienes que resolverlo esta noche.", "Está bien pedir ayuda.", "Ya has hecho mucho.", "Deja que el día termine.", "Ser amable contigo cuenta.", "Puedes sentir dos cosas a la vez.", "Lo que sientas puede estar aquí.", "Los momentos más pesados también cambian.", "Toma un sorbo de agua. Por ahora es suficiente.", "Suelta las manos.", "Mira algo lejano un momento.", "No vas con retraso.", "Suficientemente bueno es bueno.", "Primero descansa, luego decide.", "No todo pensamiento necesita respuesta.", "Puedes hacer una pausa y seguir en camino.", "Deja que tus pies sientan el suelo.", "Esto no durará exactamente así.", "Ahora mismo estás haciendo algo: descansar.", "Hoy puedes decir que no.", "La presión que sientes no es una orden.", "Entre un pensamiento y lo que haces hay un espacio.", "Ten contigo la paciencia que tendrías con un amigo.", "Esta noche solo tienes que pasar esta noche.", "Has superado todos tus días difíciles hasta ahora.", "Los pasos pequeños también son pasos.", "Una bebida caliente, luz suave, nada más.", "Deja que el ruido se asiente.", "Puedes volver a esta respiración.", "No tienes que producir para valer.", "No pasa nada por necesitar una pausa.", "Sé amable con la parte de ti que tiene miedo.", "Está bien ir despacio con lo difícil.", "No eres la única persona que siente esto.", "Que el farolillo se lleve una preocupación.", "Algunas cosas pueden esperar a la mañana.", "Tienes derecho a ser principiante.", "Equivocarse es parte de aprender, no prueba de fracaso.", "Puedes contarle a alguien que lo estás pasando mal.", "Fíjate en un sonido que oigas ahora.", "Tu esfuerzo importó, aunque fuera silencioso.", "Hoy no tiene que ser perfecto.", "Puedes sentir orgullo y cansancio a la vez.", "La incertidumbre incomoda, y se puede sobrellevar.", "Deja que tu respiración sea lenta y sin esfuerzo.", "Está bien querer consuelo.", "Puedes cambiar de opinión.", "Da el siguiente paso pequeño, y solo ese.", "No le debes a nadie una respuesta inmediata.", "El silencio es un buen lugar para descansar.", "Hasta el cielo tiene días grises.", "Un sentimiento pesado no es un sentimiento eterno.", "Puedes ser amable contigo sin motivo.", "Descansa los ojos un momento.", "Tu valor no se mide con la lista de hoy.", "Suelta un «debería».", "Cada respiración es un nuevo comienzo.", "Aquí hay lugar para ti.", "Tómate todo el tiempo que necesites.", "Los días suaves también ayudan.", "La preocupación pasará, como el clima.", "Puedes alejarte y volver más tarde.", "Confía en que puedes con una cosa a la vez.", "Sé un poco más indulgente contigo.", "Te has ganado un minuto de calma.", "No tienes que explicar tu cansancio.", "Siente cómo tu cuerpo está sostenido.", "Una pausa no es un fracaso.", "Elige el pensamiento más amable, si hay uno.", "Puedes disfrutar de las cosas pequeñas incluso ahora.", "Está bien dejar cosas sin terminar esta noche.", "Cuídate como cuidarías a alguien que quieres.", "Que la tarde sea lenta.", "Las emociones difíciles son visitas, no residentes.", "Puedes volver a hacer la pregunta mañana.", "Tu cuerpo sabe cómo calmarse. Dale un momento.", "Respira. Por ahora no hay nada más que hacer.", "Puedes descansar antes de terminar.", "Que este farolillo sea una pequeña luz.", "Puedes dudar y aun así estar bien.", "Seguir adelante ya es una forma de amabilidad.", "Deja que el día termine sin veredicto.", "Puedes sentirte mejor, poco a poco.", "Una frase amable basta para empezar.", "Que tu próxima respiración sea fácil."],
+    fr: ["Le repos fait partie du travail.", "Vous pouvez poser cela un moment.", "Lentement, on avance quand même.", "Votre corps fait de son mieux.", "Ici, personne ne compte les points.", "Ce n’est pas grave de ne pas aller bien, là, maintenant.", "Cet instant suffit.", "Vous avez le droit de prendre de la place.", "Relâchez la mâchoire. Laissez tomber les épaules.", "Expirez un peu plus longtemps que vous n’inspirez.", "Vous n’avez pas à mériter le repos.", "Les émotions viennent par vagues, et les vagues passent.", "Une petite chose suffit largement.", "Vous pouvez recommencer quand vous voulez.", "Être fatigué ne veut pas dire que vous avez échoué.", "Dans ce coin, rien ne presse.", "Que l’heure qui vient soit douce.", "Vous êtes plus grand que votre pire pensée.", "Une inquiétude n’est pas un fait.", "Vous n’avez pas à le résoudre ce soir.", "Demander de l’aide, c’est permis.", "Vous avez déjà fait beaucoup.", "Laissez la journée se terminer.", "La gentillesse envers vous compte.", "Vous pouvez ressentir deux choses à la fois.", "Ce que vous ressentez a le droit d’être ici.", "Les moments les plus lourds finissent par bouger.", "Buvez une gorgée d’eau. Pour l’instant, cela suffit.", "Desserrez les mains.", "Regardez quelque chose de loin, un moment.", "Vous n’êtes pas en retard.", "Assez bien, c’est bien.", "Reposez-vous d’abord, décidez ensuite.", "Toutes les pensées n’ont pas besoin d’une réponse.", "Vous pouvez faire une pause et rester en chemin.", "Laissez vos pieds sentir le sol.", "Cela ne restera pas exactement sous cette forme.", "Vous êtes en train de faire quelque chose : vous vous reposez.", "Aujourd’hui, vous pouvez dire non.", "La pression que vous sentez n’est pas un ordre.", "Il y a un espace entre une pensée et ce que vous faites.", "Soyez aussi patient avec vous qu’avec un ami.", "Ce soir, vous n’avez qu’à traverser ce soir.", "Vous avez traversé chacun de vos jours difficiles jusqu’ici.", "Les petits pas comptent encore comme des pas.", "Une boisson chaude, une lumière douce, rien d’autre.", "Laissez le bruit se déposer.", "Vous pouvez revenir à cette respiration.", "Vous n’avez pas à être productif pour avoir de la valeur.", "Il n’y a rien de mal à avoir besoin d’une pause.", "Soyez doux avec la part de vous qui a peur.", "Aller lentement à travers les choses difficiles, c’est bien.", "Vous n’êtes pas seul à ressentir cela.", "Laissez la lanterne emporter une inquiétude.", "Certaines choses peuvent attendre le matin.", "Vous avez le droit d’être débutant.", "Les erreurs font partie de l’apprentissage, elles ne prouvent pas un échec.", "Vous pouvez dire à quelqu’un que vous traversez un moment difficile.", "Remarquez un son que vous entendez en ce moment.", "Votre effort a compté, même quand il était silencieux.", "Aujourd’hui n’a pas besoin d’être parfait.", "Vous pouvez être fier et fatigué en même temps.", "L’incertitude est inconfortable, et on peut la traverser.", "Laissez votre souffle être lent, sans forcer.", "Avoir envie de réconfort, c’est permis.", "Vous avez le droit de changer d’avis.", "Faites le prochain petit pas, et seulement celui-là.", "Vous ne devez à personne une réponse immédiate.", "Le silence est un bon endroit pour se reposer.", "Même le ciel a des jours gris.", "Un sentiment lourd n’est pas un sentiment définitif.", "Vous pouvez être bon avec vous sans raison.", "Reposez vos yeux un moment.", "Votre valeur ne se mesure pas à la liste d’aujourd’hui.", "Lâchez un « je devrais ».", "Chaque respiration est un nouveau départ.", "Il y a de la place pour vous ici.", "Prenez tout le temps qu’il vous faut.", "Les journées douces aident aussi.", "L’inquiétude passera, comme le temps qu’il fait.", "Vous pouvez vous éloigner et revenir plus tard.", "Faites-vous confiance : une chose à la fois.", "Relâchez un peu la pression sur vous.", "Vous avez mérité une minute tranquille.", "Vous n’avez pas à expliquer votre fatigue.", "Sentez que votre corps est porté.", "Une pause n’est pas un échec.", "Choisissez la pensée la plus douce, s’il y en a une.", "Vous pouvez aimer les petites choses, même maintenant.", "Ce soir, vous pouvez laisser des choses inachevées.", "Prenez soin de vous comme vous le feriez pour quelqu’un que vous aimez.", "Laissez la soirée être lente.", "Les émotions difficiles sont de passage, elles n’habitent pas ici.", "Vous pouvez reposer la question demain.", "Votre corps sait comment se poser. Donnez-lui un moment.", "Respirez. Rien d’autre à faire pour l’instant.", "Vous avez le droit de vous reposer avant d’avoir « fini ».", "Que cette lanterne soit une petite lumière.", "Vous pouvez ne pas être sûr, et aller bien quand même.", "Continuer, simplement, est déjà une forme de douceur.", "Laissez la journée finir sans verdict.", "Vous avez le droit d’aller mieux, lentement.", "Une phrase bienveillante suffit pour commencer.", "Que la prochaine respiration soit facile."],
+    de: ["Ruhe ist Teil der Arbeit.", "Sie können das eine Weile hinlegen.", "Langsam ist trotzdem ein Vorankommen.", "Ihr Körper tut, was er kann.", "Hier führt niemand Punkte.", "Es ist in Ordnung, gerade nicht in Ordnung zu sein.", "Dieser Augenblick genügt.", "Sie dürfen Raum einnehmen.", "Lassen Sie den Kiefer weich. Lassen Sie die Schultern sinken.", "Atmen Sie etwas länger aus, als Sie einatmen.", "Ruhe müssen Sie sich nicht verdienen.", "Gefühle kommen in Wellen, und Wellen gehen vorüber.", "Eine kleine Sache ist reichlich.", "Sie können neu anfangen, wann Sie möchten.", "Müde zu sein heißt nicht, dass Sie versagt haben.", "In dieser Ecke hat nichts Eile.", "Lassen Sie die nächste Stunde sanft sein.", "Sie sind mehr als Ihr schlimmster Gedanke.", "Eine Sorge ist keine Tatsache.", "Sie müssen es heute Abend nicht lösen.", "Um Hilfe zu bitten ist in Ordnung.", "Sie haben schon viel getan.", "Lassen Sie den Tag zu Ende gehen.", "Freundlichkeit zu sich selbst zählt.", "Sie können zwei Dinge zugleich fühlen.", "Was Sie fühlen, darf hier sein.", "Die schwersten Augenblicke verschieben sich.", "Nehmen Sie einen Schluck Wasser. Das genügt für jetzt.", "Öffnen Sie die Hände.", "Schauen Sie einen Moment in die Ferne.", "Sie sind nicht hinten dran.", "Gut genug ist gut.", "Erst ruhen, dann entscheiden.", "Nicht jeder Gedanke braucht eine Antwort.", "Sie können pausieren und trotzdem unterwegs sein.", "Lassen Sie Ihre Füße den Boden spüren.", "Es wird nicht genau in dieser Form bleiben.", "Sie tun gerade etwas: Sie ruhen.", "Heute dürfen Sie nein sagen.", "Der Druck, den Sie spüren, ist kein Befehl.", "Zwischen einem Gedanken und dem, was Sie tun, ist Raum.", "Seien Sie so geduldig mit sich, wie Sie es mit einem Freund wären.", "Heute Abend müssen Sie nur den heutigen Abend schaffen.", "Sie haben bisher jeden schweren Tag überstanden.", "Kleine Schritte zählen trotzdem als Schritte.", "Ein warmes Getränk, weiches Licht, sonst nichts.", "Lassen Sie den Lärm sich legen.", "Sie können zu diesem Atemzug zurückkehren.", "Sie müssen nicht produktiv sein, um wertvoll zu sein.", "Es ist nichts falsch daran, eine Pause zu brauchen.", "Seien Sie sanft mit dem Teil von Ihnen, der Angst hat.", "Langsam durch Schweres zu gehen ist in Ordnung.", "Sie sind nicht allein mit diesem Gefühl.", "Lassen Sie die Laterne eine Sorge mitnehmen.", "Manches kann bis zum Morgen warten.", "Sie dürfen Anfänger sein.", "Fehler gehören zum Lernen, sie beweisen kein Versagen.", "Sie können jemandem sagen, dass es Ihnen schwerfällt.", "Achten Sie auf ein Geräusch, das Sie gerade hören.", "Ihre Mühe hat gezählt, auch wenn sie still war.", "Heute muss nicht vollkommen sein.", "Sie können stolz und müde zugleich sein.", "Ungewissheit ist unangenehm, und sie ist auszuhalten.", "Lassen Sie den Atem langsam und ohne Zwang sein.", "Trost zu wollen ist in Ordnung.", "Sie dürfen Ihre Meinung ändern.", "Tun Sie den nächsten kleinen Schritt, und nur den.", "Sie schulden niemandem eine sofortige Antwort.", "Stille ist ein guter Ort zum Ausruhen.", "Auch der Himmel hat graue Tage.", "Ein schweres Gefühl ist kein dauerhaftes.", "Sie können ohne Grund freundlich zu sich sein.", "Lassen Sie die Augen einen Moment ruhen.", "Ihr Wert misst sich nicht an der Liste von heute.", "Lassen Sie ein „ich sollte“ los.", "Jeder Atemzug ist ein neuer Anfang.", "Hier ist Platz für Sie.", "Nehmen Sie sich alle Zeit, die Sie brauchen.", "Sanfte Tage helfen auch.", "Die Sorge zieht durch, wie das Wetter.", "Sie können weggehen und später zurückkommen.", "Vertrauen Sie darauf, dass Sie eine Sache nach der anderen schaffen.", "Seien Sie ein wenig nachsichtiger mit sich.", "Sie haben eine stille Minute verdient.", "Sie müssen Ihre Müdigkeit nicht erklären.", "Spüren Sie, dass Ihr Körper getragen wird.", "Eine Pause ist kein Versagen.", "Wählen Sie den freundlicheren Gedanken, wenn es einen gibt.", "Sie können kleine Dinge auch jetzt genießen.", "Es ist in Ordnung, heute Abend Dinge unfertig zu lassen.", "Sorgen Sie für sich, wie Sie für jemanden sorgen würden, den Sie lieben.", "Lassen Sie den Abend langsam sein.", "Schwere Gefühle sind zu Besuch, sie wohnen nicht hier.", "Sie können die Frage morgen noch einmal stellen.", "Ihr Körper weiß, wie er zur Ruhe kommt. Geben Sie ihm einen Moment.", "Atmen Sie. Für jetzt gibt es nichts anderes zu tun.", "Sie dürfen ruhen, bevor Sie „fertig“ sind.", "Diese Laterne darf ein kleines Licht sein.", "Sie können unsicher sein und trotzdem in Ordnung.", "Einfach weiterzumachen hat schon Güte in sich.", "Lassen Sie den Tag ohne Urteil enden.", "Sie dürfen sich langsam besser fühlen.", "Ein freundlicher Satz genügt zum Anfang.", "Möge der nächste Atemzug leicht sein."],
+    it: ["Il riposo fa parte del lavoro.", "Puoi posare questa cosa per un po’.", "Andare piano è comunque andare avanti.", "Il tuo corpo sta facendo del suo meglio.", "Qui nessuno tiene il punteggio.", "Va bene non stare bene, adesso.", "Questo momento basta.", "Puoi occupare il tuo spazio.", "Ammorbidisci la mandibola. Lascia cadere le spalle.", "Espira un po’ più a lungo di quanto inspiri.", "Non devi meritarti il riposo.", "Le emozioni arrivano a onde, e le onde passano.", "Una cosa piccola è già tanto.", "Puoi ricominciare quando vuoi.", "Essere stanco non vuol dire aver fallito.", "In questo angolo non c’è fretta.", "Che l’ora che viene sia gentile.", "Sei più grande del tuo pensiero peggiore.", "Una preoccupazione non è un fatto.", "Non devi risolverlo stasera.", "Chiedere aiuto è permesso.", "Hai già fatto molto.", "Lascia che la giornata finisca.", "La gentilezza verso di te conta.", "Puoi sentire due cose insieme.", "Qualunque cosa tu senta, può stare qui.", "I momenti più pesanti si spostano.", "Bevi un sorso d’acqua. Per ora basta.", "Apri le mani.", "Guarda qualcosa di lontano, per un momento.", "Non sei indietro.", "Abbastanza buono è buono.", "Prima riposa, poi decidi.", "Non ogni pensiero ha bisogno di una risposta.", "Puoi fare una pausa e restare comunque in cammino.", "Lascia che i piedi sentano il pavimento.", "Non resterà esattamente in questa forma.", "Stai facendo una cosa, adesso: ti stai riposando.", "Oggi puoi dire di no.", "La pressione che senti non è un ordine.", "C’è uno spazio tra un pensiero e ciò che fai.", "Abbi con te la pazienza che avresti con un amico.", "Stanotte devi solo attraversare stanotte.", "Hai superato ogni giorno difficile, fin qui.", "I passi piccoli contano comunque come passi.", "Una bevanda calda, una luce morbida, nient’altro.", "Lascia che il rumore si depositi.", "Puoi tornare a questo respiro.", "Non devi essere produttivo per avere valore.", "Non c’è niente di sbagliato nel bisogno di una pausa.", "Sii gentile con la parte di te che ha paura.", "Attraversare le cose difficili lentamente va bene.", "Non sei solo a sentire questo.", "Lascia che la lanterna porti via una preoccupazione.", "Alcune cose possono aspettare fino al mattino.", "Puoi essere un principiante.", "Gli errori fanno parte dell’imparare, non sono la prova di un fallimento.", "Puoi far sapere a qualcuno che stai passando un momento difficile.", "Nota un suono che senti adesso.", "Il tuo sforzo ha contato, anche quando era silenzioso.", "Oggi non deve essere perfetto.", "Puoi essere fiero e stanco nello stesso momento.", "L’incertezza è scomoda, e si può attraversare.", "Lascia che il respiro sia lento, senza forzarlo.", "Volere conforto va bene.", "Puoi cambiare idea.", "Fai il prossimo piccolo passo, e solo quello.", "Non devi a nessuno una risposta immediata.", "Il silenzio è un buon posto per riposare.", "Anche il cielo ha giornate grigie.", "Un sentimento pesante non è un sentimento permanente.", "Puoi essere gentile con te senza un motivo.", "Riposa gli occhi per un momento.", "Il tuo valore non si misura con la lista di oggi.", "Lascia andare un “dovrei”.", "Ogni respiro è un nuovo inizio.", "Qui c’è posto per te.", "Prenditi tutto il tempo che ti serve.", "Anche le giornate gentili aiutano.", "La preoccupazione passerà, come il tempo.", "Puoi allontanarti e tornare più tardi.", "Fidati: puoi farcela una cosa alla volta.", "Allenta un po’ la presa su di te.", "Ti sei guadagnato un minuto di quiete.", "Non devi spiegare la tua stanchezza.", "Senti che il tuo corpo è sostenuto.", "Una pausa non è un fallimento.", "Scegli il pensiero più gentile, se ce n’è uno.", "Puoi goderti le cose piccole anche adesso.", "Va bene lasciare delle cose incompiute, stanotte.", "Abbi cura di te come avresti cura di qualcuno che ami.", "Lascia che la sera sia lenta.", "Le emozioni difficili sono in visita, non abitano qui.", "Puoi rifare la domanda domani.", "Il tuo corpo sa come calmarsi. Dagli un momento.", "Respira. Per ora non c’è altro da fare.", "Puoi riposare prima di aver “finito”.", "Questa lanterna può essere una piccola luce.", "Puoi essere incerto e stare bene lo stesso.", "Continuare, semplicemente, è già una forma di gentilezza.", "Lascia che la giornata finisca senza un verdetto.", "Puoi stare meglio, lentamente.", "Una frase gentile basta per cominciare.", "Che il prossimo respiro sia leggero."]
+  };
+  var sky = document.getElementById('sky'), msg = document.getElementById('msg'), tally = document.getElementById('tally');
+  var n = 0, last = -1;
+  function pickLine(){
+    var ex = EXTRA[window.qcLang] || ((window.qcLang && window.qcLang !== 'en') ? [] : EXTRA.en), total = lines.length + ex.length, i;
+    do { i = Math.floor(Math.random() * total); } while(i === last);
+    last = i;
+    return i < lines.length ? lines[i] : ex[i - lines.length];
+  }
+  function release(x){
+    var box = sky.getBoundingClientRect();
+    var left = Math.max(8, Math.min(box.width - 34, x));
+    var el = document.createElement('div'); el.className = 'lantern'; el.style.left = left + 'px';
+    el.addEventListener('animationend', function(){ el.remove(); });
+    sky.appendChild(el);
+    msg.textContent = pickLine();
+    n++; tally.textContent = n + (n === 1 ? ' lantern released' : ' lanterns released');
+    bloom();
+  }
+  sky.addEventListener('click', function(e){ release(e.clientX - sky.getBoundingClientRect().left - 14); });
+  sky.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); release(Math.random() * sky.clientWidth); }
+  });
+
+  var things = [
+    "Take a few sips of water",
+    "Loosen your shoulders and your jaw",
+    "Look out a window for a minute",
+    "Eat or drink something small",
+    "Put your phone down for five minutes",
+    "Say one kind sentence to yourself",
+    "Wash your hands or your face",
+    "Open a window, or notice the air",
+    "Step outside for one minute",
+    "Change into something more comfortable"
+  ];
+  var ul = document.getElementById('steps'), done = document.getElementById('done');
+  things.forEach(function(text){
+    var li = document.createElement('li'), label = document.createElement('label');
+    var box = document.createElement('input'); box.type = 'checkbox';
+    var span = document.createElement('span'); span.textContent = text;
+    label.appendChild(box); label.appendChild(span); li.appendChild(label); ul.appendChild(li);
+    box.addEventListener('change', function(){ if(box.checked) bloom(); update(); });
+  });
+  function update(){
+    var k = ul.querySelectorAll('input:checked').length;
+    done.textContent = k === 0 ? '' : (k === things.length ? 'All of them. That was a lot, and you did it.' : k + ' of ' + things.length + '. No rush.');
+  }
+
+  /* Thoughts: nothing is saved */
+  (function(){
+    var tricks = [
+      '“Always” or “never”: one bad moment becomes a rule',
+      'All or nothing: one slip means total failure',
+      'Seeing only the one thing that went wrong',
+      'Brushing off the good: “that doesn’t count”',
+      'Guessing: what others think, or what will go wrong, before it happens',
+      'Blowing up the bad and shrinking the good',
+      '“I feel scared, so it must be dangerous”',
+      '“I should” and “I must”, like a whip',
+      'Labels: “I’m a failure” instead of “that went badly”',
+      'Taking all the blame for things that weren’t only yours'
+    ];
+    var tiny = [
+      'Rest today, and nothing else',
+      'Drink some water',
+      'Do one small thing from your list, for just two minutes',
+      'Tell one person I’m tired'
+    ];
+    var tul = document.getElementById('tricks'), ul2 = document.getElementById('tiny');
+    function item(list, text, type, name){
+      var l = document.createElement('li'), lab = document.createElement('label');
+      var inp = document.createElement('input'); inp.type = type; if(name) inp.name = name;
+      var sp = document.createElement('span'); sp.textContent = text;
+      lab.appendChild(inp); lab.appendChild(sp); l.appendChild(lab); list.appendChild(l);
+    }
+    tricks.forEach(function(t){ item(tul, t, 'checkbox'); });
+    tiny.forEach(function(t){ item(ul2, t, 'radio', 'tinystep'); });
+    var ends = ['That was gentle work. You can stop here.', 'You looked at it, and that’s enough for today.', 'Good. Nothing more is needed right now.'];
+    var ei = Math.floor(Math.random() * ends.length);
+    document.getElementById('thdone').addEventListener('click', function(){
+      document.getElementById('th1').value = ''; document.getElementById('th3').value = '';
+      document.querySelectorAll('#p-thoughts input[type=checkbox],#p-thoughts input[type=radio]').forEach(function(x){ x.checked = false; });
+      document.getElementById('thmsg').textContent = ends[ei % ends.length]; ei++;
+      bloom();
+    });
+  })();
+
+  (function(){
+    var t = document.getElementById('tense'), tv = document.getElementById('tenseval');
+    t.addEventListener('input', function(){ tv.textContent = t.value; });
+    var parts = ['Hands: make gentle fists for about five seconds, then let go.', 'Shoulders: lift them toward your ears for five seconds, then drop them.', 'Face: scrunch it softly for five seconds, then let it soften.', 'Stomach: tighten it lightly for five seconds, then release.', 'Legs and feet: press your feet into the floor for five seconds, then let go.', 'Now just notice the difference. Breathe out slowly.'];
+    var mi = -1, mt = document.getElementById('mrtext'), mb = document.getElementById('mrnext');
+    mb.addEventListener('click', function(){
+      mi = (mi + 1) % parts.length; mt.textContent = parts[mi];
+      var last = (mi === parts.length - 1); mb.textContent = last ? 'Again' : 'Next';
+      if(last) bloom();
+    });
+    var rungs = ['Write the thing you’re facing in one plain sentence', 'Notice one part of it that feels manageable', 'Pick one tiny piece to do today, and only that', 'Tell one person you trust that it’s on your mind', 'Do the tiny piece, then rest'];
+    var lul = document.getElementById('ladder');
+    rungs.forEach(function(r){
+      var l = document.createElement('li'), lab = document.createElement('label');
+      var inp = document.createElement('input'); inp.type = 'checkbox';
+      var sp = document.createElement('span'); sp.textContent = r;
+      lab.appendChild(inp); lab.appendChild(sp); l.appendChild(lab); lul.appendChild(l);
+      inp.addEventListener('change', function(){ if(inp.checked) bloom(); });
+    });
+  })();
+
+  /* Garden: it only grows, it never wilts */
+  var SIZE = 24;
+  var glyphs = ['✿','❀','✾','❁'], tints = ['var(--amber)','#9aa5d8','#d98aa3','#6fb7a6'];
+  var plot = document.getElementById('plot'), gnote = document.getElementById('gnote'), gcount = document.getElementById('gcount'), gnew = document.getElementById('gnew');
+  var garden = [];
+  for(var s = 0; s < SIZE; s++) garden.push(-1);
+  try { localStorage.removeItem('quietCornerGarden'); localStorage.removeItem('quietCornerLang'); } catch(e){}
+  function filled(){ return garden.filter(function(v){ return v >= 0; }).length; }
+  function draw(){
+    plot.textContent = '';
+    garden.forEach(function(v, i){
+      var cell;
+      if(v >= 0){
+        cell = document.createElement('span'); cell.className = 'cell'; cell.textContent = glyphs[v]; cell.style.color = tints[v];
+        cell.setAttribute('role','img'); cell.setAttribute('aria-label','Flower');
+      } else {
+        cell = document.createElement('button'); cell.type = 'button'; cell.className = 'cell'; cell.textContent = '·';
+        cell.setAttribute('aria-label','Plant a flower here'); cell.addEventListener('click', function(){ bloom(i); });
+      }
+      plot.appendChild(cell);
+    });
+    var f = filled();
+    gcount.textContent = f === 0 ? 'Nothing planted yet, and that’s fine.' : f + ' of ' + SIZE + ' flowers';
+    gnew.hidden = f < SIZE;
+  }
+  function bloom(at){
+    var empty = []; garden.forEach(function(v, i){ if(v < 0) empty.push(i); });
+    if(!empty.length){ gnote.textContent = 'The garden is full. It can stay just as it is.'; return; }
+    var i = (typeof at === 'number') ? at : empty[Math.floor(Math.random() * empty.length)];
+    garden[i] = Math.floor(Math.random() * glyphs.length);
+    draw();
+    gnote.textContent = 'A flower opened.';
+  }
+  gnew.addEventListener('click', function(){ garden = garden.map(function(){ return -1; }); draw(); gnote.textContent = 'A fresh, quiet plot.'; });
+  draw();
+
+  /* Let it go: the words are never saved or sent; they just dissolve */
+  var write = document.getElementById('write'), lmsg = document.getElementById('lmsg'), letgo = document.getElementById('letgo'), clear = document.getElementById('clear');
+  var closing = ['It’s out of your hands now, and a little lighter.', 'You said it. That counts.', 'Let it drift. You don’t have to carry it tonight.', 'It was heavy, and you set it down.'];
+  var ci = Math.floor(Math.random() * closing.length), letTimer = null;
+  function wipe(){
+    if(letTimer){ clearTimeout(letTimer); letTimer = null; }
+    write.value = ''; write.classList.remove('letting'); write.disabled = false; letgo.disabled = false;
+  }
+  letgo.addEventListener('click', function(){
+    if(letTimer) return;
+    if(!write.value.trim()){ lmsg.textContent = 'Nothing to let go of is fine too.'; return; }
+    write.disabled = true; letgo.disabled = true; write.classList.add('letting');
+    lmsg.textContent = closing[ci % closing.length]; ci++;
+    letTimer = setTimeout(function(){ letTimer = null; wipe(); bloom(); }, reduce ? 1300 : 3500);
+  });
+  clear.addEventListener('click', function(){ wipe(); lmsg.textContent = ''; });
+
+  var themeBtn = document.getElementById('themebtn'), themeLabel = document.getElementById('themelabel');
+  var themeOrder = ['', 'light', 'dark'], themeNames = ['Same as device', 'Light', 'Dark'], themeIdx = 0;
+  themeBtn.addEventListener('click', function(){
+    themeIdx = (themeIdx + 1) % themeOrder.length;
+    if(themeOrder[themeIdx]) document.documentElement.setAttribute('data-theme', themeOrder[themeIdx]);
+    else document.documentElement.removeAttribute('data-theme');
+    themeLabel.textContent = themeNames[themeIdx];
+  });
+  var sizeBtn = document.getElementById('sizebtn'), sizeLabel = document.getElementById('sizelabel'), sizeBig = false;
+  sizeBtn.addEventListener('click', function(){
+    sizeBig = !sizeBig;
+    if(sizeBig) document.documentElement.setAttribute('data-size', 'big');
+    else document.documentElement.removeAttribute('data-size');
+    sizeLabel.textContent = sizeBig ? 'Smaller text' : 'Larger text';
+  });
+})();
+</script>
+<script>
+/* Languages: English is the source text; this layer swaps in translations as text appears. Add a language by adding a dictionary and a button. */
+(function(){
+  var ZH = {
+    "Reading":"阅读",
+    "Books and free material for when you want more. Open one page or one worksheet, not the whole thing. Research suggests this kind of reading helps most when a real person is alongside you.":"想多了解一些的话，这里有几本书和一些免费资料。不用读完，翻一页、做一张练习表就够了。研究发现，这类阅读在有真人陪着的时候帮助最大。",
+    "A classic on spotting the thinking habits that feed anxiety and low mood, with exercises you can write out. The Chinese edition is called 《伯恩斯新情绪疗法》.":"一本经典，教你认出那些让焦虑和低落越陷越深的想法，还有可以动笔写的练习。中文版叫《伯恩斯新情绪疗法》。",
+    "A step-by-step cognitive behavioural programme with monitoring sheets. In the UK it is on the Reading Well list of recommended books.":"一套按步骤来的认知行为疗法方案，配有记录表。在英国，它被列进了 Reading Well 推荐书单。",
+    "Relaxation, breathing, self-talk and gradual steps, laid out as exercises.":"放松、呼吸、和自己说话的方式、一小步一小步地面对害怕的事，都做成了练习。",
+    "An older, gentle classic about not fighting tension: face it, accept it, float, and let time pass.":"一本比较早出的温和经典，主张别和紧张较劲：面对它，接受它，顺着漂，让时间过去。",
+    "A CBT workbook built around worksheets for thoughts and moods, much like the Thoughts tab here.":"一本围绕想法和情绪记录表写成的认知行为疗法练习册，和这里的“想法”页很像。",
+    "Free workbooks":"免费练习册",
+    "Free CBT workbooks on worry, anxiety, perfectionism, sleep and more, in English. They say these don’t replace a professional.":"免费的认知行为疗法练习册，有担忧、焦虑、完美主义、睡眠等主题，是英文的。他们自己也说明，这些不能代替专业人士。",
+    "Free advice and practical tips for mental wellbeing, in English.":"免费的心理健康建议和实用小方法，英文。",
+    "Free app":"免费应用",
+    "A free app based on CBT, for worry, stress and panic.":"一款基于认知行为疗法的免费应用，针对担忧、压力和惊恐。",
+    "Ideas":"方法",
+    "Ideas from anxiety self-help books. Open one, take what helps, and leave the rest.":"几个来自焦虑自助书籍的方法。打开一个，有用就留下，没用就放着。",
+    "Float, don’t fight":"漂着，别较劲",
+    "When tension rises, fighting it tends to feed it. Try letting your body go loose, as if you were floating on water, and let time pass. It rises, and it passes. You don’t have to make it leave.":"紧张上来的时候，越跟它较劲，它往往越凶。试着把身体放松下来，像躺在水面上漂着，等时间慢慢过去。它会涨起来，也会退下去。你不用把它赶走。",
+    "Start tiny":"先动一小下",
+    "Wanting to do something often arrives after you begin, not before. Pick something very small, for five minutes. Starting is what counts, not finishing.":"想做的心情，往往是动起来之后才冒出来的，不是之前。挑一件很小的事，做五分钟。算数的是开始，不是做完。",
+    "How tense am I?":"我现在有多紧张？",
+    "Give your tension a number from 0 to 10, with no judging. Try one thing from this page, then check the number again. Small changes are real changes.":"给自己的紧张打个分，0 到 10，不评价好坏。试试这页上的某个办法，再看看分数。变化再小，也是真的变化。",
+    "How tense I am, 0 to 10":"我有多紧张，0 到 10 分",
+    "0 is calm, 10 is very tense":"0 是很平静，10 是非常紧张",
+    "Let the muscles go":"把肌肉放松下来",
+    "Tense a part of the body gently for about five seconds, then let it go and feel the difference. Skip any part that hurts.":"轻轻绷紧身体的某个部位，大约五秒，然后松开，感受前后的差别。哪个地方会痛就跳过。",
+    "Hands: make gentle fists for about five seconds, then let go.":"双手：轻轻握拳，大约五秒，再松开。",
+    "Shoulders: lift them toward your ears for five seconds, then drop them.":"肩膀：往耳朵的方向耸起，五秒后放下来。",
+    "Face: scrunch it softly for five seconds, then let it soften.":"脸：轻轻皱起来，五秒后让它松开。",
+    "Stomach: tighten it lightly for five seconds, then release.":"肚子：轻轻收紧，五秒后放松。",
+    "Legs and feet: press your feet into the floor for five seconds, then let go.":"腿和脚：脚掌用力踩住地面，五秒后松开。",
+    "Now just notice the difference. Breathe out slowly.":"现在，只是感受那份差别。慢慢地呼气。",
+    "Begin":"开始",
+    "Next":"下一步",
+    "Again":"再来一次",
+    "Come back to the room":"回到眼前的房间",
+    "A common grounding exercise":"一个常用的“回到当下”练习",
+    "Slowly notice five things you can see, four you can feel, three you can hear, two you can smell, and one you can taste. Skipping any is fine.":"慢慢留意：五样看得见的东西，四样摸得到的，三种听得到的声音，两种闻得到的气味，一种尝得到的味道。哪一项不想做就跳过。",
+    "A ladder for something hard":"给一件难事搭几级小台阶",
+    "Big worries shrink when cut into small steps. Do the first one, and stop there if you want.":"大的担心，切成小步就没那么吓人了。做第一步就好，想停就停。",
+    "Write the thing you’re facing in one plain sentence":"用一句平实的话，写下你正在面对的事",
+    "Notice one part of it that feels manageable":"找出其中一小块你觉得应付得来的",
+    "Pick one tiny piece to do today, and only that":"挑一小件今天能做的，只做这一件",
+    "Tell one person you trust that it’s on your mind":"告诉一个你信得过的人，这件事压在你心上",
+    "Do the tiny piece, then rest":"做完那一小件，然后休息",
+    "A quiet corner":"安静的角落",
+    "Nothing to finish here. Pick one thing and stay as long as you like.":"这里没有什么要做完的。挑一件事，想待多久就待多久。",
+    "Choose something to do":"选一件想做的事",
+    "Breathe":"呼吸",
+    "Lanterns":"灯笼",
+    "Small things":"小事",
+    "Thoughts":"想法",
+    "Garden":"花园",
+    "Let go":"放下",
+    "Breathe in for four, out for six.":"吸气数四拍，呼气数六拍。",
+    "Breathe in…":"吸气……",
+    "Breathe out…":"呼气……",
+    "Paused. Start whenever you like.":"先停一下。想继续的时候再开始。",
+    "Start":"开始",
+    "Pause":"暂停",
+    "Tap anywhere to release a lantern":"点一下任意位置，放飞一盏灯笼",
+    "Release a lantern":"放飞一盏灯笼",
+    "You don’t have to fix everything tonight.":"今晚不用把什么都解决。",
+    "Tired is allowed.":"累了，就累了。",
+    "One breath at a time is enough.":"一口气一口气地来，就够了。",
+    "It’s okay to rest before you figure it out.":"先歇一歇，再慢慢想，也来得及。",
+    "You’ve gotten through hard hours before.":"难熬的时候，你以前也熬过来了。",
+    "Being gentle with yourself counts as doing something.":"对自己好一点，这本身就是在做事。",
+    "This feeling is real, and it will change shape.":"这种感觉是真的，但它不会一直是这个样子。",
+    "Nothing is asked of you in this minute.":"这一分钟里，没有谁在要求你什么。",
+    "Pick any. Even one is plenty, and none is fine too.":"选哪个都行。做一个就够了，一个都不做也没关系。",
+    "Take a few sips of water":"喝几口水",
+    "Loosen your shoulders and your jaw":"放松肩膀和下巴",
+    "Look out a window for a minute":"看一分钟窗外",
+    "Eat or drink something small":"吃一点东西，或者喝点什么",
+    "Put your phone down for five minutes":"把手机放下五分钟",
+    "Say one kind sentence to yourself":"对自己说一句好话",
+    "All of them. That was a lot, and you did it.":"都做完了。真不容易，你做到了。",
+    "A gentle way to look at a worried thought. Nothing here is saved or sent. Skip any step, or stop anywhere.":"换个温和的角度，看看让你担心的那个想法。这里写的东西不会保存，也不会发出去。哪一步都可以跳过，想停就停。",
+    "1. What is my mind saying?":"1. 我的脑子在说什么？",
+    "What my mind is saying":"我的脑子在说什么",
+    "Just the sentence. No fixing, no judging.":"把那句话写下来就行，不用改，也不用评判。",
+    "2. Does it sound like any of these?":"2. 它像下面哪一种？",
+    "Tick any that fit, or none. These are habits a tired mind falls into. Seeing one is enough.":"像哪个就勾哪个，都不像也行。这些都是累了的时候，脑子容易走进去的老路。认出一个就够了。",
+    "“Always” or “never”: one bad moment becomes a rule":"“总是”“永远不会”：一次不顺，变成了定论",
+    "All or nothing: one slip means total failure":"非黑即白：一点差错，就等于全盘失败",
+    "Seeing only the one thing that went wrong":"只盯着那一件出了错的事",
+    "Brushing off the good: “that doesn’t count”":"把好的事轻轻带过：“那不算什么”",
+    "Guessing: what others think, or what will go wrong, before it happens":"还没发生就先猜：别人会怎么看我，哪里会出错",
+    "Blowing up the bad and shrinking the good":"把坏的放大，把好的缩小",
+    "“I feel scared, so it must be dangerous”":"“我害怕，所以一定有危险”",
+    "“I should” and “I must”, like a whip":"“我应该”“我必须”，像一根鞭子",
+    "Labels: “I’m a failure” instead of “that went badly”":"贴标签：说“我真失败”，而不是“那件事没做好”",
+    "Taking all the blame for things that weren’t only yours":"把本来不只是你的责任，全算在自己头上",
+    "3. What would I say to a tired friend?":"3. 如果是一个累坏了的朋友，我会对他说什么？",
+    "Someone you care about who is tired and worried. Write something true and kind, not just cheerful.":"一个你在乎的人，很累，也很担心。写一句真实又温和的话，不用硬要说得轻松。",
+    "What I would say to a tired friend":"我会对累坏了的朋友说的话",
+    "For example: I’m worried, and I’ve handled hard things before. I can take this slowly.":"比如：我有点担心，不过难的事我以前也扛过来了。这件事我可以慢慢来。",
+    "4. One tiny step":"4. 迈一小步",
+    "Rest today, and nothing else":"今天什么都不做，好好休息",
+    "Drink some water":"喝点水",
+    "Do one small thing from your list, for just two minutes":"从你的清单里挑一件小事，只做两分钟",
+    "Tell one person I’m tired":"跟一个人说我很累",
+    "Done for now":"今天先到这儿",
+    "That was gentle work. You can stop here.":"这样慢慢来就很好。到这里可以停了。",
+    "You looked at it, and that’s enough for today.":"你看了看它，今天做到这样就够了。",
+    "Good. Nothing more is needed right now.":"好。现在不用再做什么了。",
+    "A garden that only grows. It never wilts, and nothing here can go wrong. Tap a bare spot to plant. Flowers also open when you breathe, release a lantern, or do a small thing.":"一座只会长大的花园。花不会谢，这里也不会出错。点一下空地就能种一朵。你呼吸、放灯笼、做件小事的时候，花也会自己开。",
+    "Plant a flower here":"在这里种一朵花",
+    "Flower":"花",
+    "Nothing planted yet, and that’s fine.":"还没种什么，这样也挺好。",
+    "The garden is full. It can stay just as it is.":"花园满了。就让它这样吧。",
+    "A flower opened.":"开了一朵花。",
+    "A fresh, quiet plot.":"一片干净安静的空地。",
+    "Start a fresh garden":"重新开一座花园",
+    "What’s heavy right now? Write it here, however messy. It stays in this tab: nothing is saved and nothing is sent anywhere. When you let it go, it’s gone.":"心里现在最沉的是什么？写在这里，写得乱也没关系。它只留在这个页面里，不会保存，也不会发到任何地方。放下之后，它就没了。",
+    "What’s heavy right now":"心里现在最沉的是什么",
+    "Write anything. It’s only for you.":"想写什么就写什么，只给你自己看。",
+    "Let it go":"放下它",
+    "Just clear it":"只是清空",
+    "Nothing to let go of is fine too.":"没有要放下的，也没关系。",
+    "It’s out of your hands now, and a little lighter.":"它已经不在你手里了，心里轻了一点。",
+    "You said it. That counts.":"你把它说出来了，这就够了。",
+    "Let it drift. You don’t have to carry it tonight.":"让它飘走吧，今晚不用再背着它。",
+    "It was heavy, and you set it down.":"它很沉，而你把它放下了。",
+    "A quiet space, not a treatment. If sleep is hard, eating is hard, or the fear keeps growing, a doctor or counsellor can help, and you can go at your own pace.":"这是一个让人安静下来的地方，不是治疗。如果睡不着、吃不下，或者越来越害怕，医生或心理咨询师能帮上忙，而且一切都可以按你自己的节奏来。",
+    "If you ever feel unsafe, in the US call or text 988, and in the UK or Ireland call Samaritans on 116 123. Elsewhere,":"如果你觉得自己不安全：在中国请拨打 12356，在美国请拨打或发短信到 988，在英国和爱尔兰请拨打 Samaritans 的 116 123。其他地方：",
+    "lists free helplines in many countries.":"列出了许多国家的免费求助热线。",
+    "Nothing you write here is saved or sent anywhere, and nothing is stored on your device.":"你在这里写的东西不会保存，也不会发到任何地方，设备上也不会留下任何记录。",
+    "Language":"语言",
+    "Color theme":"颜色",
+    "Same as device":"跟随设备",
+    "Light":"浅色",
+    "Dark":"深色",
+    "Open the site":"打开网站",
+    "Text size":"文字大小",
+    "Larger text":"更大的字",
+    "Smaller text":"更小的字",
+    "If something specific is going on, open Right now.":"如果眼前有一件具体的事，打开「此刻」。",
+    "Right now":"此刻",
+    "If you know what is happening, open that one. If you don’t, Breathe is enough. Skip any line.":"如果你知道现在是怎么回事，就打开那一条。如果不知道，呼吸就够了。哪一句都可以跳过。",
+    "Open one. Skip any line.":"打开一条就好。哪一句都可以跳过。",
+    "I can’t catch my breath":"我喘不上气",
+    "Sit or stand, and put both feet on the floor.":"坐下或站着，两只脚都放在地上。",
+    "Breathe out more slowly than you breathe in.":"呼气比吸气更慢一点。",
+    "Look at one still object and name its color.":"看一件不动的东西，说出它的颜色。",
+    "Press your feet down for a few seconds, then release.":"脚往下踩几秒，然后松开。",
+    "If this comes with chest pain, fainting, or breathing trouble that is new for you, contact local medical help.":"如果同时有胸痛、晕厥，或者这种呼吸困难是新出现的，请联系当地的医疗帮助。",
+    "Open Breathe":"打开呼吸",
+    "I can’t sleep":"我睡不着",
+    "Dim the screen after this, or stop here.":"看完这条就把屏幕调暗，或者就停在这里。",
+    "Unclench your jaw, your tongue, and your hands.":"松开下巴、舌头和双手。",
+    "If a worry keeps returning, write one sentence in Let go, then leave it.":"如果一个担心反复回来，在「放下」里写一句话，然后离开它。",
+    "Rest with your eyes closed still counts, even when sleep does not come.":"闭着眼休息也算数，即使睡意没有来。",
+    "Open Let go":"打开放下",
+    "I feel alone":"我感到孤单",
+    "Say one true sentence, even if the room is empty.":"说一句真话，即使房间里没有别人。",
+    "If there is one safe person, a short message is enough: “I’m having a hard time.”":"如果有一个让你感到安全的人，一条短消息就够了：“我现在很难受。”",
+    "A lantern can carry one sentence up.":"一盏灯笼可以带上一句话。",
+    "If you want a voice, the numbers at the bottom of this page are there.":"如果你想听到人的声音，这一页最下面有电话号码。",
+    "Loneliness is not a failure.":"孤单不是失败。",
+    "Open Lanterns":"打开灯笼",
+    "I’m angry":"我在生气",
+    "Anger is allowed. You do not have to act on it.":"生气是可以的。你不必照着它去做。",
+    "Put both feet on the floor and lengthen the out-breath.":"两只脚放在地上，把呼气拉长。",
+    "Open and close your hands slowly a few times.":"双手慢慢张开、握上，做几次。",
+    "If it is safe, step into another room or outside for one minute.":"如果安全，去另一个房间或到外面待一分钟。",
+    "You can choose your words later, when your body is quieter.":"等身体安静一些，再决定要说什么。",
+    "I feel nothing":"我什么都感觉不到",
+    "You do not have to force a brighter feeling.":"你不必强迫自己变得开心一点。",
+    "Notice one temperature: air on your face, a cup, or your hands.":"留意一种温度：脸上的空气、一只杯子，或者你的手。",
+    "Name two plain details of one ordinary object.":"给一件普通的东西说出两个平实的细节。",
+    "Take a sip of water, and stay for one minute. That is enough.":"喝一口水，停留一分钟。这样就够了。",
+    "Numb is allowed to be here.":"麻木也可以待在这里。",
+    "Someone is gone":"有人离开了",
+    "There is no right pace. Skipping this is fine.":"没有正确的速度。跳过这一条也没关系。",
+    "A memory can sit here for a moment, or you can set it down.":"一段回忆可以在这里坐一会儿，你也可以把它放下。",
+    "If you have not eaten or had water, something small is a kindness.":"如果还没吃东西或喝水，一点点也是对自己好。",
+    "One ordinary thing is enough today.":"今天做一件普通的事就够了。",
+    "Grief does not have to be done well.":"哀伤不需要做得很好。",
+    "The worry won’t stop":"担心停不下来",
+    "A worry is not a fact, and it does not all have to be solved tonight.":"担心不是事实，也不必在今晚全部解决。",
+    "If one worry is loudest, write it as a single sentence and leave the rest.":"如果有一个担心最响，把它写成一句话，其余的先放下。",
+    "Name one thing you can see and one thing you can hear.":"说出一件看得见的，和一件听得到的。",
+    "Then stop. More thinking is not required.":"然后停下来。不需要再想更多。",
+    "You don’t have to answer every thought.":"你不必回应每一个念头。",
+    "Open Thoughts":"打开想法",
+    "Someone I love is hurting":"我在乎的人正在难受",
+    "Stay near, or say: “I’m here. You don’t have to explain.”":"留在近处，或者说：“我在这里。你不用解释。”",
+    "Ask what would help, and let “nothing” be a complete answer.":"问问什么能帮上忙，并让“什么都不用”成为一个完整的回答。",
+    "Help with one practical thing if they want it: water, a quieter room, or company.":"如果他们愿意，帮一件具体的事：水、一间更安静的房间，或者陪伴。",
+    "If they may be unsafe, stay with them if you safely can, and use a line below. You can call for them.":"如果他们可能不安全，在你自己也安全的情况下留在他们身边，并用下面的电话。你可以替他们打。",
+    "You don’t have to find the perfect words.":"你不必找到完美的话。",
+    "Wash your hands or your face":"洗洗手，或者洗把脸",
+    "Open a window, or notice the air":"开一扇窗，或者留意一下空气",
+    "Step outside for one minute":"到外面待一分钟",
+    "Change into something more comfortable":"换一件更舒服的衣服",
+    "More places to call":"更多可以打的地方",
+    "These are listening lines for when life feels unsafe. If you are in immediate physical danger, use your local emergency number. If a number does not answer, try the link above.":"这些是生命感到不安全时可以倾听的电话。如果身体正处于紧急危险中，请用当地的急救电话。如果一个号码没有人接，试上面的链接。",
+    "Aotearoa New Zealand: call or text 1737":"新西兰：拨打或发短信 1737",
+    "Australia: Lifeline, 13 11 14":"澳大利亚：Lifeline，13 11 14",
+    "Brazil: CVV, 188":"巴西：CVV，188",
+    "Canada: call or text 988":"加拿大：拨打或发短信 988",
+    "China: 12356":"中国：12356",
+    "France: 3114":"法国：3114",
+    "Germany: 0800 111 0 111 or 116 123":"德国：0800 111 0 111 或 116 123",
+    "Hong Kong: 2389 2222":"香港：2389 2222",
+    "India: Tele-MANAS, 14416":"印度：Tele-MANAS，14416",
+    "Italy: 02 2327 2327":"意大利：02 2327 2327",
+    "Japan: 0120-279-338":"日本：0120-279-338",
+    "Singapore: 1767":"新加坡：1767",
+    "South Korea: 109":"韩国：109",
+    "Spain: 024":"西班牙：024",
+    "Taiwan: 1925":"台湾：1925",
+    "United Kingdom and Ireland: Samaritans, 116 123":"英国和爱尔兰：Samaritans，116 123",
+    "United States: call or text 988":"美国：拨打或发短信 988"
+  };
+  var ES = {
+    "Reading":"Lecturas",
+    "Books and free material for when you want more. Open one page or one worksheet, not the whole thing. Research suggests this kind of reading helps most when a real person is alongside you.":"Libros y material gratuito para cuando quieras más. Abre una página o una hoja de trabajo, no todo. La investigación sugiere que este tipo de lectura ayuda más cuando hay una persona real a tu lado.",
+    "A classic on spotting the thinking habits that feed anxiety and low mood, with exercises you can write out. The Chinese edition is called 《伯恩斯新情绪疗法》.":"Un clásico para reconocer los hábitos de pensamiento que alimentan la ansiedad y el ánimo bajo, con ejercicios para escribir. La edición china se llama 《伯恩斯新情绪疗法》.",
+    "A step-by-step cognitive behavioural programme with monitoring sheets. In the UK it is on the Reading Well list of recommended books.":"Un programa cognitivo-conductual paso a paso, con hojas de registro. En el Reino Unido figura en la lista Reading Well de libros recomendados.",
+    "Relaxation, breathing, self-talk and gradual steps, laid out as exercises.":"Relajación, respiración, diálogo interno y pasos graduales, presentados como ejercicios.",
+    "An older, gentle classic about not fighting tension: face it, accept it, float, and let time pass.":"Un clásico más antiguo y amable sobre no luchar contra la tensión: enfrentarla, aceptarla, flotar y dejar pasar el tiempo.",
+    "A CBT workbook built around worksheets for thoughts and moods, much like the Thoughts tab here.":"Un cuaderno de trabajo de TCC basado en hojas para pensamientos y estados de ánimo, muy parecido a la pestaña Pensamientos de aquí.",
+    "Free workbooks":"Cuadernos gratuitos",
+    "Free CBT workbooks on worry, anxiety, perfectionism, sleep and more, in English. They say these don’t replace a professional.":"Cuadernos gratuitos de TCC sobre preocupación, ansiedad, perfeccionismo, sueño y más, en inglés. Aclaran que no sustituyen a un profesional.",
+    "Free advice and practical tips for mental wellbeing, in English.":"Consejos prácticos y gratuitos para el bienestar mental, en inglés.",
+    "Free app":"App gratuita",
+    "A free app based on CBT, for worry, stress and panic.":"Una app gratuita basada en la TCC, para la preocupación, el estrés y el pánico.",
+    "Ideas":"Ideas",
+    "Ideas from anxiety self-help books. Open one, take what helps, and leave the rest.":"Ideas de libros de autoayuda para la ansiedad. Abre una, quédate con lo que te sirva y deja el resto.",
+    "Float, don’t fight":"Flota, no luches",
+    "When tension rises, fighting it tends to feed it. Try letting your body go loose, as if you were floating on water, and let time pass. It rises, and it passes. You don’t have to make it leave.":"Cuando sube la tensión, luchar contra ella suele alimentarla. Prueba a soltar el cuerpo, como si flotaras en el agua, y deja pasar el tiempo. Sube, y pasa. No tienes que hacer que se vaya.",
+    "Start tiny":"Empieza en pequeño",
+    "Wanting to do something often arrives after you begin, not before. Pick something very small, for five minutes. Starting is what counts, not finishing.":"Las ganas de hacer algo suelen llegar después de empezar, no antes. Elige algo muy pequeño, durante cinco minutos. Lo que cuenta es empezar, no terminar.",
+    "How tense am I?":"¿Qué tan tenso estoy?",
+    "Give your tension a number from 0 to 10, with no judging. Try one thing from this page, then check the number again. Small changes are real changes.":"Ponle a tu tensión un número del 0 al 10, sin juzgar. Prueba una cosa de esta página y vuelve a mirar el número. Los cambios pequeños son cambios reales.",
+    "How tense I am, 0 to 10":"Qué tan tenso estoy, de 0 a 10",
+    "0 is calm, 10 is very tense":"0 es calma, 10 es mucha tensión",
+    "Let the muscles go":"Suelta los músculos",
+    "Tense a part of the body gently for about five seconds, then let it go and feel the difference. Skip any part that hurts.":"Tensa suavemente una parte del cuerpo unos cinco segundos, luego suéltala y siente la diferencia. Salta cualquier parte que te duela.",
+    "Hands: make gentle fists for about five seconds, then let go.":"Manos: haz puños suaves unos cinco segundos y luego suelta.",
+    "Shoulders: lift them toward your ears for five seconds, then drop them.":"Hombros: súbelos hacia las orejas cinco segundos y luego déjalos caer.",
+    "Face: scrunch it softly for five seconds, then let it soften.":"Cara: arrúgala suavemente cinco segundos y luego deja que se relaje.",
+    "Stomach: tighten it lightly for five seconds, then release.":"Estómago: apriétalo con suavidad cinco segundos y luego suelta.",
+    "Legs and feet: press your feet into the floor for five seconds, then let go.":"Piernas y pies: presiona los pies contra el suelo cinco segundos y luego suelta.",
+    "Now just notice the difference. Breathe out slowly.":"Ahora solo nota la diferencia. Exhala despacio.",
+    "Begin":"Empezar",
+    "Next":"Siguiente",
+    "Again":"Otra vez",
+    "Come back to the room":"Vuelve a la habitación",
+    "A common grounding exercise":"Un ejercicio común de anclaje",
+    "Slowly notice five things you can see, four you can feel, three you can hear, two you can smell, and one you can taste. Skipping any is fine.":"Fíjate despacio en cinco cosas que ves, cuatro que sientes, tres que oyes, dos que hueles y una que saboreas. Puedes saltarte cualquiera.",
+    "A ladder for something hard":"Una escalera para algo difícil",
+    "Big worries shrink when cut into small steps. Do the first one, and stop there if you want.":"Las grandes preocupaciones se encogen al dividirlas en pasos pequeños. Haz el primero y, si quieres, para ahí.",
+    "Write the thing you’re facing in one plain sentence":"Escribe en una frase sencilla lo que estás afrontando",
+    "Notice one part of it that feels manageable":"Fíjate en una parte que te parezca manejable",
+    "Pick one tiny piece to do today, and only that":"Elige una pieza muy pequeña para hoy, y solo esa",
+    "Tell one person you trust that it’s on your mind":"Cuéntale a una persona de confianza que lo tienes en la cabeza",
+    "Do the tiny piece, then rest":"Haz esa pieza pequeña y luego descansa",
+    "A quiet corner":"Un rincón tranquilo",
+    "Nothing to finish here. Pick one thing and stay as long as you like.":"Aquí no hay nada que terminar. Elige una cosa y quédate el tiempo que quieras.",
+    "Choose something to do":"Elige algo que hacer",
+    "Breathe":"Respirar",
+    "Lanterns":"Farolillos",
+    "Small things":"Cosas pequeñas",
+    "Thoughts":"Pensamientos",
+    "Garden":"Jardín",
+    "Let go":"Soltar",
+    "Breathe in for four, out for six.":"Inhala cuatro, exhala seis.",
+    "Breathe in…":"Inhala…",
+    "Breathe out…":"Exhala…",
+    "Paused. Start whenever you like.":"En pausa. Empieza cuando quieras.",
+    "Start":"Empezar",
+    "Pause":"Pausa",
+    "Tap anywhere to release a lantern":"Toca en cualquier lugar para soltar un farolillo",
+    "Release a lantern":"Soltar un farolillo",
+    "You don’t have to fix everything tonight.":"No tienes que arreglarlo todo esta noche.",
+    "Tired is allowed.":"Cansarse está permitido.",
+    "One breath at a time is enough.":"Una respiración a la vez es suficiente.",
+    "It’s okay to rest before you figure it out.":"Está bien descansar antes de resolverlo.",
+    "You’ve gotten through hard hours before.":"Ya has pasado por horas difíciles antes.",
+    "Being gentle with yourself counts as doing something.":"Ser amable contigo cuenta como hacer algo.",
+    "This feeling is real, and it will change shape.":"Esta sensación es real, y va a cambiar de forma.",
+    "Nothing is asked of you in this minute.":"En este minuto nadie te pide nada.",
+    "Pick any. Even one is plenty, and none is fine too.":"Elige cualquiera. Con una basta, y ninguna también está bien.",
+    "Take a few sips of water":"Beber unos sorbos de agua",
+    "Loosen your shoulders and your jaw":"Soltar los hombros y la mandíbula",
+    "Look out a window for a minute":"Mirar por la ventana un minuto",
+    "Eat or drink something small":"Comer o beber algo pequeño",
+    "Put your phone down for five minutes":"Dejar el teléfono cinco minutos",
+    "Say one kind sentence to yourself":"Decirte una frase amable",
+    "All of them. That was a lot, and you did it.":"Todas. Fue mucho, y lo lograste.",
+    "A gentle way to look at a worried thought. Nothing here is saved or sent. Skip any step, or stop anywhere.":"Una forma suave de mirar un pensamiento preocupante. Nada de esto se guarda ni se envía. Salta cualquier paso o para donde quieras.",
+    "1. What is my mind saying?":"1. ¿Qué me dice mi mente?",
+    "What my mind is saying":"Lo que me dice mi mente",
+    "Just the sentence. No fixing, no judging.":"Solo la frase. Sin corregir, sin juzgar.",
+    "2. Does it sound like any of these?":"2. ¿Se parece a alguno de estos?",
+    "Tick any that fit, or none. These are habits a tired mind falls into. Seeing one is enough.":"Marca los que encajen, o ninguno. Son hábitos en los que cae una mente cansada. Ver uno es suficiente.",
+    "“Always” or “never”: one bad moment becomes a rule":"“Siempre” o “nunca”: un mal momento se vuelve regla",
+    "All or nothing: one slip means total failure":"Todo o nada: un tropiezo es un fracaso total",
+    "Seeing only the one thing that went wrong":"Ver solo lo único que salió mal",
+    "Brushing off the good: “that doesn’t count”":"Quitarle valor a lo bueno: “eso no cuenta”",
+    "Guessing: what others think, or what will go wrong, before it happens":"Adivinar: lo que piensan otros, o lo que saldrá mal, antes de que ocurra",
+    "Blowing up the bad and shrinking the good":"Agrandar lo malo y encoger lo bueno",
+    "“I feel scared, so it must be dangerous”":"“Siento miedo, así que debe ser peligroso”",
+    "“I should” and “I must”, like a whip":"“Debería” y “tengo que”, como un látigo",
+    "Labels: “I’m a failure” instead of “that went badly”":"Etiquetas: “soy un fracaso” en vez de “eso salió mal”",
+    "Taking all the blame for things that weren’t only yours":"Cargar con toda la culpa de cosas que no eran solo tuyas",
+    "3. What would I say to a tired friend?":"3. ¿Qué le diría a un amigo cansado?",
+    "Someone you care about who is tired and worried. Write something true and kind, not just cheerful.":"Alguien querido que está pasando por un momento de cansancio y preocupación. Escribe algo verdadero y amable, no solo alegre.",
+    "What I would say to a tired friend":"Lo que le diría a un amigo cansado",
+    "For example: I’m worried, and I’ve handled hard things before. I can take this slowly.":"Por ejemplo: Me preocupa esto, pero ya he sacado adelante cosas difíciles. Puedo ir despacio.",
+    "4. One tiny step":"4. Un paso pequeño",
+    "Rest today, and nothing else":"Descansar hoy, y nada más",
+    "Drink some water":"Beber un poco de agua",
+    "Do one small thing from your list, for just two minutes":"Haz una cosa pequeña de tu lista, solo dos minutos",
+    "Tell one person I’m tired":"Decirle a alguien que estoy cansado",
+    "Done for now":"Por hoy, listo",
+    "That was gentle work. You can stop here.":"Fue un trabajo suave. Puedes parar aquí.",
+    "You looked at it, and that’s enough for today.":"Lo miraste, y eso es suficiente por hoy.",
+    "Good. Nothing more is needed right now.":"Bien. Ahora mismo no hace falta nada más.",
+    "A garden that only grows. It never wilts, and nothing here can go wrong. Tap a bare spot to plant. Flowers also open when you breathe, release a lantern, or do a small thing.":"Un jardín que solo crece. Nunca se marchita y aquí nada puede salir mal. Toca un espacio vacío para plantar. Las flores también se abren cuando respiras, sueltas un farolillo o haces una cosa pequeña.",
+    "Plant a flower here":"Plantar una flor aquí",
+    "Flower":"Flor",
+    "Nothing planted yet, and that’s fine.":"Todavía no hay nada plantado, y está bien.",
+    "The garden is full. It can stay just as it is.":"El jardín está lleno. Puede quedarse así.",
+    "A flower opened.":"Se abrió una flor.",
+    "A fresh, quiet plot.":"Un terreno nuevo y tranquilo.",
+    "Start a fresh garden":"Empezar un jardín nuevo",
+    "What’s heavy right now? Write it here, however messy. It stays in this tab: nothing is saved and nothing is sent anywhere. When you let it go, it’s gone.":"¿Qué pesa ahora? Escríbelo aquí, por desordenado que sea. Se queda en esta pestaña: no se guarda nada ni se envía a ningún sitio. Cuando lo sueltes, desaparece.",
+    "What’s heavy right now":"Lo que pesa ahora",
+    "Write anything. It’s only for you.":"Escribe lo que quieras. Es solo para ti.",
+    "Let it go":"Soltarlo",
+    "Just clear it":"Solo borrar",
+    "Nothing to let go of is fine too.":"No tener nada que soltar también está bien.",
+    "It’s out of your hands now, and a little lighter.":"Ya no está en tus manos, y pesa un poco menos.",
+    "You said it. That counts.":"Lo dijiste. Eso cuenta.",
+    "Let it drift. You don’t have to carry it tonight.":"Déjalo flotar. Esta noche no tienes que cargarlo.",
+    "It was heavy, and you set it down.":"Pesaba mucho, y lo dejaste.",
+    "A quiet space, not a treatment. If sleep is hard, eating is hard, or the fear keeps growing, a doctor or counsellor can help, and you can go at your own pace.":"Un espacio tranquilo, no un tratamiento. Si dormir cuesta, comer cuesta o el miedo sigue creciendo, un médico o terapeuta puede ayudar, y puedes ir a tu propio ritmo.",
+    "If you ever feel unsafe, in the US call or text 988, and in the UK or Ireland call Samaritans on 116 123. Elsewhere,":"Si alguna vez te sientes en peligro, en EE. UU. llama o escribe al 988, y en el Reino Unido e Irlanda llama a Samaritans al 116 123. En otros lugares,",
+    "lists free helplines in many countries.":"enumera líneas de ayuda gratuitas en muchos países.",
+    "Nothing you write here is saved or sent anywhere, and nothing is stored on your device.":"Nada de lo que escribas aquí se guarda ni se envía a ningún sitio, y no se almacena nada en tu dispositivo.",
+    "Language":"Idioma",
+    "Color theme":"Tema de color",
+    "Same as device":"Como el dispositivo",
+    "Light":"Claro",
+    "Dark":"Oscuro",
+    "Open the site":"Abrir el sitio",
+    "Text size":"Tamaño del texto",
+    "Larger text":"Texto más grande",
+    "Smaller text":"Texto más pequeño",
+    "If something specific is going on, open Right now.":"Si está pasando algo concreto, abre Ahora.",
+    "Right now":"Ahora",
+    "If you know what is happening, open that one. If you don’t, Breathe is enough. Skip any line.":"Si sabes qué está pasando, abre esa. Si no, Respirar es suficiente. Puedes saltarte cualquier línea.",
+    "Open one. Skip any line.":"Abre una. Puedes saltarte cualquier línea.",
+    "I can’t catch my breath":"No puedo recuperar el aliento",
+    "Sit or stand, and put both feet on the floor.":"Siéntate o quédate de pie, con los dos pies en el suelo.",
+    "Breathe out more slowly than you breathe in.":"Exhala más despacio de lo que inhalas.",
+    "Look at one still object and name its color.":"Mira un objeto quieto y di su color.",
+    "Press your feet down for a few seconds, then release.":"Presiona los pies hacia abajo unos segundos y luego suelta.",
+    "If this comes with chest pain, fainting, or breathing trouble that is new for you, contact local medical help.":"Si esto viene con dolor en el pecho, desmayo o una dificultad para respirar que es nueva para ti, contacta ayuda médica local.",
+    "Open Breathe":"Abrir Respirar",
+    "I can’t sleep":"No puedo dormir",
+    "Dim the screen after this, or stop here.":"Baja el brillo de la pantalla después de esto, o detente aquí.",
+    "Unclench your jaw, your tongue, and your hands.":"Suelta la mandíbula, la lengua y las manos.",
+    "If a worry keeps returning, write one sentence in Let go, then leave it.":"Si una preocupación vuelve una y otra vez, escribe una frase en Soltar y luego déjala.",
+    "Rest with your eyes closed still counts, even when sleep does not come.":"Descansar con los ojos cerrados también cuenta, aunque el sueño no llegue.",
+    "Open Let go":"Abrir Soltar",
+    "I feel alone":"Me siento solo",
+    "Say one true sentence, even if the room is empty.":"Di una frase verdadera, aunque la habitación esté vacía.",
+    "If there is one safe person, a short message is enough: “I’m having a hard time.”":"Si hay una persona segura, un mensaje corto basta: “Lo estoy pasando mal.”",
+    "A lantern can carry one sentence up.":"Un farolillo puede llevarse una frase.",
+    "If you want a voice, the numbers at the bottom of this page are there.":"Si quieres una voz, los números al final de esta página están ahí.",
+    "Loneliness is not a failure.":"La soledad no es un fracaso.",
+    "Open Lanterns":"Abrir Farolillos",
+    "I’m angry":"Estoy enfadado",
+    "Anger is allowed. You do not have to act on it.":"El enfado está permitido. No tienes que actuar según él.",
+    "Put both feet on the floor and lengthen the out-breath.":"Pon los dos pies en el suelo y alarga la exhalación.",
+    "Open and close your hands slowly a few times.":"Abre y cierra las manos despacio, unas cuantas veces.",
+    "If it is safe, step into another room or outside for one minute.":"Si es seguro, pasa a otra habitación o sal fuera un minuto.",
+    "You can choose your words later, when your body is quieter.":"Puedes elegir tus palabras después, cuando el cuerpo esté más quieto.",
+    "I feel nothing":"No siento nada",
+    "You do not have to force a brighter feeling.":"No tienes que forzar un sentimiento más alegre.",
+    "Notice one temperature: air on your face, a cup, or your hands.":"Nota una temperatura: el aire en la cara, una taza o tus manos.",
+    "Name two plain details of one ordinary object.":"Di dos detalles sencillos de un objeto ordinario.",
+    "Take a sip of water, and stay for one minute. That is enough.":"Toma un sorbo de agua y quédate un minuto. Eso basta.",
+    "Numb is allowed to be here.":"El entumecimiento puede estar aquí.",
+    "Someone is gone":"Alguien se ha ido",
+    "There is no right pace. Skipping this is fine.":"No hay un ritmo correcto. Saltarse esto está bien.",
+    "A memory can sit here for a moment, or you can set it down.":"Un recuerdo puede quedarse un momento, o puedes dejarlo.",
+    "If you have not eaten or had water, something small is a kindness.":"Si no has comido o bebido, algo pequeño es un cuidado.",
+    "One ordinary thing is enough today.":"Una cosa ordinaria basta por hoy.",
+    "Grief does not have to be done well.":"El duelo no tiene que hacerse bien.",
+    "The worry won’t stop":"La preocupación no para",
+    "A worry is not a fact, and it does not all have to be solved tonight.":"Una preocupación no es un hecho, y no hace falta resolverla toda esta noche.",
+    "If one worry is loudest, write it as a single sentence and leave the rest.":"Si una preocupación es la más fuerte, escríbela en una sola frase y deja el resto.",
+    "Name one thing you can see and one thing you can hear.":"Di una cosa que ves y una cosa que oyes.",
+    "Then stop. More thinking is not required.":"Luego para. No hace falta pensar más.",
+    "You don’t have to answer every thought.":"No tienes que responder a cada pensamiento.",
+    "Open Thoughts":"Abrir Pensamientos",
+    "Someone I love is hurting":"Alguien a quien quiero está sufriendo",
+    "Stay near, or say: “I’m here. You don’t have to explain.”":"Quédate cerca, o di: “Estoy aquí. No tienes que explicar.”",
+    "Ask what would help, and let “nothing” be a complete answer.":"Pregunta qué ayudaría, y deja que “nada” sea una respuesta completa.",
+    "Help with one practical thing if they want it: water, a quieter room, or company.":"Ayuda con una cosa práctica si la quieren: agua, una habitación más quieta o compañía.",
+    "If they may be unsafe, stay with them if you safely can, and use a line below. You can call for them.":"Si pueden estar en peligro, quédate si puedes hacerlo con seguridad y usa un teléfono de abajo. Puedes llamar por ellos.",
+    "You don’t have to find the perfect words.":"No tienes que encontrar las palabras perfectas.",
+    "Wash your hands or your face":"Lavarte las manos o la cara",
+    "Open a window, or notice the air":"Abrir una ventana, o notar el aire",
+    "Step outside for one minute":"Salir fuera un minuto",
+    "Change into something more comfortable":"Ponerte algo más cómodo",
+    "More places to call":"Más lugares a los que llamar",
+    "These are listening lines for when life feels unsafe. If you are in immediate physical danger, use your local emergency number. If a number does not answer, try the link above.":"Son líneas de escucha para cuando la vida se siente insegura. Si estás en peligro físico inmediato, usa el número de emergencias local. Si un número no contesta, prueba el enlace de arriba.",
+    "Aotearoa New Zealand: call or text 1737":"Aotearoa Nueva Zelanda: llama o escribe al 1737",
+    "Australia: Lifeline, 13 11 14":"Australia: Lifeline, 13 11 14",
+    "Brazil: CVV, 188":"Brasil: CVV, 188",
+    "Canada: call or text 988":"Canadá: llama o escribe al 988",
+    "China: 12356":"China: 12356",
+    "France: 3114":"Francia: 3114",
+    "Germany: 0800 111 0 111 or 116 123":"Alemania: 0800 111 0 111 o 116 123",
+    "Hong Kong: 2389 2222":"Hong Kong: 2389 2222",
+    "India: Tele-MANAS, 14416":"India: Tele-MANAS, 14416",
+    "Italy: 02 2327 2327":"Italia: 02 2327 2327",
+    "Japan: 0120-279-338":"Japón: 0120-279-338",
+    "Singapore: 1767":"Singapur: 1767",
+    "South Korea: 109":"Corea del Sur: 109",
+    "Spain: 024":"España: 024",
+    "Taiwan: 1925":"Taiwán: 1925",
+    "United Kingdom and Ireland: Samaritans, 116 123":"Reino Unido e Irlanda: Samaritans, 116 123",
+    "United States: call or text 988":"Estados Unidos: llama o escribe al 988"
+  };
+  var FR = {
+    "Reading":"Lectures",
+    "Ideas":"Idées",
+    "A quiet corner":"Un coin tranquille",
+    "Nothing to finish here. Pick one thing and stay as long as you like.":"Rien à terminer ici. Choisissez une chose et restez aussi longtemps que vous voulez.",
+    "Choose something to do":"Choisissez quelque chose à faire",
+    "Breathe":"Respirer",
+    "Lanterns":"Lanternes",
+    "Small things":"Petites choses",
+    "Thoughts":"Pensées",
+    "Garden":"Jardin",
+    "Let go":"Lâcher prise",
+    "Breathe in for four, out for six.":"Inspirez sur quatre temps, expirez sur six.",
+    "Breathe in…":"Inspirez…",
+    "Breathe out…":"Expirez…",
+    "Paused. Start whenever you like.":"En pause. Reprenez quand vous voulez.",
+    "Start":"Commencer",
+    "Pause":"Pause",
+    "Tap anywhere to release a lantern":"Touchez n’importe où pour lâcher une lanterne",
+    "Release a lantern":"Lâcher une lanterne",
+    "You don’t have to fix everything tonight.":"Vous n’avez pas à tout régler ce soir.",
+    "Tired is allowed.":"La fatigue a le droit d’exister.",
+    "One breath at a time is enough.":"Une respiration à la fois suffit.",
+    "It’s okay to rest before you figure it out.":"Vous pouvez vous reposer avant de trouver la réponse.",
+    "You’ve gotten through hard hours before.":"Vous avez déjà traversé des heures difficiles.",
+    "Being gentle with yourself counts as doing something.":"Être doux avec soi-même, c’est déjà faire quelque chose.",
+    "This feeling is real, and it will change shape.":"Ce que vous ressentez est réel, et cela va changer de forme.",
+    "Nothing is asked of you in this minute.":"Personne ne vous demande rien en cet instant.",
+    "A quiet space, not a treatment. If sleep is hard, eating is hard, or the fear keeps growing, a doctor or counsellor can help, and you can go at your own pace.":"Un espace calme, pas un traitement. Si dormir ou manger devient difficile, ou si la peur grandit, un médecin ou un psychologue peut vous aider, à votre rythme.",
+    "If you ever feel unsafe, in the US call or text 988, and in the UK or Ireland call Samaritans on 116 123. Elsewhere,":"Si vous vous sentez en danger : en France, appelez le 3114 (numéro national de prévention du suicide, gratuit, 24 h/24). Ailleurs,",
+    "lists free helplines in many countries.":"répertorie des lignes d’écoute gratuites dans de nombreux pays.",
+    "Nothing you write here is saved or sent anywhere, and nothing is stored on your device.":"Rien de ce que vous écrivez ici n’est enregistré ni envoyé, et rien n’est conservé sur votre appareil.",
+    "Books and free material for when you want more. Open one page or one worksheet, not the whole thing. Research suggests this kind of reading helps most when a real person is alongside you.":"Des livres et des ressources gratuites, pour quand vous voudrez aller plus loin. Ouvrez une page ou une fiche, pas tout le livre. Les recherches suggèrent que ce genre de lecture aide surtout lorsqu’une vraie personne est à vos côtés.",
+    "A classic on spotting the thinking habits that feed anxiety and low mood, with exercises you can write out. The Chinese edition is called 《伯恩斯新情绪疗法》.":"Un classique pour repérer les habitudes de pensée qui nourrissent l’anxiété et la baisse de moral, avec des exercices à écrire. L’édition chinoise s’appelle 《伯恩斯新情绪疗法》.",
+    "A step-by-step cognitive behavioural programme with monitoring sheets. In the UK it is on the Reading Well list of recommended books.":"Un programme de thérapie cognitivo-comportementale, étape par étape, avec des fiches de suivi. Au Royaume-Uni, il figure sur la liste Reading Well.",
+    "Relaxation, breathing, self-talk and gradual steps, laid out as exercises.":"Relaxation, respiration, façon de se parler, et petits pas pour approcher ce qui fait peur : tout est proposé comme des exercices.",
+    "An older, gentle classic about not fighting tension: face it, accept it, float, and let time pass.":"Un classique plus ancien et doux : ne pas lutter contre la tension. L’affronter, l’accepter, se laisser flotter, et laisser le temps passer.",
+    "A CBT workbook built around worksheets for thoughts and moods, much like the Thoughts tab here.":"Un cahier de TCC organisé autour de fiches sur les pensées et les humeurs, proche de l’onglet Pensées de cette page.",
+    "Free workbooks":"Cahiers gratuits",
+    "Free CBT workbooks on worry, anxiety, perfectionism, sleep and more, in English. They say these don’t replace a professional.":"Des cahiers gratuits de TCC sur l’inquiétude, l’anxiété, le perfectionnisme, le sommeil et d’autres thèmes, en anglais. Ils précisent qu’ils ne remplacent pas un professionnel.",
+    "Free advice and practical tips for mental wellbeing, in English.":"Des conseils gratuits et concrets pour le bien-être, en anglais.",
+    "Free app":"Application gratuite",
+    "A free app based on CBT, for worry, stress and panic.":"Une application gratuite fondée sur la TCC, pour l’inquiétude, le stress et la panique.",
+    "Ideas from anxiety self-help books. Open one, take what helps, and leave the rest.":"Quelques idées venues de livres d’aide sur l’anxiété. Ouvrez-en une, gardez ce qui vous aide, laissez le reste.",
+    "Float, don’t fight":"Flotter, sans lutter",
+    "When tension rises, fighting it tends to feed it. Try letting your body go loose, as if you were floating on water, and let time pass. It rises, and it passes. You don’t have to make it leave.":"Quand la tension monte, lutter contre elle a tendance à la nourrir. Essayez de relâcher le corps, comme si vous flottiez sur l’eau, et laissez le temps passer. Elle monte, et elle passe. Vous n’avez pas à la faire partir.",
+    "Start tiny":"Commencer tout petit",
+    "Wanting to do something often arrives after you begin, not before. Pick something very small, for five minutes. Starting is what counts, not finishing.":"L’envie de faire quelque chose arrive souvent après avoir commencé, pas avant. Choisissez une toute petite chose, pendant cinq minutes. Ce qui compte, c’est de commencer, pas de finir.",
+    "How tense am I?":"À quel point suis-je tendu ?",
+    "Give your tension a number from 0 to 10, with no judging. Try one thing from this page, then check the number again. Small changes are real changes.":"Donnez à votre tension un chiffre de 0 à 10, sans jugement. Essayez une chose de cette page, puis regardez le chiffre à nouveau. Un petit changement est un vrai changement.",
+    "How tense I am, 0 to 10":"Ma tension, de 0 à 10",
+    "0 is calm, 10 is very tense":"0, c’est calme ; 10, c’est très tendu",
+    "Let the muscles go":"Relâcher les muscles",
+    "Tense a part of the body gently for about five seconds, then let it go and feel the difference. Skip any part that hurts.":"Contractez doucement une partie du corps pendant environ cinq secondes, puis relâchez et sentez la différence. Passez toute zone qui fait mal.",
+    "Hands: make gentle fists for about five seconds, then let go.":"Mains : serrez doucement les poings environ cinq secondes, puis relâchez.",
+    "Shoulders: lift them toward your ears for five seconds, then drop them.":"Épaules : montez-les vers les oreilles pendant cinq secondes, puis laissez-les retomber.",
+    "Face: scrunch it softly for five seconds, then let it soften.":"Visage : plissez-le doucement pendant cinq secondes, puis laissez-le se détendre.",
+    "Stomach: tighten it lightly for five seconds, then release.":"Ventre : rentrez-le légèrement pendant cinq secondes, puis relâchez.",
+    "Legs and feet: press your feet into the floor for five seconds, then let go.":"Jambes et pieds : appuyez les pieds dans le sol pendant cinq secondes, puis relâchez.",
+    "Now just notice the difference. Breathe out slowly.":"Maintenant, remarquez seulement la différence. Expirez lentement.",
+    "Begin":"Commencer",
+    "Next":"Suivant",
+    "Again":"Encore",
+    "Come back to the room":"Revenir dans la pièce",
+    "A common grounding exercise":"Un exercice courant pour revenir ici",
+    "Slowly notice five things you can see, four you can feel, three you can hear, two you can smell, and one you can taste. Skipping any is fine.":"Remarquez lentement cinq choses que vous voyez, quatre que vous sentez au toucher, trois que vous entendez, deux que vous sentez à l’odeur, et une que vous goûtez. En sauter une, c’est très bien.",
+    "A ladder for something hard":"Une échelle pour quelque chose de difficile",
+    "Big worries shrink when cut into small steps. Do the first one, and stop there if you want.":"Les grandes inquiétudes rapetissent quand on les coupe en petits pas. Faites le premier, et arrêtez-vous là si vous voulez.",
+    "Write the thing you’re facing in one plain sentence":"Écrivez en une phrase simple ce que vous affrontez",
+    "Notice one part of it that feels manageable":"Repérez une partie qui vous semble abordable",
+    "Pick one tiny piece to do today, and only that":"Choisissez un tout petit morceau pour aujourd’hui, et seulement celui-là",
+    "Tell one person you trust that it’s on your mind":"Dites à une personne de confiance que cela vous pèse",
+    "Do the tiny piece, then rest":"Faites ce petit morceau, puis reposez-vous",
+    "Pick any. Even one is plenty, and none is fine too.":"Choisissez n’importe laquelle. Une seule suffit, et aucune aussi, c’est bien.",
+    "Take a few sips of water":"Boire quelques gorgées d’eau",
+    "Loosen your shoulders and your jaw":"Relâcher les épaules et la mâchoire",
+    "Look out a window for a minute":"Regarder par la fenêtre une minute",
+    "Eat or drink something small":"Manger ou boire un peu quelque chose",
+    "Put your phone down for five minutes":"Poser le téléphone pendant cinq minutes",
+    "Say one kind sentence to yourself":"Se dire une phrase bienveillante",
+    "All of them. That was a lot, and you did it.":"Toutes. C’était beaucoup, et vous l’avez fait.",
+    "A gentle way to look at a worried thought. Nothing here is saved or sent. Skip any step, or stop anywhere.":"Une façon douce de regarder une pensée inquiète. Rien ici n’est enregistré ni envoyé. Sautez une étape, ou arrêtez-vous où vous voulez.",
+    "1. What is my mind saying?":"1. Que dit mon esprit ?",
+    "What my mind is saying":"Ce que dit mon esprit",
+    "Just the sentence. No fixing, no judging.":"Juste la phrase. Sans corriger, sans juger.",
+    "2. Does it sound like any of these?":"2. Est-ce que cela ressemble à l’une de ces formes ?",
+    "Tick any that fit, or none. These are habits a tired mind falls into. Seeing one is enough.":"Cochez celles qui correspondent, ou aucune. Ce sont des habitudes où un esprit fatigué glisse facilement. En voir une suffit.",
+    "“Always” or “never”: one bad moment becomes a rule":"« Toujours » ou « jamais » : un mauvais moment devient une règle",
+    "All or nothing: one slip means total failure":"Tout ou rien : un faux pas veut dire un échec total",
+    "Seeing only the one thing that went wrong":"Ne voir que la seule chose qui a mal tourné",
+    "Brushing off the good: “that doesn’t count”":"Écarter le bon : « ça ne compte pas »",
+    "Guessing: what others think, or what will go wrong, before it happens":"Deviner, avant que cela arrive : ce que les autres pensent, ou ce qui va mal tourner",
+    "Blowing up the bad and shrinking the good":"Grossir le mauvais et rapetisser le bon",
+    "“I feel scared, so it must be dangerous”":"« J’ai peur, donc ce doit être dangereux »",
+    "“I should” and “I must”, like a whip":"« Je devrais » et « je dois », comme un fouet",
+    "Labels: “I’m a failure” instead of “that went badly”":"Les étiquettes : « je suis nul » au lieu de « cela s’est mal passé »",
+    "Taking all the blame for things that weren’t only yours":"Prendre toute la faute pour des choses qui n’étaient pas seulement les vôtres",
+    "3. What would I say to a tired friend?":"3. Que dirais-je à un ami épuisé ?",
+    "Someone you care about who is tired and worried. Write something true and kind, not just cheerful.":"Quelqu’un qui vous est cher, fatigué et inquiet. Écrivez quelque chose de vrai et de doux, pas seulement de gai.",
+    "What I would say to a tired friend":"Ce que je dirais à un ami épuisé",
+    "For example: I’m worried, and I’ve handled hard things before. I can take this slowly.":"Par exemple : je suis inquiet, et j’ai déjà traversé des choses difficiles. Je peux y aller lentement.",
+    "4. One tiny step":"4. Un tout petit pas",
+    "Rest today, and nothing else":"Me reposer aujourd’hui, et rien d’autre",
+    "Drink some water":"Boire un peu d’eau",
+    "Do one small thing from your list, for just two minutes":"Faire une petite chose de ma liste, pendant seulement deux minutes",
+    "Tell one person I’m tired":"Dire à une personne que je suis fatigué",
+    "Done for now":"C’est assez pour l’instant",
+    "That was gentle work. You can stop here.":"C’était un travail doux. Vous pouvez vous arrêter là.",
+    "You looked at it, and that’s enough for today.":"Vous l’avez regardé, et cela suffit pour aujourd’hui.",
+    "Good. Nothing more is needed right now.":"Bien. Rien de plus n’est nécessaire maintenant.",
+    "A garden that only grows. It never wilts, and nothing here can go wrong. Tap a bare spot to plant. Flowers also open when you breathe, release a lantern, or do a small thing.":"Un jardin qui ne fait que grandir. Il ne fane jamais, et ici rien ne peut mal tourner. Touchez un endroit vide pour planter. Des fleurs s’ouvrent aussi quand vous respirez, lâchez une lanterne, ou faites une petite chose.",
+    "Plant a flower here":"Planter une fleur ici",
+    "Flower":"Fleur",
+    "Nothing planted yet, and that’s fine.":"Rien n’est planté encore, et c’est très bien.",
+    "The garden is full. It can stay just as it is.":"Le jardin est plein. Il peut rester ainsi.",
+    "A flower opened.":"Une fleur s’est ouverte.",
+    "A fresh, quiet plot.":"Une parcelle neuve et tranquille.",
+    "Start a fresh garden":"Commencer un nouveau jardin",
+    "What’s heavy right now? Write it here, however messy. It stays in this tab: nothing is saved and nothing is sent anywhere. When you let it go, it’s gone.":"Qu’est-ce qui pèse en ce moment ? Écrivez-le ici, même en désordre. Cela reste dans cet onglet : rien n’est enregistré et rien n’est envoyé. Quand vous le lâchez, il disparaît.",
+    "What’s heavy right now":"Ce qui pèse en ce moment",
+    "Write anything. It’s only for you.":"Écrivez ce que vous voulez. C’est seulement pour vous.",
+    "Let it go":"Le lâcher",
+    "Just clear it":"Simplement effacer",
+    "Nothing to let go of is fine too.":"N’avoir rien à lâcher, c’est bien aussi.",
+    "It’s out of your hands now, and a little lighter.":"Ce n’est plus entre vos mains, et c’est un peu plus léger.",
+    "You said it. That counts.":"Vous l’avez dit. Cela compte.",
+    "Let it drift. You don’t have to carry it tonight.":"Laissez-le dériver. Vous n’avez pas à le porter ce soir.",
+    "It was heavy, and you set it down.":"C’était lourd, et vous l’avez posé.",
+    "Language":"Langue",
+    "Color theme":"Couleurs",
+    "Same as device":"Comme l’appareil",
+    "Light":"Clair",
+    "Dark":"Sombre",
+    "Open the site":"Ouvrir le site",
+    "Text size":"Taille du texte",
+    "Larger text":"Texte plus grand",
+    "Smaller text":"Texte plus petit",
+    "If something specific is going on, open Right now.":"Si quelque chose de précis se passe, ouvrez Tout de suite.",
+    "Right now":"Tout de suite",
+    "If you know what is happening, open that one. If you don’t, Breathe is enough. Skip any line.":"Si vous savez ce qui se passe, ouvrez celle-là. Sinon, Respirer suffit. Sautez n’importe quelle ligne.",
+    "Open one. Skip any line.":"Ouvrez-en une. Sautez n’importe quelle ligne.",
+    "I can’t catch my breath":"Je n’arrive pas à reprendre mon souffle",
+    "Sit or stand, and put both feet on the floor.":"Asseyez-vous ou restez debout, les deux pieds au sol.",
+    "Breathe out more slowly than you breathe in.":"Expirez plus lentement que vous n’inspirez.",
+    "Look at one still object and name its color.":"Regardez un objet immobile et nommez sa couleur.",
+    "Press your feet down for a few seconds, then release.":"Appuyez les pieds vers le bas quelques secondes, puis relâchez.",
+    "If this comes with chest pain, fainting, or breathing trouble that is new for you, contact local medical help.":"Si cela s’accompagne de douleur dans la poitrine, d’un malaise ou d’une gêne respiratoire nouvelle pour vous, contactez une aide médicale locale.",
+    "Open Breathe":"Ouvrir Respirer",
+    "I can’t sleep":"Je n’arrive pas à dormir",
+    "Dim the screen after this, or stop here.":"Baissez la lumière de l’écran après cela, ou arrêtez-vous ici.",
+    "Unclench your jaw, your tongue, and your hands.":"Desserrez la mâchoire, la langue et les mains.",
+    "If a worry keeps returning, write one sentence in Let go, then leave it.":"Si une inquiétude revient sans cesse, écrivez une phrase dans Lâcher prise, puis laissez-la.",
+    "Rest with your eyes closed still counts, even when sleep does not come.":"Se reposer les yeux fermés compte aussi, même si le sommeil ne vient pas.",
+    "Open Let go":"Ouvrir Lâcher prise",
+    "I feel alone":"Je me sens seul",
+    "Say one true sentence, even if the room is empty.":"Dites une phrase vraie, même si la pièce est vide.",
+    "If there is one safe person, a short message is enough: “I’m having a hard time.”":"S’il y a une personne sûre, un court message suffit : « Je traverse un moment difficile. »",
+    "A lantern can carry one sentence up.":"Une lanterne peut emporter une phrase.",
+    "If you want a voice, the numbers at the bottom of this page are there.":"Si vous voulez une voix, les numéros en bas de cette page sont là.",
+    "Loneliness is not a failure.":"La solitude n’est pas un échec.",
+    "Open Lanterns":"Ouvrir Lanternes",
+    "I’m angry":"Je suis en colère",
+    "Anger is allowed. You do not have to act on it.":"La colère est permise. Vous n’avez pas à agir selon elle.",
+    "Put both feet on the floor and lengthen the out-breath.":"Posez les deux pieds au sol et allongez l’expiration.",
+    "Open and close your hands slowly a few times.":"Ouvrez et fermez les mains lentement, quelques fois.",
+    "If it is safe, step into another room or outside for one minute.":"Si c’est sans danger, passez dans une autre pièce ou dehors pendant une minute.",
+    "You can choose your words later, when your body is quieter.":"Vous pourrez choisir vos mots plus tard, quand le corps sera plus calme.",
+    "I feel nothing":"Je ne sens rien",
+    "You do not have to force a brighter feeling.":"Vous n’avez pas à forcer un sentiment plus lumineux.",
+    "Notice one temperature: air on your face, a cup, or your hands.":"Remarquez une température : l’air sur le visage, une tasse, ou vos mains.",
+    "Name two plain details of one ordinary object.":"Nommez deux détails simples d’un objet ordinaire.",
+    "Take a sip of water, and stay for one minute. That is enough.":"Buvez une gorgée d’eau, et restez une minute. Cela suffit.",
+    "Numb is allowed to be here.":"L’engourdissement a le droit d’être ici.",
+    "Someone is gone":"Quelqu’un est parti",
+    "There is no right pace. Skipping this is fine.":"Il n’y a pas de bon rythme. Passer ceci est très bien.",
+    "A memory can sit here for a moment, or you can set it down.":"Un souvenir peut rester un moment, ou vous pouvez le poser.",
+    "If you have not eaten or had water, something small is a kindness.":"Si vous n’avez pas mangé ou bu, un peu est déjà une douceur.",
+    "One ordinary thing is enough today.":"Une chose ordinaire suffit pour aujourd’hui.",
+    "Grief does not have to be done well.":"Le deuil n’a pas à être bien fait.",
+    "The worry won’t stop":"L’inquiétude ne s’arrête pas",
+    "A worry is not a fact, and it does not all have to be solved tonight.":"Une inquiétude n’est pas un fait, et elle n’a pas à être entièrement résolue ce soir.",
+    "If one worry is loudest, write it as a single sentence and leave the rest.":"Si une inquiétude est la plus forte, écrivez-la en une phrase et laissez le reste.",
+    "Name one thing you can see and one thing you can hear.":"Nommez une chose que vous voyez et une chose que vous entendez.",
+    "Then stop. More thinking is not required.":"Puis arrêtez. Il n’est pas nécessaire de penser davantage.",
+    "You don’t have to answer every thought.":"Vous n’avez pas à répondre à chaque pensée.",
+    "Open Thoughts":"Ouvrir Pensées",
+    "Someone I love is hurting":"Quelqu’un que j’aime souffre",
+    "Stay near, or say: “I’m here. You don’t have to explain.”":"Restez près, ou dites : « Je suis là. Vous n’avez pas à expliquer. »",
+    "Ask what would help, and let “nothing” be a complete answer.":"Demandez ce qui aiderait, et laissez « rien » être une réponse complète.",
+    "Help with one practical thing if they want it: water, a quieter room, or company.":"Aidez pour une chose concrète s’ils le veulent : de l’eau, une pièce plus calme, ou votre présence.",
+    "If they may be unsafe, stay with them if you safely can, and use a line below. You can call for them.":"S’ils sont peut-être en danger, restez si vous pouvez le faire sans risque, et utilisez un numéro plus bas. Vous pouvez appeler pour eux.",
+    "You don’t have to find the perfect words.":"Vous n’avez pas à trouver les mots parfaits.",
+    "Wash your hands or your face":"Se laver les mains ou le visage",
+    "Open a window, or notice the air":"Ouvrir une fenêtre, ou remarquer l’air",
+    "Step outside for one minute":"Sortir une minute",
+    "Change into something more comfortable":"Mettre quelque chose de plus confortable",
+    "More places to call":"D’autres endroits à appeler",
+    "These are listening lines for when life feels unsafe. If you are in immediate physical danger, use your local emergency number. If a number does not answer, try the link above.":"Ce sont des lignes d’écoute pour quand la vie semble peu sûre. En cas de danger physique immédiat, utilisez le numéro d’urgence local. Si un numéro ne répond pas, essayez le lien ci-dessus.",
+    "Aotearoa New Zealand: call or text 1737":"Aotearoa Nouvelle-Zélande : appelez ou écrivez au 1737",
+    "Australia: Lifeline, 13 11 14":"Australie : Lifeline, 13 11 14",
+    "Brazil: CVV, 188":"Brésil : CVV, 188",
+    "Canada: call or text 988":"Canada : appelez ou écrivez au 988",
+    "China: 12356":"Chine : 12356",
+    "France: 3114":"France : 3114",
+    "Germany: 0800 111 0 111 or 116 123":"Allemagne : 0800 111 0 111 ou 116 123",
+    "Hong Kong: 2389 2222":"Hong Kong : 2389 2222",
+    "India: Tele-MANAS, 14416":"Inde : Tele-MANAS, 14416",
+    "Italy: 02 2327 2327":"Italie : 02 2327 2327",
+    "Japan: 0120-279-338":"Japon : 0120-279-338",
+    "Singapore: 1767":"Singapour : 1767",
+    "South Korea: 109":"Corée du Sud : 109",
+    "Spain: 024":"Espagne : 024",
+    "Taiwan: 1925":"Taïwan : 1925",
+    "United Kingdom and Ireland: Samaritans, 116 123":"Royaume-Uni et Irlande : Samaritans, 116 123",
+    "United States: call or text 988":"États-Unis : appelez ou écrivez au 988"
+  };
+  var DE = {
+    "Reading":"Lesetipps",
+    "Ideas":"Ideen",
+    "A quiet corner":"Eine stille Ecke",
+    "Nothing to finish here. Pick one thing and stay as long as you like.":"Hier gibt es nichts zu erledigen. Wählen Sie eine Sache und bleiben Sie, so lange Sie möchten.",
+    "Choose something to do":"Wählen Sie, was Sie tun möchten",
+    "Breathe":"Atmen",
+    "Lanterns":"Laternen",
+    "Small things":"Kleinigkeiten",
+    "Thoughts":"Gedanken",
+    "Garden":"Garten",
+    "Let go":"Loslassen",
+    "Breathe in for four, out for six.":"Vier Takte einatmen, sechs ausatmen.",
+    "Breathe in…":"Einatmen…",
+    "Breathe out…":"Ausatmen…",
+    "Paused. Start whenever you like.":"Pausiert. Beginnen Sie, wann Sie möchten.",
+    "Start":"Start",
+    "Pause":"Pause",
+    "Tap anywhere to release a lantern":"Tippen Sie irgendwo, um eine Laterne steigen zu lassen",
+    "Release a lantern":"Eine Laterne steigen lassen",
+    "You don’t have to fix everything tonight.":"Sie müssen heute Abend nicht alles lösen.",
+    "Tired is allowed.":"Müdigkeit darf sein.",
+    "One breath at a time is enough.":"Ein Atemzug nach dem anderen genügt.",
+    "It’s okay to rest before you figure it out.":"Es ist in Ordnung, sich auszuruhen, bevor Sie eine Antwort finden.",
+    "You’ve gotten through hard hours before.":"Sie haben schon schwere Stunden überstanden.",
+    "Being gentle with yourself counts as doing something.":"Freundlich zu sich zu sein, zählt als etwas tun.",
+    "This feeling is real, and it will change shape.":"Dieses Gefühl ist echt, und es wird sich verändern.",
+    "Nothing is asked of you in this minute.":"In dieser Minute wird nichts von Ihnen verlangt.",
+    "A quiet space, not a treatment. If sleep is hard, eating is hard, or the fear keeps growing, a doctor or counsellor can help, and you can go at your own pace.":"Ein ruhiger Raum, keine Behandlung. Wenn Schlafen oder Essen schwerfällt oder die Angst wächst, kann eine Ärztin, ein Arzt oder eine Therapeutin helfen, in Ihrem eigenen Tempo.",
+    "If you ever feel unsafe, in the US call or text 988, and in the UK or Ireland call Samaritans on 116 123. Elsewhere,":"Wenn Sie sich in Gefahr fühlen: In Deutschland erreichen Sie die Telefonseelsorge kostenlos unter 0800 111 0 111, 0800 111 0 222 oder 116 123. Anderswo",
+    "lists free helplines in many countries.":"listet kostenlose Hilfetelefone in vielen Ländern auf.",
+    "Nothing you write here is saved or sent anywhere, and nothing is stored on your device.":"Nichts, was Sie hier schreiben, wird gespeichert oder gesendet, und auf Ihrem Gerät wird nichts abgelegt.",
+    "Books and free material for when you want more. Open one page or one worksheet, not the whole thing. Research suggests this kind of reading helps most when a real person is alongside you.":"Bücher und kostenloses Material, wenn Sie mehr möchten. Öffnen Sie eine Seite oder ein Arbeitsblatt, nicht das Ganze. Forschung legt nahe, dass solches Lesen am meisten hilft, wenn ein echter Mensch dabei ist.",
+    "A classic on spotting the thinking habits that feed anxiety and low mood, with exercises you can write out. The Chinese edition is called 《伯恩斯新情绪疗法》.":"Ein Klassiker darüber, die Denkgewohnheiten zu erkennen, die Angst und gedrückte Stimmung nähren, mit Übungen zum Aufschreiben. Die chinesische Ausgabe heißt 《伯恩斯新情绪疗法》.",
+    "A step-by-step cognitive behavioural programme with monitoring sheets. In the UK it is on the Reading Well list of recommended books.":"Ein kognitiv-verhaltenstherapeutisches Programm in Schritten, mit Protokollbögen. In Großbritannien steht es auf der Reading-Well-Liste.",
+    "Relaxation, breathing, self-talk and gradual steps, laid out as exercises.":"Entspannung, Atmung, wie man mit sich spricht, und kleine Schritte hin zu dem, was Angst macht — alles als Übungen.",
+    "An older, gentle classic about not fighting tension: face it, accept it, float, and let time pass.":"Ein älterer, sanfter Klassiker: nicht gegen die Anspannung kämpfen. Ihr begegnen, sie annehmen, treiben lassen und der Zeit Zeit geben.",
+    "A CBT workbook built around worksheets for thoughts and moods, much like the Thoughts tab here.":"Ein KVT-Arbeitsbuch mit Bögen für Gedanken und Stimmungen, ähnlich wie der Reiter Gedanken hier.",
+    "Free workbooks":"Kostenlose Arbeitshefte",
+    "Free CBT workbooks on worry, anxiety, perfectionism, sleep and more, in English. They say these don’t replace a professional.":"Kostenlose KVT-Arbeitshefte zu Sorgen, Angst, Perfektionismus, Schlaf und mehr, auf Englisch. Sie sagen selbst, dass sie keine Fachperson ersetzen.",
+    "Free advice and practical tips for mental wellbeing, in English.":"Kostenlose Ratschläge und praktische Tipps für seelisches Wohlbefinden, auf Englisch.",
+    "Free app":"Kostenlose App",
+    "A free app based on CBT, for worry, stress and panic.":"Eine kostenlose App auf Grundlage der KVT, bei Sorgen, Stress und Panik.",
+    "Ideas from anxiety self-help books. Open one, take what helps, and leave the rest.":"Ideen aus Ratgebern zur Angst. Öffnen Sie eine, behalten Sie, was hilft, und lassen Sie den Rest.",
+    "Float, don’t fight":"Treiben lassen, nicht kämpfen",
+    "When tension rises, fighting it tends to feed it. Try letting your body go loose, as if you were floating on water, and let time pass. It rises, and it passes. You don’t have to make it leave.":"Wenn die Anspannung steigt, nährt der Kampf gegen sie sie oft. Versuchen Sie, den Körper locker zu lassen, als würden Sie auf dem Wasser treiben, und lassen Sie Zeit vergehen. Sie steigt, und sie geht vorüber. Sie müssen sie nicht vertreiben.",
+    "Start tiny":"Ganz klein anfangen",
+    "Wanting to do something often arrives after you begin, not before. Pick something very small, for five minutes. Starting is what counts, not finishing.":"Die Lust, etwas zu tun, kommt oft erst nach dem Anfang, nicht davor. Wählen Sie etwas sehr Kleines, für fünf Minuten. Das Anfangen zählt, nicht das Fertigwerden.",
+    "How tense am I?":"Wie angespannt bin ich?",
+    "Give your tension a number from 0 to 10, with no judging. Try one thing from this page, then check the number again. Small changes are real changes.":"Geben Sie Ihrer Anspannung eine Zahl von 0 bis 10, ohne zu bewerten. Probieren Sie eine Sache von dieser Seite, und schauen Sie dann wieder auf die Zahl. Kleine Veränderungen sind echte Veränderungen.",
+    "How tense I am, 0 to 10":"Wie angespannt ich bin, von 0 bis 10",
+    "0 is calm, 10 is very tense":"0 ist ruhig, 10 ist sehr angespannt",
+    "Let the muscles go":"Die Muskeln loslassen",
+    "Tense a part of the body gently for about five seconds, then let it go and feel the difference. Skip any part that hurts.":"Spannen Sie eine Körperstelle etwa fünf Sekunden lang sanft an, lassen Sie dann los und spüren Sie den Unterschied. Lassen Sie aus, was wehtut.",
+    "Hands: make gentle fists for about five seconds, then let go.":"Hände: Ballen Sie etwa fünf Sekunden lang sanft die Fäuste, dann loslassen.",
+    "Shoulders: lift them toward your ears for five seconds, then drop them.":"Schultern: Ziehen Sie sie fünf Sekunden zu den Ohren, dann fallen lassen.",
+    "Face: scrunch it softly for five seconds, then let it soften.":"Gesicht: Rümpfen Sie es fünf Sekunden lang sanft, dann weich werden lassen.",
+    "Stomach: tighten it lightly for five seconds, then release.":"Bauch: Ziehen Sie ihn fünf Sekunden lang leicht ein, dann loslassen.",
+    "Legs and feet: press your feet into the floor for five seconds, then let go.":"Beine und Füße: Drücken Sie die Füße fünf Sekunden in den Boden, dann loslassen.",
+    "Now just notice the difference. Breathe out slowly.":"Nehmen Sie jetzt nur den Unterschied wahr. Atmen Sie langsam aus.",
+    "Begin":"Beginnen",
+    "Next":"Weiter",
+    "Again":"Noch einmal",
+    "Come back to the room":"Zurück in den Raum",
+    "A common grounding exercise":"Eine bekannte Übung, um hier anzukommen",
+    "Slowly notice five things you can see, four you can feel, three you can hear, two you can smell, and one you can taste. Skipping any is fine.":"Nehmen Sie langsam fünf Dinge wahr, die Sie sehen, vier, die Sie spüren, drei, die Sie hören, zwei, die Sie riechen, und eines, das Sie schmecken. Etwas auszulassen ist in Ordnung.",
+    "A ladder for something hard":"Eine Leiter für etwas Schweres",
+    "Big worries shrink when cut into small steps. Do the first one, and stop there if you want.":"Große Sorgen werden kleiner, wenn man sie in kleine Schritte teilt. Tun Sie den ersten, und hören Sie dort auf, wenn Sie möchten.",
+    "Write the thing you’re facing in one plain sentence":"Schreiben Sie in einem schlichten Satz auf, womit Sie es zu tun haben",
+    "Notice one part of it that feels manageable":"Finden Sie einen Teil, der sich bewältigen lässt",
+    "Pick one tiny piece to do today, and only that":"Wählen Sie ein winziges Stück für heute, und nur das",
+    "Tell one person you trust that it’s on your mind":"Sagen Sie einem Menschen, dem Sie vertrauen, dass es Sie beschäftigt",
+    "Do the tiny piece, then rest":"Tun Sie das winzige Stück, und ruhen Sie dann",
+    "Pick any. Even one is plenty, and none is fine too.":"Wählen Sie eine beliebige. Schon eine ist genug, und keine ist auch in Ordnung.",
+    "Take a few sips of water":"Ein paar Schlucke Wasser trinken",
+    "Loosen your shoulders and your jaw":"Schultern und Kiefer lockern",
+    "Look out a window for a minute":"Eine Minute aus dem Fenster sehen",
+    "Eat or drink something small":"Etwas Kleines essen oder trinken",
+    "Put your phone down for five minutes":"Das Telefon fünf Minuten weglegen",
+    "Say one kind sentence to yourself":"Sich selbst einen freundlichen Satz sagen",
+    "All of them. That was a lot, and you did it.":"Alle. Das war viel, und Sie haben es getan.",
+    "A gentle way to look at a worried thought. Nothing here is saved or sent. Skip any step, or stop anywhere.":"Ein sanfter Weg, einen sorgenvollen Gedanken anzusehen. Hier wird nichts gespeichert und nichts gesendet. Überspringen Sie einen Schritt, oder hören Sie auf, wo Sie möchten.",
+    "1. What is my mind saying?":"1. Was sagt mein Kopf?",
+    "What my mind is saying":"Was mein Kopf sagt",
+    "Just the sentence. No fixing, no judging.":"Nur der Satz. Nichts verbessern, nichts bewerten.",
+    "2. Does it sound like any of these?":"2. Klingt es nach einem von diesen?",
+    "Tick any that fit, or none. These are habits a tired mind falls into. Seeing one is enough.":"Kreuzen Sie an, was passt, oder keins. Das sind Gewohnheiten, in die ein müder Kopf leicht gerät. Eine zu erkennen genügt.",
+    "“Always” or “never”: one bad moment becomes a rule":"„Immer“ oder „nie“: ein schlechter Moment wird zur Regel",
+    "All or nothing: one slip means total failure":"Alles oder nichts: ein Ausrutscher bedeutet völliges Scheitern",
+    "Seeing only the one thing that went wrong":"Nur das eine sehen, das schiefging",
+    "Brushing off the good: “that doesn’t count”":"Das Gute abtun: „das zählt nicht“",
+    "Guessing: what others think, or what will go wrong, before it happens":"Vorher raten: was andere denken, oder was schiefgehen wird",
+    "Blowing up the bad and shrinking the good":"Das Schlechte vergrößern und das Gute verkleinern",
+    "“I feel scared, so it must be dangerous”":"„Ich habe Angst, also muss es gefährlich sein“",
+    "“I should” and “I must”, like a whip":"„Ich sollte“ und „ich muss“, wie eine Peitsche",
+    "Labels: “I’m a failure” instead of “that went badly”":"Etiketten: „ich bin ein Versager“ statt „das ist schlecht gelaufen“",
+    "Taking all the blame for things that weren’t only yours":"Die ganze Schuld für Dinge nehmen, die nicht nur Ihre waren",
+    "3. What would I say to a tired friend?":"3. Was würde ich einem erschöpften Freund sagen?",
+    "Someone you care about who is tired and worried. Write something true and kind, not just cheerful.":"Jemand, der Ihnen am Herzen liegt, müde und besorgt. Schreiben Sie etwas Wahres und Freundliches, nicht nur etwas Heiteres.",
+    "What I would say to a tired friend":"Was ich einem erschöpften Freund sagen würde",
+    "For example: I’m worried, and I’ve handled hard things before. I can take this slowly.":"Zum Beispiel: Ich bin besorgt, und ich habe Schweres schon einmal geschafft. Ich kann das langsam angehen.",
+    "4. One tiny step":"4. Ein winziger Schritt",
+    "Rest today, and nothing else":"Heute ruhen, und sonst nichts",
+    "Drink some water":"Etwas Wasser trinken",
+    "Do one small thing from your list, for just two minutes":"Eine kleine Sache von der Liste tun, nur zwei Minuten",
+    "Tell one person I’m tired":"Einem Menschen sagen, dass ich müde bin",
+    "Done for now":"Für jetzt genug",
+    "That was gentle work. You can stop here.":"Das war sanfte Arbeit. Sie können hier aufhören.",
+    "You looked at it, and that’s enough for today.":"Sie haben es angeschaut, und das genügt für heute.",
+    "Good. Nothing more is needed right now.":"Gut. Im Moment ist nichts weiter nötig.",
+    "A garden that only grows. It never wilts, and nothing here can go wrong. Tap a bare spot to plant. Flowers also open when you breathe, release a lantern, or do a small thing.":"Ein Garten, der nur wächst. Er welkt nie, und hier kann nichts schiefgehen. Tippen Sie auf eine freie Stelle, um zu pflanzen. Blumen öffnen sich auch, wenn Sie atmen, eine Laterne steigen lassen oder eine Kleinigkeit tun.",
+    "Plant a flower here":"Hier eine Blume pflanzen",
+    "Flower":"Blume",
+    "Nothing planted yet, and that’s fine.":"Noch nichts gepflanzt, und das ist in Ordnung.",
+    "The garden is full. It can stay just as it is.":"Der Garten ist voll. Er kann so bleiben.",
+    "A flower opened.":"Eine Blume hat sich geöffnet.",
+    "A fresh, quiet plot.":"Ein frisches, stilles Beet.",
+    "Start a fresh garden":"Einen neuen Garten beginnen",
+    "What’s heavy right now? Write it here, however messy. It stays in this tab: nothing is saved and nothing is sent anywhere. When you let it go, it’s gone.":"Was ist gerade schwer? Schreiben Sie es hier auf, so ungeordnet Sie möchten. Es bleibt in diesem Reiter: nichts wird gespeichert und nichts wird irgendwohin gesendet. Wenn Sie es loslassen, ist es weg.",
+    "What’s heavy right now":"Was gerade schwer ist",
+    "Write anything. It’s only for you.":"Schreiben Sie, was Sie möchten. Es ist nur für Sie.",
+    "Let it go":"Loslassen",
+    "Just clear it":"Nur löschen",
+    "Nothing to let go of is fine too.":"Nichts loszulassen zu haben, ist auch in Ordnung.",
+    "It’s out of your hands now, and a little lighter.":"Es liegt nicht mehr in Ihren Händen, und es ist ein wenig leichter.",
+    "You said it. That counts.":"Sie haben es gesagt. Das zählt.",
+    "Let it drift. You don’t have to carry it tonight.":"Lassen Sie es davontreiben. Sie müssen es heute Abend nicht tragen.",
+    "It was heavy, and you set it down.":"Es war schwer, und Sie haben es abgesetzt.",
+    "Language":"Sprache",
+    "Color theme":"Farben",
+    "Same as device":"Wie das Gerät",
+    "Light":"Hell",
+    "Dark":"Dunkel",
+    "Open the site":"Seite öffnen",
+    "Text size":"Schriftgröße",
+    "Larger text":"Größerer Text",
+    "Smaller text":"Kleinerer Text",
+    "If something specific is going on, open Right now.":"Wenn etwas Bestimmtes los ist, öffnen Sie Gerade jetzt.",
+    "Right now":"Gerade jetzt",
+    "If you know what is happening, open that one. If you don’t, Breathe is enough. Skip any line.":"Wenn Sie wissen, was los ist, öffnen Sie diesen Punkt. Wenn nicht, reicht Atmen. Sie können jede Zeile überspringen.",
+    "Open one. Skip any line.":"Öffnen Sie einen Punkt. Sie können jede Zeile überspringen.",
+    "I can’t catch my breath":"Ich bekomme keine Luft",
+    "Sit or stand, and put both feet on the floor.":"Setzen Sie sich oder bleiben Sie stehen, beide Füße auf dem Boden.",
+    "Breathe out more slowly than you breathe in.":"Atmen Sie langsamer aus, als Sie einatmen.",
+    "Look at one still object and name its color.":"Schauen Sie einen stillen Gegenstand an und nennen Sie seine Farbe.",
+    "Press your feet down for a few seconds, then release.":"Drücken Sie die Füße ein paar Sekunden nach unten, dann loslassen.",
+    "If this comes with chest pain, fainting, or breathing trouble that is new for you, contact local medical help.":"Wenn Brustschmerz, Ohnmacht oder eine für Sie neue Atemnot dazukommen, holen Sie örtliche medizinische Hilfe.",
+    "Open Breathe":"Atmen öffnen",
+    "I can’t sleep":"Ich kann nicht schlafen",
+    "Dim the screen after this, or stop here.":"Machen Sie danach den Bildschirm dunkler, oder hören Sie hier auf.",
+    "Unclench your jaw, your tongue, and your hands.":"Lassen Sie Kiefer, Zunge und Hände locker.",
+    "If a worry keeps returning, write one sentence in Let go, then leave it.":"Wenn eine Sorge immer wiederkommt, schreiben Sie einen Satz unter Loslassen und lassen Sie ihn dann liegen.",
+    "Rest with your eyes closed still counts, even when sleep does not come.":"Mit geschlossenen Augen zu ruhen zählt auch, wenn der Schlaf nicht kommt.",
+    "Open Let go":"Loslassen öffnen",
+    "I feel alone":"Ich fühle mich allein",
+    "Say one true sentence, even if the room is empty.":"Sagen Sie einen wahren Satz, auch wenn der Raum leer ist.",
+    "If there is one safe person, a short message is enough: “I’m having a hard time.”":"Wenn es einen sicheren Menschen gibt, reicht eine kurze Nachricht: „Mir geht es gerade schlecht.“",
+    "A lantern can carry one sentence up.":"Eine Laterne kann einen Satz mitnehmen.",
+    "If you want a voice, the numbers at the bottom of this page are there.":"Wenn Sie eine Stimme möchten, stehen die Nummern unten auf dieser Seite.",
+    "Loneliness is not a failure.":"Einsamkeit ist kein Versagen.",
+    "Open Lanterns":"Laternen öffnen",
+    "I’m angry":"Ich bin wütend",
+    "Anger is allowed. You do not have to act on it.":"Wut darf sein. Sie müssen nicht nach ihr handeln.",
+    "Put both feet on the floor and lengthen the out-breath.":"Stellen Sie beide Füße auf den Boden und verlängern Sie das Ausatmen.",
+    "Open and close your hands slowly a few times.":"Öffnen und schließen Sie die Hände langsam ein paarmal.",
+    "If it is safe, step into another room or outside for one minute.":"Wenn es sicher ist, gehen Sie für eine Minute in einen anderen Raum oder nach draußen.",
+    "You can choose your words later, when your body is quieter.":"Sie können Ihre Worte später wählen, wenn der Körper ruhiger ist.",
+    "I feel nothing":"Ich fühle nichts",
+    "You do not have to force a brighter feeling.":"Sie müssen kein helleres Gefühl erzwingen.",
+    "Notice one temperature: air on your face, a cup, or your hands.":"Nehmen Sie eine Temperatur wahr: Luft im Gesicht, eine Tasse oder Ihre Hände.",
+    "Name two plain details of one ordinary object.":"Nennen Sie zwei schlichte Einzelheiten eines gewöhnlichen Gegenstands.",
+    "Take a sip of water, and stay for one minute. That is enough.":"Nehmen Sie einen Schluck Wasser und bleiben Sie eine Minute. Das genügt.",
+    "Numb is allowed to be here.":"Taubheit darf hier sein.",
+    "Someone is gone":"Jemand ist fort",
+    "There is no right pace. Skipping this is fine.":"Es gibt kein richtiges Tempo. Dies zu überspringen ist in Ordnung.",
+    "A memory can sit here for a moment, or you can set it down.":"Eine Erinnerung kann einen Moment hier sitzen, oder Sie können sie absetzen.",
+    "If you have not eaten or had water, something small is a kindness.":"Wenn Sie nichts gegessen oder getrunken haben, ist etwas Kleines eine Freundlichkeit.",
+    "One ordinary thing is enough today.":"Eine gewöhnliche Sache genügt für heute.",
+    "Grief does not have to be done well.":"Trauer muss nicht gut gemacht werden.",
+    "The worry won’t stop":"Die Sorge hört nicht auf",
+    "A worry is not a fact, and it does not all have to be solved tonight.":"Eine Sorge ist keine Tatsache, und sie muss heute Abend nicht ganz gelöst werden.",
+    "If one worry is loudest, write it as a single sentence and leave the rest.":"Wenn eine Sorge am lautesten ist, schreiben Sie sie als einen Satz und lassen Sie den Rest.",
+    "Name one thing you can see and one thing you can hear.":"Nennen Sie eine Sache, die Sie sehen, und eine, die Sie hören.",
+    "Then stop. More thinking is not required.":"Dann hören Sie auf. Mehr Denken ist nicht nötig.",
+    "You don’t have to answer every thought.":"Sie müssen nicht jeden Gedanken beantworten.",
+    "Open Thoughts":"Gedanken öffnen",
+    "Someone I love is hurting":"Jemand, den ich liebe, leidet",
+    "Stay near, or say: “I’m here. You don’t have to explain.”":"Bleiben Sie in der Nähe, oder sagen Sie: „Ich bin hier. Sie müssen nichts erklären.“",
+    "Ask what would help, and let “nothing” be a complete answer.":"Fragen Sie, was helfen würde, und lassen Sie „nichts“ eine vollständige Antwort sein.",
+    "Help with one practical thing if they want it: water, a quieter room, or company.":"Helfen Sie bei einer praktischen Sache, wenn sie das möchten: Wasser, ein ruhigerer Raum oder Gesellschaft.",
+    "If they may be unsafe, stay with them if you safely can, and use a line below. You can call for them.":"Wenn sie vielleicht in Gefahr sind, bleiben Sie, sofern Sie das sicher können, und nutzen Sie eine Nummer unten. Sie können für sie anrufen.",
+    "You don’t have to find the perfect words.":"Sie müssen nicht die perfekten Worte finden.",
+    "Wash your hands or your face":"Hände oder Gesicht waschen",
+    "Open a window, or notice the air":"Ein Fenster öffnen oder die Luft bemerken",
+    "Step outside for one minute":"Eine Minute nach draußen gehen",
+    "Change into something more comfortable":"Etwas Bequemeres anziehen",
+    "More places to call":"Weitere Orte zum Anrufen",
+    "These are listening lines for when life feels unsafe. If you are in immediate physical danger, use your local emergency number. If a number does not answer, try the link above.":"Das sind Zuhörtelefone für Zeiten, in denen das Leben unsicher wirkt. Bei unmittelbarer körperlicher Gefahr nutzen Sie die örtliche Notrufnummer. Wenn eine Nummer nicht antwortet, versuchen Sie den Link oben.",
+    "Aotearoa New Zealand: call or text 1737":"Aotearoa Neuseeland: anrufen oder schreiben, 1737",
+    "Australia: Lifeline, 13 11 14":"Australien: Lifeline, 13 11 14",
+    "Brazil: CVV, 188":"Brasilien: CVV, 188",
+    "Canada: call or text 988":"Kanada: anrufen oder schreiben, 988",
+    "China: 12356":"China: 12356",
+    "France: 3114":"Frankreich: 3114",
+    "Germany: 0800 111 0 111 or 116 123":"Deutschland: 0800 111 0 111 oder 116 123",
+    "Hong Kong: 2389 2222":"Hongkong: 2389 2222",
+    "India: Tele-MANAS, 14416":"Indien: Tele-MANAS, 14416",
+    "Italy: 02 2327 2327":"Italien: 02 2327 2327",
+    "Japan: 0120-279-338":"Japan: 0120-279-338",
+    "Singapore: 1767":"Singapur: 1767",
+    "South Korea: 109":"Südkorea: 109",
+    "Spain: 024":"Spanien: 024",
+    "Taiwan: 1925":"Taiwan: 1925",
+    "United Kingdom and Ireland: Samaritans, 116 123":"Vereinigtes Königreich und Irland: Samaritans, 116 123",
+    "United States: call or text 988":"Vereinigte Staaten: anrufen oder schreiben, 988"
+  };
+  var IT = {
+    "Reading":"Letture",
+    "Ideas":"Idee",
+    "A quiet corner":"Un angolo tranquillo",
+    "Nothing to finish here. Pick one thing and stay as long as you like.":"Qui non c’è niente da finire. Scegli una cosa e resta quanto vuoi.",
+    "Choose something to do":"Scegli cosa fare",
+    "Breathe":"Respira",
+    "Lanterns":"Lanterne",
+    "Small things":"Piccole cose",
+    "Thoughts":"Pensieri",
+    "Garden":"Giardino",
+    "Let go":"Lascia andare",
+    "Breathe in for four, out for six.":"Inspira per quattro, espira per sei.",
+    "Breathe in…":"Inspira…",
+    "Breathe out…":"Espira…",
+    "Paused. Start whenever you like.":"In pausa. Riprendi quando vuoi.",
+    "Start":"Inizia",
+    "Pause":"Pausa",
+    "Tap anywhere to release a lantern":"Tocca ovunque per lasciar salire una lanterna",
+    "Release a lantern":"Lascia salire una lanterna",
+    "You don’t have to fix everything tonight.":"Non devi sistemare tutto stasera.",
+    "Tired is allowed.":"La stanchezza è permessa.",
+    "One breath at a time is enough.":"Un respiro alla volta basta.",
+    "It’s okay to rest before you figure it out.":"Va bene riposare prima di trovare una risposta.",
+    "You’ve gotten through hard hours before.":"Hai già superato ore difficili.",
+    "Being gentle with yourself counts as doing something.":"Essere gentili con se stessi conta come fare qualcosa.",
+    "This feeling is real, and it will change shape.":"Questa sensazione è reale, e cambierà forma.",
+    "Nothing is asked of you in this minute.":"In questo minuto nessuno ti chiede nulla.",
+    "A quiet space, not a treatment. If sleep is hard, eating is hard, or the fear keeps growing, a doctor or counsellor can help, and you can go at your own pace.":"Uno spazio tranquillo, non una terapia. Se dormire o mangiare è difficile, o la paura continua a crescere, un medico o uno psicologo può aiutarti, ai tuoi tempi.",
+    "If you ever feel unsafe, in the US call or text 988, and in the UK or Ireland call Samaritans on 116 123. Elsewhere,":"Se ti senti in pericolo: in Italia puoi chiamare Telefono Amico Italia al 02 2327 2327 (ogni giorno, in genere dalle 9-10 alle 24). Altrove,",
+    "lists free helplines in many countries.":"elenca linee di ascolto gratuite in molti paesi.",
+    "Nothing you write here is saved or sent anywhere, and nothing is stored on your device.":"Niente di ciò che scrivi qui viene salvato o inviato, e nulla resta memorizzato sul tuo dispositivo.",
+    "Books and free material for when you want more. Open one page or one worksheet, not the whole thing. Research suggests this kind of reading helps most when a real person is alongside you.":"Libri e materiali gratuiti, per quando vuoi di più. Apri una pagina o una scheda, non tutto. Le ricerche suggeriscono che questo tipo di lettura aiuta soprattutto quando c’è una persona vera accanto a te.",
+    "A classic on spotting the thinking habits that feed anxiety and low mood, with exercises you can write out. The Chinese edition is called 《伯恩斯新情绪疗法》.":"Un classico per riconoscere le abitudini di pensiero che alimentano l’ansia e l’umore basso, con esercizi da scrivere. L’edizione cinese si chiama 《伯恩斯新情绪疗法》.",
+    "A step-by-step cognitive behavioural programme with monitoring sheets. In the UK it is on the Reading Well list of recommended books.":"Un programma di terapia cognitivo-comportamentale, passo dopo passo, con schede di monitoraggio. Nel Regno Unito è nella lista Reading Well.",
+    "Relaxation, breathing, self-talk and gradual steps, laid out as exercises.":"Rilassamento, respiro, modo di parlarti, e piccoli passi verso ciò che fa paura, proposti come esercizi.",
+    "An older, gentle classic about not fighting tension: face it, accept it, float, and let time pass.":"Un classico più vecchio e gentile: non lottare contro la tensione. Affrontarla, accoglierla, lasciarsi galleggiare e dare tempo al tempo.",
+    "A CBT workbook built around worksheets for thoughts and moods, much like the Thoughts tab here.":"Un quaderno di TCC fatto di schede per pensieri e stati d’animo, simile alla scheda Pensieri di questa pagina.",
+    "Free workbooks":"Quaderni gratuiti",
+    "Free CBT workbooks on worry, anxiety, perfectionism, sleep and more, in English. They say these don’t replace a professional.":"Quaderni gratuiti di TCC su preoccupazione, ansia, perfezionismo, sonno e altro, in inglese. Precisano che non sostituiscono un professionista.",
+    "Free advice and practical tips for mental wellbeing, in English.":"Consigli gratuiti e pratici per il benessere, in inglese.",
+    "Free app":"App gratuita",
+    "A free app based on CBT, for worry, stress and panic.":"Un’app gratuita basata sulla TCC, per preoccupazione, stress e panico.",
+    "Ideas from anxiety self-help books. Open one, take what helps, and leave the rest.":"Idee da libri di autoaiuto sull’ansia. Aprine una, tieni ciò che ti aiuta e lascia il resto.",
+    "Float, don’t fight":"Galleggia, non lottare",
+    "When tension rises, fighting it tends to feed it. Try letting your body go loose, as if you were floating on water, and let time pass. It rises, and it passes. You don’t have to make it leave.":"Quando la tensione sale, combatterla tende ad alimentarla. Prova a lasciare il corpo morbido, come se galleggiassi sull’acqua, e lascia passare il tempo. Sale, e passa. Non devi farla andare via.",
+    "Start tiny":"Inizia in piccolo",
+    "Wanting to do something often arrives after you begin, not before. Pick something very small, for five minutes. Starting is what counts, not finishing.":"La voglia di fare qualcosa arriva spesso dopo che hai iniziato, non prima. Scegli una cosa molto piccola, per cinque minuti. Conta iniziare, non finire.",
+    "How tense am I?":"Quanto sono teso?",
+    "Give your tension a number from 0 to 10, with no judging. Try one thing from this page, then check the number again. Small changes are real changes.":"Dai alla tua tensione un numero da 0 a 10, senza giudicare. Prova una cosa di questa pagina, poi guarda di nuovo il numero. I piccoli cambiamenti sono cambiamenti veri.",
+    "How tense I am, 0 to 10":"Quanto sono teso, da 0 a 10",
+    "0 is calm, 10 is very tense":"0 è calma, 10 è molta tensione",
+    "Let the muscles go":"Lascia andare i muscoli",
+    "Tense a part of the body gently for about five seconds, then let it go and feel the difference. Skip any part that hurts.":"Contrai con dolcezza una parte del corpo per circa cinque secondi, poi lascia andare e senti la differenza. Salta qualsiasi parte che fa male.",
+    "Hands: make gentle fists for about five seconds, then let go.":"Mani: stringi i pugni con dolcezza per circa cinque secondi, poi lascia.",
+    "Shoulders: lift them toward your ears for five seconds, then drop them.":"Spalle: sollevale verso le orecchie per cinque secondi, poi lasciale cadere.",
+    "Face: scrunch it softly for five seconds, then let it soften.":"Viso: corrugalo piano per cinque secondi, poi lascia che si ammorbidisca.",
+    "Stomach: tighten it lightly for five seconds, then release.":"Pancia: tirala dentro leggermente per cinque secondi, poi rilascia.",
+    "Legs and feet: press your feet into the floor for five seconds, then let go.":"Gambe e piedi: premi i piedi sul pavimento per cinque secondi, poi lascia.",
+    "Now just notice the difference. Breathe out slowly.":"Ora nota solo la differenza. Espira lentamente.",
+    "Begin":"Inizia",
+    "Next":"Avanti",
+    "Again":"Di nuovo",
+    "Come back to the room":"Torna nella stanza",
+    "A common grounding exercise":"Un esercizio comune per tornare qui",
+    "Slowly notice five things you can see, four you can feel, three you can hear, two you can smell, and one you can taste. Skipping any is fine.":"Nota lentamente cinque cose che vedi, quattro che senti al tatto, tre che senti con le orecchie, due che annusi e una che assaggi. Saltarne una va bene.",
+    "A ladder for something hard":"Una scala per qualcosa di difficile",
+    "Big worries shrink when cut into small steps. Do the first one, and stop there if you want.":"Le grandi preoccupazioni si rimpiccioliscono se le tagli in piccoli passi. Fai il primo, e fermati lì se vuoi.",
+    "Write the thing you’re facing in one plain sentence":"Scrivi in una frase semplice ciò che stai affrontando",
+    "Notice one part of it that feels manageable":"Nota una parte che ti sembra affrontabile",
+    "Pick one tiny piece to do today, and only that":"Scegli un pezzetto piccolo per oggi, e solo quello",
+    "Tell one person you trust that it’s on your mind":"Di’ a una persona di cui ti fidi che ti pesa",
+    "Do the tiny piece, then rest":"Fai quel pezzetto, poi riposa",
+    "Pick any. Even one is plenty, and none is fine too.":"Scegline una qualsiasi. Anche una sola basta, e nessuna va bene lo stesso.",
+    "Take a few sips of water":"Bere qualche sorso d’acqua",
+    "Loosen your shoulders and your jaw":"Allentare spalle e mandibola",
+    "Look out a window for a minute":"Guardare fuori dalla finestra per un minuto",
+    "Eat or drink something small":"Mangiare o bere qualcosa di piccolo",
+    "Put your phone down for five minutes":"Posare il telefono per cinque minuti",
+    "Say one kind sentence to yourself":"Dirti una frase gentile",
+    "All of them. That was a lot, and you did it.":"Tutte. Era tanto, e l’hai fatto.",
+    "A gentle way to look at a worried thought. Nothing here is saved or sent. Skip any step, or stop anywhere.":"Un modo gentile di guardare un pensiero preoccupato. Qui non si salva e non si invia nulla. Salta un passaggio, o fermati dove vuoi.",
+    "1. What is my mind saying?":"1. Che cosa sta dicendo la mia mente?",
+    "What my mind is saying":"Quello che sta dicendo la mia mente",
+    "Just the sentence. No fixing, no judging.":"Solo la frase. Senza correggere, senza giudicare.",
+    "2. Does it sound like any of these?":"2. Assomiglia a una di queste?",
+    "Tick any that fit, or none. These are habits a tired mind falls into. Seeing one is enough.":"Segna quelle che corrispondono, o nessuna. Sono abitudini in cui una mente stanca scivola facilmente. Vederne una basta.",
+    "“Always” or “never”: one bad moment becomes a rule":"“Sempre” o “mai”: un momento difficile diventa una regola",
+    "All or nothing: one slip means total failure":"Tutto o niente: un passo falso significa un fallimento totale",
+    "Seeing only the one thing that went wrong":"Vedere solo l’unica cosa andata storta",
+    "Brushing off the good: “that doesn’t count”":"Liquidare il buono: “quello non conta”",
+    "Guessing: what others think, or what will go wrong, before it happens":"Indovinare, prima che accada: cosa pensano gli altri, o cosa andrà storto",
+    "Blowing up the bad and shrinking the good":"Ingrandire il male e rimpicciolire il bene",
+    "“I feel scared, so it must be dangerous”":"“Ho paura, quindi deve essere pericoloso”",
+    "“I should” and “I must”, like a whip":"“Dovrei” e “devo”, come una frusta",
+    "Labels: “I’m a failure” instead of “that went badly”":"Etichette: “sono un fallimento” invece di “quella cosa è andata male”",
+    "Taking all the blame for things that weren’t only yours":"Prenderti tutta la colpa di cose che non erano solo tue",
+    "3. What would I say to a tired friend?":"3. Che cosa direi a un amico stanco?",
+    "Someone you care about who is tired and worried. Write something true and kind, not just cheerful.":"Qualcuno a cui tieni, stanco e preoccupato. Scrivi qualcosa di vero e gentile, non solo di allegro.",
+    "What I would say to a tired friend":"Quello che direi a un amico stanco",
+    "For example: I’m worried, and I’ve handled hard things before. I can take this slowly.":"Per esempio: sono preoccupato, e ho già affrontato cose difficili. Posso andarci piano.",
+    "4. One tiny step":"4. Un passo piccolissimo",
+    "Rest today, and nothing else":"Riposare oggi, e nient’altro",
+    "Drink some water":"Bere un po’ d’acqua",
+    "Do one small thing from your list, for just two minutes":"Fare una cosa piccola della tua lista, solo per due minuti",
+    "Tell one person I’m tired":"Dire a una persona che sono stanco",
+    "Done for now":"Per ora basta",
+    "That was gentle work. You can stop here.":"È stato un lavoro gentile. Puoi fermarti qui.",
+    "You looked at it, and that’s enough for today.":"L’hai guardato, e per oggi basta.",
+    "Good. Nothing more is needed right now.":"Bene. Adesso non serve nient’altro.",
+    "A garden that only grows. It never wilts, and nothing here can go wrong. Tap a bare spot to plant. Flowers also open when you breathe, release a lantern, or do a small thing.":"Un giardino che cresce soltanto. Non appassisce mai, e qui niente può andare storto. Tocca un punto vuoto per piantare. I fiori si aprono anche quando respiri, lasci salire una lanterna o fai una piccola cosa.",
+    "Plant a flower here":"Pianta un fiore qui",
+    "Flower":"Fiore",
+    "Nothing planted yet, and that’s fine.":"Non c’è ancora niente, e va bene così.",
+    "The garden is full. It can stay just as it is.":"Il giardino è pieno. Può restare così.",
+    "A flower opened.":"Si è aperto un fiore.",
+    "A fresh, quiet plot.":"Un appezzamento nuovo e quieto.",
+    "Start a fresh garden":"Iniziare un giardino nuovo",
+    "What’s heavy right now? Write it here, however messy. It stays in this tab: nothing is saved and nothing is sent anywhere. When you let it go, it’s gone.":"Che cosa pesa adesso? Scrivilo qui, anche in disordine. Resta in questa scheda: non si salva nulla e non si invia nulla. Quando lo lasci andare, sparisce.",
+    "What’s heavy right now":"Quello che pesa adesso",
+    "Write anything. It’s only for you.":"Scrivi quello che vuoi. È solo per te.",
+    "Let it go":"Lascialo andare",
+    "Just clear it":"Solo cancella",
+    "Nothing to let go of is fine too.":"Non avere niente da lasciare andare va bene lo stesso.",
+    "It’s out of your hands now, and a little lighter.":"Non è più nelle tue mani, ed è un po’ più leggero.",
+    "You said it. That counts.":"L’hai detto. Conta.",
+    "Let it drift. You don’t have to carry it tonight.":"Lascialo andare alla deriva. Stanotte non devi portarlo.",
+    "It was heavy, and you set it down.":"Era pesante, e l’hai posato.",
+    "Language":"Lingua",
+    "Color theme":"Colori",
+    "Same as device":"Come il dispositivo",
+    "Light":"Chiaro",
+    "Dark":"Scuro",
+    "Open the site":"Apri il sito",
+    "Text size":"Dimensione del testo",
+    "Larger text":"Testo più grande",
+    "Smaller text":"Testo più piccolo",
+    "If something specific is going on, open Right now.":"Se sta succedendo qualcosa di preciso, apri Adesso.",
+    "Right now":"Adesso",
+    "If you know what is happening, open that one. If you don’t, Breathe is enough. Skip any line.":"Se sai che cosa sta succedendo, apri quella. Se no, Respira basta. Puoi saltare qualsiasi riga.",
+    "Open one. Skip any line.":"Aprine una. Puoi saltare qualsiasi riga.",
+    "I can’t catch my breath":"Non riesco a riprendere fiato",
+    "Sit or stand, and put both feet on the floor.":"Siediti o resta in piedi, con entrambi i piedi a terra.",
+    "Breathe out more slowly than you breathe in.":"Espira più lentamente di quanto inspiri.",
+    "Look at one still object and name its color.":"Guarda un oggetto fermo e dici il suo colore.",
+    "Press your feet down for a few seconds, then release.":"Premi i piedi verso il basso per qualche secondo, poi lascia.",
+    "If this comes with chest pain, fainting, or breathing trouble that is new for you, contact local medical help.":"Se insieme ci sono dolore al petto, svenimento o un affanno nuovo per te, contatta un aiuto medico locale.",
+    "Open Breathe":"Apri Respira",
+    "I can’t sleep":"Non riesco a dormire",
+    "Dim the screen after this, or stop here.":"Abbassa la luce dello schermo dopo questo, oppure fermati qui.",
+    "Unclench your jaw, your tongue, and your hands.":"Allenta la mandibola, la lingua e le mani.",
+    "If a worry keeps returning, write one sentence in Let go, then leave it.":"Se una preoccupazione continua a tornare, scrivi una frase in Lascia andare e poi lasciala lì.",
+    "Rest with your eyes closed still counts, even when sleep does not come.":"Riposare a occhi chiusi conta lo stesso, anche se il sonno non arriva.",
+    "Open Let go":"Apri Lascia andare",
+    "I feel alone":"Mi sento solo",
+    "Say one true sentence, even if the room is empty.":"Di’ una frase vera, anche se la stanza è vuota.",
+    "If there is one safe person, a short message is enough: “I’m having a hard time.”":"Se c’è una persona sicura, un messaggio breve basta: “Sto passando un momento difficile.”",
+    "A lantern can carry one sentence up.":"Una lanterna può portare su una frase.",
+    "If you want a voice, the numbers at the bottom of this page are there.":"Se vuoi una voce, i numeri in fondo a questa pagina ci sono.",
+    "Loneliness is not a failure.":"La solitudine non è un fallimento.",
+    "Open Lanterns":"Apri Lanterne",
+    "I’m angry":"Sono arrabbiato",
+    "Anger is allowed. You do not have to act on it.":"La rabbia è permessa. Non devi agire secondo lei.",
+    "Put both feet on the floor and lengthen the out-breath.":"Metti entrambi i piedi a terra e allunga l’espirazione.",
+    "Open and close your hands slowly a few times.":"Apri e chiudi le mani lentamente, qualche volta.",
+    "If it is safe, step into another room or outside for one minute.":"Se è sicuro, vai in un’altra stanza o fuori per un minuto.",
+    "You can choose your words later, when your body is quieter.":"Puoi scegliere le parole dopo, quando il corpo è più quieto.",
+    "I feel nothing":"Non sento niente",
+    "You do not have to force a brighter feeling.":"Non devi forzare un sentimento più luminoso.",
+    "Notice one temperature: air on your face, a cup, or your hands.":"Nota una temperatura: l’aria sul viso, una tazza o le tue mani.",
+    "Name two plain details of one ordinary object.":"Di’ due dettagli semplici di un oggetto ordinario.",
+    "Take a sip of water, and stay for one minute. That is enough.":"Bevi un sorso d’acqua e resta un minuto. Basta così.",
+    "Numb is allowed to be here.":"Il torpore può stare qui.",
+    "Someone is gone":"Qualcuno se n’è andato",
+    "There is no right pace. Skipping this is fine.":"Non c’è un ritmo giusto. Saltare questo va bene.",
+    "A memory can sit here for a moment, or you can set it down.":"Un ricordo può sedersi qui un momento, oppure puoi posarlo.",
+    "If you have not eaten or had water, something small is a kindness.":"Se non hai mangiato o bevuto, una cosa piccola è una gentilezza.",
+    "One ordinary thing is enough today.":"Una cosa ordinaria basta per oggi.",
+    "Grief does not have to be done well.":"Il lutto non deve essere fatto bene.",
+    "The worry won’t stop":"La preoccupazione non si ferma",
+    "A worry is not a fact, and it does not all have to be solved tonight.":"Una preoccupazione non è un fatto, e non deve essere risolta tutta stasera.",
+    "If one worry is loudest, write it as a single sentence and leave the rest.":"Se una preoccupazione è la più forte, scrivila in una sola frase e lascia il resto.",
+    "Name one thing you can see and one thing you can hear.":"Di’ una cosa che vedi e una cosa che senti.",
+    "Then stop. More thinking is not required.":"Poi fermati. Non serve pensare altro.",
+    "You don’t have to answer every thought.":"Non devi rispondere a ogni pensiero.",
+    "Open Thoughts":"Apri Pensieri",
+    "Someone I love is hurting":"Qualcuno che amo sta soffrendo",
+    "Stay near, or say: “I’m here. You don’t have to explain.”":"Resta vicino, oppure di’: “Sono qui. Non devi spiegare.”",
+    "Ask what would help, and let “nothing” be a complete answer.":"Chiedi che cosa aiuterebbe, e lascia che “niente” sia una risposta completa.",
+    "Help with one practical thing if they want it: water, a quieter room, or company.":"Aiuta in una cosa pratica se lo vogliono: acqua, una stanza più quieta o compagnia.",
+    "If they may be unsafe, stay with them if you safely can, and use a line below. You can call for them.":"Se possono essere in pericolo, resta se puoi farlo in sicurezza e usa un numero qui sotto. Puoi chiamare per loro.",
+    "You don’t have to find the perfect words.":"Non devi trovare le parole perfette.",
+    "Wash your hands or your face":"Lavarti le mani o il viso",
+    "Open a window, or notice the air":"Aprire una finestra, o notare l’aria",
+    "Step outside for one minute":"Uscire per un minuto",
+    "Change into something more comfortable":"Mettere qualcosa di più comodo",
+    "More places to call":"Altri posti da chiamare",
+    "These are listening lines for when life feels unsafe. If you are in immediate physical danger, use your local emergency number. If a number does not answer, try the link above.":"Sono linee di ascolto per quando la vita sembra poco sicura. Se sei in pericolo fisico immediato, usa il numero di emergenza locale. Se un numero non risponde, prova il link qui sopra.",
+    "Aotearoa New Zealand: call or text 1737":"Aotearoa Nuova Zelanda: chiama o scrivi al 1737",
+    "Australia: Lifeline, 13 11 14":"Australia: Lifeline, 13 11 14",
+    "Brazil: CVV, 188":"Brasile: CVV, 188",
+    "Canada: call or text 988":"Canada: chiama o scrivi al 988",
+    "China: 12356":"Cina: 12356",
+    "France: 3114":"Francia: 3114",
+    "Germany: 0800 111 0 111 or 116 123":"Germania: 0800 111 0 111 o 116 123",
+    "Hong Kong: 2389 2222":"Hong Kong: 2389 2222",
+    "India: Tele-MANAS, 14416":"India: Tele-MANAS, 14416",
+    "Italy: 02 2327 2327":"Italia: 02 2327 2327",
+    "Japan: 0120-279-338":"Giappone: 0120-279-338",
+    "Singapore: 1767":"Singapore: 1767",
+    "South Korea: 109":"Corea del Sud: 109",
+    "Spain: 024":"Spagna: 024",
+    "Taiwan: 1925":"Taiwan: 1925",
+    "United Kingdom and Ireland: Samaritans, 116 123":"Regno Unito e Irlanda: Samaritans, 116 123",
+    "United States: call or text 988":"Stati Uniti: chiama o scrivi al 988"
+  };
+  var PATS_FR = [
+    [/^(\d+) slow breaths?$/, function(m){ return m[1] + (m[1] === '1' ? ' respiration lente' : ' respirations lentes'); }],
+    [/^(\d+) lanterns? released$/, function(m){ return m[1] + (m[1] === '1' ? ' lanterne lâchée' : ' lanternes lâchées'); }],
+    [/^(\d+) of (\d+)\. No rush\.$/, function(m){ return m[1] + ' sur ' + m[2] + '. Sans se presser.'; }],
+    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + ' fleurs sur ' + m[2]; }]
+  ];
+  var PATS_DE = [
+    [/^(\d+) slow breaths?$/, function(m){ return m[1] + (m[1] === '1' ? ' langsamer Atemzug' : ' langsame Atemzüge'); }],
+    [/^(\d+) lanterns? released$/, function(m){ return m[1] + (m[1] === '1' ? ' Laterne gestiegen' : ' Laternen gestiegen'); }],
+    [/^(\d+) of (\d+)\. No rush\.$/, function(m){ return m[1] + ' von ' + m[2] + '. Ohne Eile.'; }],
+    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + ' von ' + m[2] + ' Blumen'; }]
+  ];
+  var PATS_IT = [
+    [/^(\d+) slow breaths?$/, function(m){ return m[1] + (m[1] === '1' ? ' respiro lento' : ' respiri lenti'); }],
+    [/^(\d+) lanterns? released$/, function(m){ return m[1] + (m[1] === '1' ? ' lanterna lasciata salire' : ' lanterne lasciate salire'); }],
+    [/^(\d+) of (\d+)\. No rush\.$/, function(m){ return m[1] + ' di ' + m[2] + '. Senza fretta.'; }],
+    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + (m[1] === '1' ? ' fiore su ' : ' fiori su ') + m[2]; }]
+  ];
+  var DICT = {zh: ZH, es: ES, fr: FR, de: DE, it: IT};
+  var PATS_ES = [
+    [/^(\d+) slow breaths?$/, function(m){ return m[1] + (m[1] === '1' ? ' respiración lenta' : ' respiraciones lentas'); }],
+    [/^(\d+) lanterns? released$/, function(m){ return m[1] + (m[1] === '1' ? ' farolillo soltado' : ' farolillos soltados'); }],
+    [/^(\d+) of (\d+)\. No rush\.$/, function(m){ return m[1] + ' de ' + m[2] + '. Sin prisa.'; }],
+    [/^(\d+) of (\d+) flowers$/, function(m){ return m[1] + ' de ' + m[2] + ' flores'; }]
+  ];
+  var PATS = [
+    [/^(\d+) slow breaths?$/, function(m){ return m[1] + ' 次缓慢的呼吸'; }],
+    [/^(\d+) lanterns? released$/, function(m){ return '已放飞 ' + m[1] + ' 盏灯笼'; }],
+    [/^(\d+) of (\d+)\. No rush\.$/, function(m){ return m[2] + ' 件里做了 ' + m[1] + ' 件。不着急。'; }],
+    [/^(\d+) of (\d+) flowers$/, function(m){ return m[2] + ' 朵里开了 ' + m[1] + ' 朵'; }]
+  ];
+  var PSETS = {zh: PATS, es: PATS_ES, fr: PATS_FR, de: PATS_DE, it: PATS_IT};
+  var lang = 'en', orig = new WeakMap(), ATTR = ['placeholder', 'aria-label'];
+  function tr(s){
+    var k = s.trim(); if(!k) return null;
+    var D = DICT[lang]; if(D && D.hasOwnProperty(k)) return D[k];
+    var P = PSETS[lang] || [];
+    for(var i = 0; i < P.length; i++){ var m = k.match(P[i][0]); if(m) return P[i][1](m); }
+    return null;
+  }
+  function walk(n){
+    if(n.nodeType === 3){
+      if(!orig.has(n)) orig.set(n, n.data);
+      var o = orig.get(n); n.data = (lang !== 'en') ? (tr(o) || o) : o; return;
+    }
+    if(n.nodeType !== 1 || n.tagName === 'SCRIPT' || n.tagName === 'STYLE') return;
+    ATTR.forEach(function(a){
+      if(!n.hasAttribute(a)) return;
+      var key = '_o_' + a; if(n[key] === undefined) n[key] = n.getAttribute(a);
+      n.setAttribute(a, (lang !== 'en') ? (tr(n[key]) || n[key]) : n[key]);
+    });
+    for(var c = n.firstChild; c; c = c.nextSibling) walk(c);
+  }
+  function setLang(l){
+    lang = l; window.qcLang = l; walk(document.documentElement);
+    document.documentElement.lang = ({zh:'zh-Hans', es:'es', fr:'fr', de:'de', it:'it', en:'en'})[l];
+    document.getElementById('langsel').value = l;
+  }
+  new MutationObserver(function(ms){
+    ms.forEach(function(m){ for(var i = 0; i < m.addedNodes.length; i++) walk(m.addedNodes[i]); });
+  }).observe(document.body, {childList:true, subtree:true});
+  document.getElementById('langsel').addEventListener('change', function(){ setLang(this.value); });
+  var start = 'en';
+  var nav = (navigator.language || '').toLowerCase().slice(0, 2);
+  start = DICT[nav] ? nav : 'en';
+  if(!DICT[start]) start = 'en';
+  if(start !== 'en') setLang(start);
+})();
+</script>
+</body>
+</html>
